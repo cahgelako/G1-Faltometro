@@ -36,11 +36,11 @@
                         <?php 
                             switch ($_SESSION['tipo_acesso'] ) {
                                 case '1':?>
-                                    <li class="nav-item"><a class="nav-link" href="./home">Início</a></li>
+                                 <li class="nav-item"><a class="nav-link" href="./home">Início</a></li>
                                     <li class="nav-item"><a class="nav-link" href="./conta">Conta</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="./faltas">Faltas</a></li>
                                     <li class="nav-item"><a class="nav-link" href="./relatorios">Relatórios</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="./logout">Sair</a></li>    
-
+                                    <li class="nav-item"><a class="nav-link" href="./logout">Sair</a></li>  
                                     <?php break;
 
                                 case '2':?>
@@ -54,7 +54,6 @@
                                 case '3':?>  
                                     <li class="nav-item"><a class="nav-link" href="./home">Início</a></li>
                                     <li class="nav-item"><a class="nav-link" href="./conta">Conta</a></li>
-                                    <li class="nav-item"><a class="nav-link" href="./faltas">Faltas</a></li>
                                     <li class="nav-item"><a class="nav-link" href="./relatorios">Relatórios</a></li>
                                     <li class="nav-item"><a class="nav-link" href="./logout">Sair</a></li>    
 
