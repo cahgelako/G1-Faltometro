@@ -14,6 +14,6 @@
         }
 
         public function dashboard(): void {
-            $this->view('site/dashboard');
+            $this->view('site/inicio');
         }
     }

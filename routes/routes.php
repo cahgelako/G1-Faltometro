@@ -2,10 +2,9 @@
 $routes = [
 
     // Site (revisar)
-    'home'        => ['controller' => 'SiteController', 'method' => 'index'],
     'sobre'       => ['controller' => 'SiteController', 'method' => 'sobre'],
     'contato'     => ['controller' => 'SiteController', 'method' => 'contato'],
-    'dashboard'   => ['controller' => 'SiteController', 'method' => 'dashboard'],
+    'inicio'   => ['controller' => 'SiteController', 'method' => 'inicio'],
     'logout'      => ['controller' => 'UserController', 'method' => 'logout'],
 
     // Escolas
