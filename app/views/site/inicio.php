@@ -40,22 +40,27 @@
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-                                    <h2 class="h5">Featured title</h2>
-                                    <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <h2 class="h5">Contagem de Faltas</h2>
+                                    <p class="mb-0">Uma nova forma de contagem de faltas, simples e ágil. O sistema permite registrar a presença dos alunos de maneira eficiente, 
+                                acompanhar diariamente a frequência de cada turma e gerar relatórios automáticos para a coordenação e a cozinha. Com dados precisos e organizados,
+                                         a gestão escolar se torna mais transparente, evitando desperdícios e garantindo decisões mais inteligentes.
+                                         </p>
                                 </div>
                                 <div class="col mb-5 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
-                                    <h2 class="h5">Featured title</h2>
-                                    <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <h2 class="h5">Relatórios Diários</h2>
+                                    <p class="mb-0">Relatórios completos que apresentam todas as informações essenciais para manter um controle eficiente das faltas.
+                                         Com dados organizados e detalhados, a coordenação, os professores e a cozinha podem acompanhar a frequência de cada aluno e tomar decisões informadas
+                                          para uma gestão escolar mais eficaz.</p>
                                 </div>
                                 <div class="col mb-5 mb-md-0 h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
-                                    <h2 class="h5">Featured title</h2>
-                                    <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <h2 class="h5">Informações sobre os Estudantes</h2>
+                                    <p class="mb-0">informações necessárias sobre cada estudante, </p>
                                 </div>
                                 <div class="col h-100">
                                     <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
-                                    <h2 class="h5">Featured title</h2>
+                                    <h2 class="h5">Fácil Manuseio</h2>
                                     <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
                                 </div>
                             </div>
