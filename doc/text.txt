@@ -1,0 +1,11 @@
+Tipo de acesso:
+1- Coordenação
+2- Cozinha
+3- Professores
+4 - Adms 
+
+Ciclos da Cozinha:
+ Ciclo 1  - 1º ao 5º ano;
+ Ciclo 2  - 6ºA ao 9º ano;
+ Ciclo 3  - 1ºEM ao 3º EM;
+ Ciclo 4  - 6ºB e 7ºB;
