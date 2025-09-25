@@ -2,7 +2,10 @@ Tipo de acesso:
 1- Coordenação
 2- Cozinha
 3- Professores
-4 - Adms 
+
+4 - Adms
+listar: Funcionários, alunos, escolas, turmas,matrículas, grade curricular, turmas extracurriculares, relatórios;
+cadastrar: Funcionários, alunos, escolas, turmas,matrículas, grade curricular, turmas extracurriculares
 
 Ciclos da Cozinha:
  Ciclo 1  - 1º ao 5º ano;
