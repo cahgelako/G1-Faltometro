@@ -1,7 +1,7 @@
 Tipo de acesso:
-1- Coordenação
+1- Professores
 2- Cozinha
-3- Professores
+3- Coordenação
 
 4 - Adms
 listar: Funcionários, alunos, escolas, turmas,matrículas, grade curricular, turmas extracurriculares, relatórios;
