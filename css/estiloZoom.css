@@ -1,0 +1,51 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.thumbnail {
+  width: 100%;
+  max-width: 300px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.thumbnail:hover {
+  transform: scale(1.05);
+}
+
+/* .fullscreen {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 50vw;
+  height: 50vh;
+  background-color: rgba(0, 0, 0, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow: hidden;
+  padding: 10px;
+  box-sizing: border-box;
+} */
+
+.fullscreen img {
+  max-width: 30vw;
+  max-height: 30vh;
+  transition: transform 0.3s ease-in-out;
+  display: block;
+  margin: auto;
+} 
+
+.fullscreen .close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+  z-index: 1100;
+}
