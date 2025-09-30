@@ -27,7 +27,7 @@
                                 <p class="lead fw-normal text-black-50 mb-4">Da frequência à gestão: informação para cuidar do futuro!</p>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="img/logo_faltometro2.png" alt="..." /></div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-3 h-50 w-50" src="img/logo_novo.png" alt="..." /></div>
                     </div>
                 </div>
             </header>

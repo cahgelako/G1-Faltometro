@@ -6,6 +6,7 @@ $routes = [
     'contato'  => ['controller' => 'SiteController', 'method' => 'contato'],
     'inicio'   => ['controller' => 'SiteController', 'method' => 'inicio'],
     'logout'   => ['controller' => 'UserController', 'method' => 'logout'],
+    'login'   => ['controller' => 'UserController', 'method' => 'logout'],
 
     // Escolas
     'listEscola' => ['controller' => 'EscolaController', 'method' => 'listar'],
