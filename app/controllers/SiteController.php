@@ -13,7 +13,7 @@
             $this->view('site/contato');
         }
 
-        public function dashboard(): void {
+        public function inicio(): void {
             $this->view('site/inicio');
         }
     }

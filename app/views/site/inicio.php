@@ -7,9 +7,10 @@
         <meta name="author" content="" />
         <title>Faltômetro</title>
         <!-- Favicon-->
-        <link rel="icon" href="../../../img/icon_faltometro.ico" />
+        <link rel="icon" href="img/icon_faltometro.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
     </head>
@@ -17,16 +18,16 @@
         <main class="flex-shrink-0">
        
             <!-- Header-->
-            <header class="bg-dark py-5">
+            <header class="bg-light py-5">
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
                             <div class="my-5 text-center text-xl-start">
-                                <h1 class="display-5 fw-bolder text-white mb-2">Faltômetro</h1>
-                                <p class="lead fw-normal text-white-50 mb-4">Da frequência à gestão: informação para cuidar do futuro!</p>
+                                <h1 class="display-5 fw-bolder text-black mb-2">Faltômetro</h1>
+                                <p class="lead fw-normal text-black-50 mb-4">Da frequência à gestão: informação para cuidar do futuro!</p>
                             </div>
                         </div>
-                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="../../../img/logo_faltometro.png" alt="..." /></div>
+                        <div style="background-color: antiquewhite;" class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="img/logo_faltometro2.png" alt="..." /></div>
                     </div>
                 </div>
             </header>
@@ -39,7 +40,7 @@
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-square-poll-vertical"></i></div>
                                     <h2 class="h5">Contagem de Faltas</h2>
                                     <p class="mb-0">Uma nova forma de contagem de faltas, simples e ágil. O sistema permite registrar a presença dos alunos de maneira eficiente, 
                                 acompanhar diariamente a frequência de cada turma e gerar relatórios automáticos para a coordenação e a cozinha. Com dados precisos e organizados,
@@ -47,21 +48,24 @@
                                          </p>
                                 </div>
                                 <div class="col mb-5 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-building"></i></div>
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-pen-to-square"></i></div>
                                     <h2 class="h5">Relatórios Diários</h2>
                                     <p class="mb-0">Relatórios completos que apresentam todas as informações essenciais para manter um controle eficiente das faltas.
                                          Com dados organizados e detalhados, a coordenação, os professores e a cozinha podem acompanhar a frequência de cada aluno e tomar decisões informadas
                                           para uma gestão escolar mais eficaz.</p>
                                 </div>
                                 <div class="col mb-5 mb-md-0 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-people-roof"></i></i></div>
                                     <h2 class="h5">Informações sobre os Estudantes</h2>
-                                    <p class="mb-0">informações necessárias sobre cada estudante, </p>
+                                    <p class="mb-0">Informações completas e necessárias sobre cada estudante,
+                                         organizadas em relatórios claros que facilitam o acompanhamento da frequência e o apoio à gestão escolar. </p>
                                 </div>
                                 <div class="col h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-toggles2"></i></div>
+                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-chalkboard"></i></div>
                                     <h2 class="h5">Fácil Manuseio</h2>
-                                    <p class="mb-0">Paragraph of text beneath the heading to explain the heading. Here is just a bit more text.</p>
+                                    <p class="mb-0">O sistema foi desenvolvido com foco no fácil manuseio, garantindo que professores, coordenadores
+                                         e toda a equipe escolar possam utilizá-lo de maneira simples e intuitiva. A navegação clara e objetiva permite
+                                          registrar presenças, acompanhar faltas e gerar relatórios de forma eficiente, sem necessidade de treinamentos complexos.</p>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +80,6 @@
                             <div class="text-center">
                                 <div class="fs-4 mb-4 fst-italic">"O que nos torna humanos é a responsabilidade que assumimos por nossas ações"</div>
                                 <div class="d-flex align-items-center justify-content-center">
-                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
                                     <div class="fw-bold">
                                         Khalil Gibran
                                         <span class="fw-bold text-primary mx-1">/</span>
@@ -184,20 +187,7 @@
             </section>
         </main>
         <!-- Footer-->
-        <footer class="bg-dark py-4 mt-auto">
-            <div class="container px-5">
-                <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                    <div class="col-auto"><div class="small m-0 text-white">Copyright &copy; Your Website 2023</div></div>
-                    <div class="col-auto">
-                        <a class="link-light small" href="#!">Privacy</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Terms</a>
-                        <span class="text-white mx-1">&middot;</span>
-                        <a class="link-light small" href="#!">Contact</a>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
