@@ -7,7 +7,7 @@
         <meta name="author" content="" />
         <title>Faltômetro</title>
         <!-- Favicon-->
-        <link rel="icon" href="img/icon_faltometro.ico" />
+        <link rel="icon" href="img/educacao-escolar-em-casa.png" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
@@ -106,21 +106,13 @@
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
                                 <img class="card-img-top" src="https://dummyimage.com/600x350/ced4da/6c757d" alt="..." />
-                                <div class="card-body p-4">
-                                    <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Blog post title</h5></a>
-                                    <p class="card-text mb-0">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                    <div class="d-flex align-items-end justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                            <div class="small">
-                                                <div class="fw-bold">Kelly Rowan</div>
-                                                <div class="text-muted">March 12, 2023 &middot; 6 min read</div>
+                                 <div class="card-body p-4">
+                                    <div class="badge bg-info bg-gradient rounded-pill mb-2">Desenvolvedora Front-End</div>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Ana Carolina Gelako Silva</h5></a>
+                                    <div class="small">
+                                        <div class="text-muted">Entre em contato:</div>
+                                                <div class="fw-bold">@carolgelako</div>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -128,44 +120,55 @@
                             <div class="card h-100 shadow border-0">
                                 <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
                                 <div class="card-body p-4">
-                                    <div class="badge bg-primary bg-gradient rounded-pill mb-2">Media</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Another blog post title</h5></a>
-                                    <p class="card-text mb-0">This text is a bit longer to illustrate the adaptive height of each card. Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                    <div class="d-flex align-items-end justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                            <div class="small">
-                                                <div class="fw-bold">Josiah Barclay</div>
-                                                <div class="text-muted">March 23, 2023 &middot; 4 min read</div>
+                                    <div class="badge bg-info bg-gradient rounded-pill mb-2">Desenvolvedora Back-End</div>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Beatriz da Cruz Purissimo</h5></a>
+                                    <div class="small">
+                                        <div class="text-muted">Entre em contato:</div>
+                                                <div class="fw-bold">@...</div>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-4 mb-5">
                             <div class="card h-100 shadow border-0">
-                                <img class="card-img-top" src="https://dummyimage.com/600x350/6c757d/343a40" alt="..." />
+                                <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
                                 <div class="card-body p-4">
-                                    <div class="badge bg-primary bg-gradient rounded-pill mb-2">News</div>
-                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">The last blog post title is a little bit longer than the others</h5></a>
-                                    <p class="card-text mb-0">Some more quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                </div>
-                                <div class="card-footer p-4 pt-0 bg-transparent border-top-0">
-                                    <div class="d-flex align-items-end justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                            <div class="small">
-                                                <div class="fw-bold">Evelyn Martinez</div>
-                                                <div class="text-muted">April 2, 2023 &middot; 10 min read</div>
+                                    <div class="badge bg-info bg-gradient rounded-pill mb-2">Documentação</div>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Giordana Mirela Borges Martins</h5></a>
+                                    <div class="small">
+                                        <div class="text-muted">Entre em contato:</div>
+                                                <div class="fw-bold">@...</div>
                                             </div>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-lg-4 mb-5">
+                            <div class="card h-100 shadow border-0">
+                                <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
+                                <div class="card-body p-4">
+                                    <div class="badge bg-info bg-gradient rounded-pill mb-2">Documentação</div>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">José Augusto dos Santos Piedade</h5></a>
+                                    <div class="small">
+                                        <div class="text-muted">Entre em contato:</div>
+                                                <div class="fw-bold">@...</div>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 mb-5">
+                            <div class="card h-100 shadow border-0">
+                                <img class="card-img-top" src="https://dummyimage.com/600x350/adb5bd/495057" alt="..." />
+                                <div class="card-body p-4">
+                                    <div class="badge bg-info bg-gradient rounded-pill mb-2">Documentação</div>
+                                    <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Matheus Barêa Coutinho Sevilha Silva</h5></a>
+                                    <div class="small">
+                                        <div class="text-muted">Entre em contato:</div>
+                                                <div class="fw-bold">@...</div>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+                     
                     </div>
                 </div>
             </section>
