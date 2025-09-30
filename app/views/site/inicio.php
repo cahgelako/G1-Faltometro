@@ -18,7 +18,7 @@
         <main class="flex-shrink-0">
        
             <!-- Header-->
-            <header class="bg-light py-5">
+            <header class=" bg-light py-5">
                 <div class="container px-5">
                     <div class="row gx-5 align-items-center justify-content-center">
                         <div class="col-lg-8 col-xl-7 col-xxl-6">
@@ -27,7 +27,7 @@
                                 <p class="lead fw-normal text-black-50 mb-4">Da frequência à gestão: informação para cuidar do futuro!</p>
                             </div>
                         </div>
-                        <div style="background-color: antiquewhite;" class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="img/logo_faltometro2.png" alt="..." /></div>
+                        <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-5" src="img/logo_faltometro2.png" alt="..." /></div>
                     </div>
                 </div>
             </header>
@@ -40,7 +40,7 @@
                         <div class="col-lg-8">
                             <div class="row gx-5 row-cols-1 row-cols-md-2">
                                 <div class="col mb-5 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-square-poll-vertical"></i></div>
+                                    <div class="feature bg-danger-subtle text-white rounded-3 mb-3"><i class="fa-solid fa-square-poll-vertical"></i></div>
                                     <h2 class="h5">Contagem de Faltas</h2>
                                     <p class="mb-0">Uma nova forma de contagem de faltas, simples e ágil. O sistema permite registrar a presença dos alunos de maneira eficiente, 
                                 acompanhar diariamente a frequência de cada turma e gerar relatórios automáticos para a coordenação e a cozinha. Com dados precisos e organizados,
@@ -48,20 +48,20 @@
                                          </p>
                                 </div>
                                 <div class="col mb-5 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-pen-to-square"></i></div>
+                                    <div class="feature bg-danger-subtle text-white rounded-3 mb-3"><i class="fa-solid fa-pen-to-square"></i></div>
                                     <h2 class="h5">Relatórios Diários</h2>
                                     <p class="mb-0">Relatórios completos que apresentam todas as informações essenciais para manter um controle eficiente das faltas.
                                          Com dados organizados e detalhados, a coordenação, os professores e a cozinha podem acompanhar a frequência de cada aluno e tomar decisões informadas
                                           para uma gestão escolar mais eficaz.</p>
                                 </div>
                                 <div class="col mb-5 mb-md-0 h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-people-roof"></i></i></div>
+                                    <div class="feature bg-danger-subtle text-white rounded-3 mb-3"><i class="fa-solid fa-people-roof"></i></i></div>
                                     <h2 class="h5">Informações sobre os Estudantes</h2>
                                     <p class="mb-0">Informações completas e necessárias sobre cada estudante,
                                          organizadas em relatórios claros que facilitam o acompanhamento da frequência e o apoio à gestão escolar. </p>
                                 </div>
                                 <div class="col h-100">
-                                    <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="fa-solid fa-chalkboard"></i></div>
+                                    <div class="feature bg-danger-subtle text-white rounded-3 mb-3"><i class="fa-solid fa-chalkboard"></i></div>
                                     <h2 class="h5">Fácil Manuseio</h2>
                                     <p class="mb-0">O sistema foi desenvolvido com foco no fácil manuseio, garantindo que professores, coordenadores
                                          e toda a equipe escolar possam utilizá-lo de maneira simples e intuitiva. A navegação clara e objetiva permite
@@ -97,8 +97,8 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
-                                <h2 class="fw-bolder">From our blog</h2>
-                                <p class="lead fw-normal text-muted mb-5">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eaque fugit ratione dicta mollitia. Officiis ad.</p>
+                                <h2 class="fw-bolder">Desenvolvedores</h2>
+                                <p class="lead fw-normal text-muted mb-5">Conheça a equipe</p>
                             </div>
                         </div>
                     </div>
@@ -167,22 +167,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- Call to action-->
-                    <aside class="bg-primary bg-gradient rounded-3 p-4 p-sm-5 mt-5">
-                        <div class="d-flex align-items-center justify-content-between flex-column flex-xl-row text-center text-xl-start">
-                            <div class="mb-4 mb-xl-0">
-                                <div class="fs-3 fw-bold text-white">New products, delivered to you.</div>
-                                <div class="text-white-50">Sign up for our newsletter for the latest updates.</div>
-                            </div>
-                            <div class="ms-xl-4">
-                                <div class="input-group mb-2">
-                                    <input class="form-control" type="text" placeholder="Email address..." aria-label="Email address..." aria-describedby="button-newsletter" />
-                                    <button class="btn btn-outline-light" id="button-newsletter" type="button">Sign up</button>
-                                </div>
-                                <div class="small text-white-50">We care about privacy, and will never share your data.</div>
-                            </div>
-                        </div>
-                    </aside>
                 </div>
             </section>
         </main>
