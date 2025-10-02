@@ -6,7 +6,6 @@ $routes = [
     'contato'  => ['controller' => 'SiteController', 'method' => 'contato'],
     'inicio'   => ['controller' => 'SiteController', 'method' => 'inicio'],
     'logout'   => ['controller' => 'UserController', 'method' => 'logout'],
-    'login'   => ['controller' => 'UserController', 'method' => 'logout'],
 
     // Escolas
     'listEscola' => ['controller' => 'EscolaController', 'method' => 'listar'],
@@ -15,5 +14,12 @@ $routes = [
 
     // Turmas
     'listTurma' => ['controller' => 'TurmaController', 'method' => 'listar'],
-    'registerTu'=> ['controller' => 'TurmaController', 'method' => 'registrar']
+    'registerTu'=> ['controller' => 'TurmaController', 'method' => 'registrar'],
+
+    // Funcionarios
+    'login'    => ['controller' => 'FuncionarioController', 'method' => 'login'],
+    'listFunc' => ['controller' => 'FuncionarioController', 'method' => 'listar'],
+    'editFunc' => ['controller' => 'FuncionarioController', 'method' => 'editar'],
+    'deleteFunc' => ['controller' => 'FuncionarioController', 'method' => 'deletar'],
+    'registrarFunc' => ['controller' => 'FuncionarioController', 'method' => 'registrar'],
 ];
