@@ -7,7 +7,7 @@ class EscolaController extends Controller {
         $this->view('escola/listEscola', ['escolas' => $escolas]);
     }
     
-    public function registro() {
+    public function registrar() {
         require "app/core/auth.php";
         $model = $this->model('Escola');
         
@@ -15,7 +15,7 @@ class EscolaController extends Controller {
             $model->salvar($_POST['nome_escola']);
             header("Location: ./listEscola");
         } else {
-            $this->view('escola/registroEscola');
+            $this->view('escola/registerEs');
         }
     }
     

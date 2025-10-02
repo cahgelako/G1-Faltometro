@@ -97,7 +97,7 @@
                     <div class="row gx-5 justify-content-center">
                         <div class="col-lg-8 col-xl-6">
                             <div class="text-center">
-                                <h2 class="fw-bolder">Desenvolvedores</h2>
+                                <h2 class="fw-bolder">Nosso Time</h2>
                                 <p class="lead fw-normal text-muted mb-5">Conheça a equipe</p>
                             </div>
                         </div>
@@ -110,8 +110,8 @@
                                     <div class="badge bg-info bg-gradient rounded-pill mb-2">Desenvolvedora Front-End</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Ana Carolina Gelako Silva</h5></a>
                                     <div class="small">
-                                        <div class="text-muted">Entre em contato:</div>
-                                                <div class="fw-bold">@carolgelako</div>
+                                        <div class="text-muted">Entre em contato pelo email:</div>
+                                                <div class="fw-bold">ana.gelako@portalsesisp.org.br</div>
                                             </div>
                                 </div>
                             </div>
@@ -123,8 +123,8 @@
                                     <div class="badge bg-info bg-gradient rounded-pill mb-2">Desenvolvedora Back-End</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Beatriz da Cruz Purissimo</h5></a>
                                     <div class="small">
-                                        <div class="text-muted">Entre em contato:</div>
-                                                <div class="fw-bold">@...</div>
+                                        <div class="text-muted">Entre em contato pelo email:</div>
+                                                <div class="fw-bold">beatriz.purissimo@portalsesisp.org.br</div>
                                             </div>
                                 </div>
                             </div>
@@ -136,8 +136,8 @@
                                     <div class="badge bg-info bg-gradient rounded-pill mb-2">Documentação</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Giordana Mirela Borges Martins</h5></a>
                                     <div class="small">
-                                        <div class="text-muted">Entre em contato:</div>
-                                                <div class="fw-bold">@...</div>
+                                        <div class="text-muted">Entre em contato pelo email:</div>
+                                                <div class="fw-bold">giordana.martins@portalsesisp.org.br</div>
                                             </div>
                                 </div>
                             </div>
@@ -149,8 +149,8 @@
                                     <div class="badge bg-info bg-gradient rounded-pill mb-2">Documentação</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">José Augusto dos Santos Piedade</h5></a>
                                     <div class="small">
-                                        <div class="text-muted">Entre em contato:</div>
-                                                <div class="fw-bold">@...</div>
+                                        <div class="text-muted">Entre em contato pelo email:</div>
+                                                <div class="fw-bold">jose.piedade@portalsesisp.org.br</div>
                                             </div>
                                 </div>
                             </div>
@@ -162,8 +162,8 @@
                                     <div class="badge bg-info bg-gradient rounded-pill mb-2">Documentação</div>
                                     <a class="text-decoration-none link-dark stretched-link" href="#!"><h5 class="card-title mb-3">Matheus Barêa Coutinho Sevilha Silva</h5></a>
                                     <div class="small">
-                                        <div class="text-muted">Entre em contato:</div>
-                                                <div class="fw-bold">@...</div>
+                                        <div class="text-muted">Entre em contato pelo email:</div>
+                                                <div class="fw-bold">matheus.sevilha@portalsesisp.org.br</div>
                                             </div>
                                 </div>
                             </div>

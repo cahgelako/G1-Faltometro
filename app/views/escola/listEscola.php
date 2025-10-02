@@ -24,12 +24,12 @@
                                 
                                 ?>
                                 <tr>
-                                    <td class="text-center"><?= $escola['idescola']?></td>
-                                    <td><?= $escola['es_nome']?></td>
+                                    <td class="text-center"><?= $escola['id_escola']?></td>
+                                    <td><?= $escola['nome_escola']?></td>
                                     <td>
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="./editEscola&id=<?= $escola['idescola'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>
-                                        <a href="./deleteEscola&id=<?= $escola['idescola'] ?>"   title="Excluir" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')"><i class="fa fa-trash"></i></a>
+                                            <a href="./editEscola&id=<?= $escola['id_escola'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>
+                                        <a href="./deleteEscola&id=<?= $escola['id_escola'] ?>"   title="Excluir" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

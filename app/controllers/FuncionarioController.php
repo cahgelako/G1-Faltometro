@@ -1,34 +1,41 @@
 <?php
-class FuncionarioController extends Controller {
+class FuncionarioController extends Controller
+{
 
-    public function login() {
-        session_start(); //inicia a sessão
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') { // pergunta se o método de requisição é igual a post
-            $model = $this->model('Funcionarios'); // chama a classe Funcionario
-            if ($model->login($_POST)) { // manda os dados para o método login da classe Funcionario, que vai retonar se os dados do login bateram com os dados do banco
-                // se for compatível
-                $dados = $model->funcionario_por_email($_POST['email_funcionario']);
+    public function login()
+    {
+        session_start();
+
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') { 
+            $modal = $this->model('Funcionario'); 
+            
+            if ($modal->login($_POST)) { 
+           /*      echo "<pre>";
+                echo var_dump($_POST);
+                echo "</pre>"; */
+
+                $dados = $modal->funcionario_por_email($_POST['email_funcionario']);
+
                 if ($dados) {
-                    $_SESSION['logged'] = true; // define como verdadeiro o login
+                    $_SESSION['logged'] = true;
                     foreach ($dados as $chave => $valor) {
-                        $_SESSION[`func_$chave`] = $valor;
+                        $_SESSION["func_$chave"] = $valor;
                     }
-                    header('Location: ./inicio'); // vai para a tela de início
+                    header('Location: ./inicio');
                     exit;
                 } else {
                     $this->view('funcionario/login', ['error' => 'Usuário não encontrado']);
                 }
-                
             } else {
                 $this->view('funcionario/login', ['error' => 'Login inválido']);
             }
-            
         } else {
             $this->view('funcionario/login');
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_start();
 
         // remove todas as variáveis da sessão
@@ -42,30 +49,33 @@ class FuncionarioController extends Controller {
 
         // Destroi a sessão
         session_destroy();
-        
+
         header('Location: ./login');
         exit;
     }
-    
-    public function listar() {
+
+    public function listar()
+    {
         require_once 'app/core/auth.php'; // verifica se a sessão existe
         $model = $this->model('Funcionario');
         $funcionarios = $model->listar();
         $this->view('funcionario/listFunc', ['funcionarios' => $funcionarios]);
     }
 
-    public function registrar() {
+    public function registrar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Funcionario');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model->salvar($_POST);
             header('Location: ./listFunc');
         } else {
-            $this->view('funcionario/registrar');
+            $this->view('funcionario/registrarFunc');
         }
     }
-    
-    public function deletar() {
+
+    public function deletar()
+    {
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
             $model = $this->model('Funcionario');
@@ -74,17 +84,20 @@ class FuncionarioController extends Controller {
         header('Location: ./listFunc');
         exit;
     }
-    
-    public function editar() {
+
+    public function editar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Funcionario');
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->editar($_POST);
+            $dados = $_POST;
+            $model->editar($dados);
             header('Location: ./listFunc');
-        } else if (isset($_GET['id'])) {
+            exit;
+        } else {
             $funcionario = $model->funcionario_por_id($_GET['id']);
             $this->view('funcionario/editFunc', ['funcionario' => $funcionario]);
         }
-        
     }
 }

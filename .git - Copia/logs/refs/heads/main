@@ -1,0 +1,40 @@
+0000000000000000000000000000000000000000 bb78a66f4029c7d815a4d9a1c5d9493d9dbc8d69 anamennd <164012224+cahgelako@users.noreply.github.com> 1758792449 -0300	clone: from https://github.com/cahgelako/G1-Faltometro.git
+bb78a66f4029c7d815a4d9a1c5d9493d9dbc8d69 fa49841e5e8498d5f20ede125269e05de67295f5 anamennd <164012224+cahgelako@users.noreply.github.com> 1758792606 -0300	pull --ff --recurse-submodules --progress origin: Fast-forward
+fa49841e5e8498d5f20ede125269e05de67295f5 0ea8556d3e0caa292b762930abb8d387516fd896 anamennd <164012224+cahgelako@users.noreply.github.com> 1758792970 -0300	commit: criação das pastas bases
+0ea8556d3e0caa292b762930abb8d387516fd896 c2cf812c50b6df7072cd0ac3f3be6de79d4bd50d anamennd <164012224+cahgelako@users.noreply.github.com> 1758793058 -0300	commit: Create text.txt
+c2cf812c50b6df7072cd0ac3f3be6de79d4bd50d 18f1fa58ee578277c6cb3e1dc17e6be79287c68a anamennd <164012224+cahgelako@users.noreply.github.com> 1758793187 -0300	commit: atualização de pastas
+18f1fa58ee578277c6cb3e1dc17e6be79287c68a 2576f9b9fe3c2bd02b0411d45218c2d7d1fac281 anamennd <164012224+cahgelako@users.noreply.github.com> 1758793413 -0300	commit: criação do cabeçalho e rodapé
+2576f9b9fe3c2bd02b0411d45218c2d7d1fac281 c52b0d12f94bb3a20bb1223892a373b2dd4a8735 anamennd <164012224+cahgelako@users.noreply.github.com> 1758793488 -0300	pull --ff --recurse-submodules --progress origin: Fast-forward
+c52b0d12f94bb3a20bb1223892a373b2dd4a8735 14643a2c7aa3c16d1eb23c2f6ceaac9142836b13 anamennd <164012224+cahgelako@users.noreply.github.com> 1758794985 -0300	commit: Update footer.php
+14643a2c7aa3c16d1eb23c2f6ceaac9142836b13 b187238fa12d9f07a8a9557d09b722b620067ddc anamennd <164012224+cahgelako@users.noreply.github.com> 1758794997 -0300	pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+b187238fa12d9f07a8a9557d09b722b620067ddc ab9d60757b182735b7ca83636564a2975a53394d anamennd <164012224+cahgelako@users.noreply.github.com> 1758795360 -0300	commit: salvando o logo do site na pasta img
+ab9d60757b182735b7ca83636564a2975a53394d 3f76d86bda311e49e5659803fadae8b2db65b0c3 anamennd <164012224+cahgelako@users.noreply.github.com> 1758795699 -0300	commit: Criação do icon do site
+3f76d86bda311e49e5659803fadae8b2db65b0c3 e2b73f0ea870b64375615b1646d7c2d75c615ad5 anamennd <164012224+cahgelako@users.noreply.github.com> 1758795794 -0300	pull --ff --recurse-submodules --progress origin: Fast-forward
+e2b73f0ea870b64375615b1646d7c2d75c615ad5 054590fd4da2945c9859a89ec71323cdf7862735 anamennd <164012224+cahgelako@users.noreply.github.com> 1758797977 -0300	commit: arquivos da pasta CSS
+054590fd4da2945c9859a89ec71323cdf7862735 1ff014bd2c6d3c3cb93836b1dcf910720afdb5b1 anamennd <164012224+cahgelako@users.noreply.github.com> 1758797992 -0300	pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+1ff014bd2c6d3c3cb93836b1dcf910720afdb5b1 76361a80423061089b8457ff7ba893249056624c anamennd <164012224+cahgelako@users.noreply.github.com> 1758802234 -0300	commit: anotações
+76361a80423061089b8457ff7ba893249056624c cb813027de6ff1b866d6e17ee132b5c6769156a2 anamennd <164012224+cahgelako@users.noreply.github.com> 1758804030 -0300	commit: anotações
+cb813027de6ff1b866d6e17ee132b5c6769156a2 fcd08407355c93e63842d788200d3027ac6472b9 anamennd <164012224+cahgelako@users.noreply.github.com> 1758804093 -0300	commit: cabeçalho - 1ª tentativa
+fcd08407355c93e63842d788200d3027ac6472b9 0a295e4b75b90d1c39a50799e64fbf79b6db24e3 anamennd <164012224+cahgelako@users.noreply.github.com> 1758805275 -0300	commit: view da tabela escola
+0a295e4b75b90d1c39a50799e64fbf79b6db24e3 94325a4e3a1e77623cd7d5f78ce1fc0b6fc9659d anamennd <164012224+cahgelako@users.noreply.github.com> 1758807480 -0300	commit: tela de inicio
+94325a4e3a1e77623cd7d5f78ce1fc0b6fc9659d 4a897fdea0e0ae4d0297834fbf3a9c0ab4df4cd5 anamennd <164012224+cahgelako@users.noreply.github.com> 1758807486 -0300	pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+4a897fdea0e0ae4d0297834fbf3a9c0ab4df4cd5 741c758840ca345591104efcf89ab9a247fa8425 anamennd <164012224+cahgelako@users.noreply.github.com> 1758814718 -0300	commit: anotações - mudança da ordem de acesso
+741c758840ca345591104efcf89ab9a247fa8425 e600ee03b67f37c6bebffca4708a0bdba479e1cb anamennd <164012224+cahgelako@users.noreply.github.com> 1758814765 -0300	commit: mudança do cabeçalho de acordo com a nova ordem de acesso
+e600ee03b67f37c6bebffca4708a0bdba479e1cb 837c3d002a4667f718fe715c790c2d491925db28 cahgelako <164012224+cahgelako@users.noreply.github.com> 1758816729 -0300	commit: mudanças simples na tela de inicio
+837c3d002a4667f718fe715c790c2d491925db28 505dcf092fd2108b366fe3cc11ef6700db0a7cb9 cahgelako <164012224+cahgelako@users.noreply.github.com> 1758822547 -0300	commit: começo dos cards da tela de inicio sobre a funcionalidade do site
+505dcf092fd2108b366fe3cc11ef6700db0a7cb9 5b8b0a5d707549e32b57c5fc4479f60963fc441e cahgelako <164012224+cahgelako@users.noreply.github.com> 1758822551 -0300	pull --ff --recurse-submodules --progress origin: Merge made by the 'ort' strategy.
+5b8b0a5d707549e32b57c5fc4479f60963fc441e e64013180672553859ea9d871003bd0caa1261ed cahgelako <164012224+cahgelako@users.noreply.github.com> 1759240871 -0300	commit: mudanças na tela de início
+e64013180672553859ea9d871003bd0caa1261ed 5e7980070eba817cab01940de9fde912d1edb0a0 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759246684 -0300	commit: mudanças na tela inicial
+5e7980070eba817cab01940de9fde912d1edb0a0 dcb6e7e36b650da885df3f5905d1aac56d79c3bc cahgelako <164012224+cahgelako@users.noreply.github.com> 1759246702 -0300	commit: editando o footer
+dcb6e7e36b650da885df3f5905d1aac56d79c3bc e65941f580cb69b24762e5796c711c46441c0193 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759246727 -0300	commit: editando a cor de fundo do header
+e65941f580cb69b24762e5796c711c46441c0193 2975d2f2455a48896ec6e983e25cdf4ca73dfe3d cahgelako <164012224+cahgelako@users.noreply.github.com> 1759246750 -0300	commit: criação dos arquivos da tabela Turma
+2975d2f2455a48896ec6e983e25cdf4ca73dfe3d 1fb41795e45ab1d166aa3116d3116f7a016e4dde cahgelako <164012224+cahgelako@users.noreply.github.com> 1759246763 -0300	commit: Criação do Login
+1fb41795e45ab1d166aa3116d3116f7a016e4dde 8bd3a303c999e1c000adeb99e9d3fe008daa1198 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759252809 -0300	commit: login
+8bd3a303c999e1c000adeb99e9d3fe008daa1198 1fb41795e45ab1d166aa3116d3116f7a016e4dde cahgelako <164012224+cahgelako@users.noreply.github.com> 1759252816 -0300	reset: moving to 1fb41795e45ab1d166aa3116d3116f7a016e4dde
+1fb41795e45ab1d166aa3116d3116f7a016e4dde 6969b731a482590518a5b703b39028a23ab6b0c9 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759252831 -0300	commit: login
+6969b731a482590518a5b703b39028a23ab6b0c9 3e5909925cc3ded13ab4e5af66d128afe1a6c1be cahgelako <164012224+cahgelako@users.noreply.github.com> 1759252869 -0300	commit: mudança na cor do texto do footer
+3e5909925cc3ded13ab4e5af66d128afe1a6c1be 179237628c63ac8054f857783e3fabf250dbfc89 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759252899 -0300	commit: mudança dos campos do header
+179237628c63ac8054f857783e3fabf250dbfc89 8447723715dab12ea398ae985a517b98343a9680 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759252953 -0300	commit: mundança do icon e criação do campo "sobre a equipe"
+8447723715dab12ea398ae985a517b98343a9680 2308040ed1d65d571eb0fac85e2b143faa077ac8 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759252980 -0300	commit: Início do Login
+2308040ed1d65d571eb0fac85e2b143faa077ac8 bad783440e2d410c12089a734872027d71f6f5a4 cahgelako <164012224+cahgelako@users.noreply.github.com> 1759254509 -0300	commit: mudanças no design
+bad783440e2d410c12089a734872027d71f6f5a4 b2ae13c4cbc5fd21b8f67d13c03b5dc4d191499a cahgelako <164012224+cahgelako@users.noreply.github.com> 1759397568 -0300	commit: acrescentando e editando alguns arquivos da bia

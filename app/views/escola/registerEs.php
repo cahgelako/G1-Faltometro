@@ -8,7 +8,7 @@
                         <div class="row">
                             <div class="col-sm-6 mb-3">
                                 <label for="nome" class="form-label">Nome da Instituição de Ensino</label>
-                                <input type="text" class="form-control" id="es_nome" name="es_nome" placeholder="Nome completo" value="<?= $escolas['es_nome'] ?? '' ?>" required>
+                                <input type="text" class="form-control" id="nome_escola" name="nome_escola" placeholder="Nome completo" value="<?= $escolas['es_nome'] ?? '' ?>" required>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success"><?= isset($edit) ? 'Atualizar' : 'Cadastrar'?></button>

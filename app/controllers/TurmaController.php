@@ -16,7 +16,7 @@ class TurmaController extends Controller {
             $model->salvar($_POST);
             header("Location: ./listTurma");
         } else {
-            $this->view('turma/registerTu');
+            $this->view('turma/registerTurma');
         }
     }
 
@@ -28,7 +28,7 @@ class TurmaController extends Controller {
             $model->editar($_POST);
             header("Location: ./listTurma");
         } else if (isset($_GET['id'])) {
-            $turmas = $model->filter($_GET['id']);
+            $turmas = $model->filtrar($_GET['id']);
             $this->view('turma/editTurma', ['turmas' => $turmas]);
         }
         

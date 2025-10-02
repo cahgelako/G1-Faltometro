@@ -2,7 +2,7 @@
     require_once 'app/core/Controller.php';
     require_once 'app/core/Database.php';
 
-    $uri = $_GET['url'] ?? 'inicio' ; //mudar depois para 'login'
+    $uri = $_GET['url'] ?? 'login' ; //mudar depois para 'login'
     require_once 'routes/routes.php';
     
     if (array_key_exists($uri, $routes)) {
