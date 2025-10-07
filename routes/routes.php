@@ -24,7 +24,7 @@ $routes = [
     'listFunc' => ['controller' => 'FuncionarioController', 'method' => 'listar'],
     'editFunc' => ['controller' => 'FuncionarioController', 'method' => 'editar'],
     'deleteFunc' => ['controller' => 'FuncionarioController', 'method' => 'deletar'],
-    'registerFunc' => ['controller' => 'FuncionarioController', 'method' => 'registrar'],
+    'registrarFunc' => ['controller' => 'FuncionarioController', 'method' => 'registrar'],
 
     // Estudantes
     'listEstudante' => ['controller' => 'EstudanteController', 'method' => 'listar'],
@@ -57,5 +57,11 @@ $routes = [
     'deleteFalta' => ['controller' => 'FaltaController', 'method' => 'delete'],
     'relFalta' => ['controller' => 'FaltaController', 'method' => 'relatorio'],
     'relPDFFalta' => ['controller' => 'FaltaController', 'method' => 'gerarPDF'],
+
+    // Projetos Especiais
+    'listProjeto' => ['controller' => 'ProjetoController', 'method' => 'listar'],
+    'editProjeto' => ['controller' => 'ProjetoController', 'method' => 'editar'],
+    'registerProjeto' => ['controller' => 'ProjetoController', 'method' => 'registrar'],
+    'deleteProjeto' => ['controller' => 'ProjetoController', 'method' => 'deletar'],
 
 ];
