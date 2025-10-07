@@ -3,7 +3,7 @@ class Database extends PDO
 {
     public function __construct()
     {
-        $host = '10.132.224.65:3306';
+        $host = '10.132.224.55:3306';
         $dbname = 'faltometro_teste';
         $username = 'ana_carolina';
         $password = 'faltometro_123';
