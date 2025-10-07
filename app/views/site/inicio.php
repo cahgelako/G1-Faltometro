@@ -16,7 +16,6 @@
     </head>
     <body class="d-flex flex-column h-100">
         <main class="flex-shrink-0">
-       
             <!-- Header-->
             <header class=" bg-light py-5">
                 <div class="container px-5">

@@ -59,7 +59,7 @@
                                     <a class="nav-link dropdown-toggle text-black" href="#" id="cadastrosDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Cadastros</a>
                                     <ul class="dropdown-menu" aria-labelledby="cadastrosDropdown">
                                         <li><a class="dropdown-item text-black" href="./listFunc">Funcionários</a></li>
-                                        <li><a class="dropdown-item text-black" href="./listAluno">Alunos</a></li>
+                                        <li><a class="dropdown-item text-black" href="./listEstudante">Alunos</a></li>
                                         <li><a class="dropdown-item text-black" href="./listEscola">Escolas</a></li>
                                         <li><a class="dropdown-item text-black" href="./listTurma">Turmas</a></li>
                                         <li>
