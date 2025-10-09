@@ -16,8 +16,8 @@
                             <input type="text" class="form-control" id="telefone_responsavel" name="telefone_responsavel" placeholder="Telefone do responsável" value="<?= $estudantes['telefone_responsavel'] ?? '' ?>" required>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label for="registro_matricula" class="form-label">Registro de Matrícula</label>
-                            <input type="text" class="form-control" id="registro_matricula" name="registro_matricula" placeholder="Registro de Matrícula" value="<?= $estudantes['registro_matricula'] ?? '' ?>" required>
+                            <label for="registro_matricula_escola" class="form-label">Registro de Matrícula</label>
+                            <input type="text" class="form-control" id="registro_matricula_escola" name="registro_matricula_escola" placeholder="Registro de Matrícula" value="<?= $estudantes['registro_matricula_escola'] ?? '' ?>" required>
                         </div>
                     </div>
 

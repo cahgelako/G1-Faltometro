@@ -15,7 +15,6 @@
                                     <th class="text-center">Chave do Usuário</th>
                                     <th>Nome</th>
                                     <th>Email</th>
-                                    <th class="text-center">Status</th>
                                     <th class="text-center">Perfil de Acesso</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
@@ -23,11 +22,6 @@
                             <tbody>
                                 <?php 
                                     foreach ($funcionarios as $user): 
-                                        if ($user['ativo'] == 0) {
-                                            $status = "<span style='color: red;'>Inativo</span>";
-                                        } elseif ($user['ativo'] == 1) {
-                                            $status = "<span style='color: green;'>Ativo</span>";  
-                                        }
                                         if ($user['tipo_acesso'] == 1) {
                                             $perfil = "<span style='color: blue;'>Professores(a)</span>";
                                         } elseif ($user['tipo_acesso'] == 2) {
@@ -40,9 +34,8 @@
                                 ?>
                                     <tr>
                                         <td class="text-center"><?= $user['id_funcionario'] ?></td>
-                                        <td><?= $user['nome_funcionario'] ?></td>
-                                        <td><?= $user['email_funcionario'] ?></td>
-                                        <td class="text-center"><?= $status ?></td>
+                                        <td><?= $user['nome'] ?></td>
+                                        <td><?= $user['email'] ?></td>
                                         <td class="text-center"><?= $perfil ?></td>
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center gap-2">

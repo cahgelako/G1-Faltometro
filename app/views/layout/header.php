@@ -14,11 +14,11 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#F0F8FF;">
+    <nav class="navbar navbar-expand-lg   navbar-dark" style="background-color:#F0F8FF;">
         <div class="container px-5">
             <a class="navbar-brand" href="inicio"><img class="w-25 h-50" src="img/logo_faltometro2.png" alt=""></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="collapse  navbar-collapse" id="navbarSupportedContent">
                 <?php 
                 require_once 'app/core/auth.php';
                 if (isset($_SESSION['logged'])): ?>
@@ -32,7 +32,7 @@
                             case '1': ?>
                                 <li class="nav-item"><a class="nav-link text-black" href="./home">Início</a></li>
                                 <li class="nav-item"><a class="nav-link text-black" href="./conta">Conta</a></li>
-                                <li class="nav-item"><a class="nav-link text-black" href="./faltas">Faltas</a></li>
+                                <li class="nav-item"><a class="nav-link text-black" href="./faltas">Frequência</a></li>
                                 <li class="nav-item"><a class="nav-link text-black" href="./relatorios">Relatórios</a></li>
                                 <li class="nav-item"><a class="nav-link text-black" href="./logout">Sair</a></li>
                             <?php break;
@@ -62,11 +62,12 @@
                                         <li><a class="dropdown-item text-black" href="./listEstudante">Alunos</a></li>
                                         <li><a class="dropdown-item text-black" href="./listEscola">Escolas</a></li>
                                         <li><a class="dropdown-item text-black" href="./listTurma">Turmas</a></li>
+                                        <li><a class="dropdown-item text-black" href="./listGrade">Classes</a></li>
                                         <li>
                                             <hr class="dropdown-divider">
                                         </li>
-                                        <li><a class="dropdown-item text-black" href="./listGrade">Grade Curricular</a></li>
                                         <li><a class="dropdown-item text-black" href="./listMatricula">Matrícula</a></li>
+                                        <li><a class="dropdown-item text-black" href="./listDieta">Dietas Especiais</a></li>
                                         <li><a class="dropdown-item text-black" href="./listTurmaExtra">Turmas Extracurriculares</a></li>
                                         <li>
                                             <hr class="dropdown-divider">

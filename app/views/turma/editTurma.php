@@ -13,15 +13,6 @@
                                 <label for="nome_turma" class="form-label">Nome da Turma</label>
                                 <input type="text" class="form-control" id="nome_turma" name="nome_turma" placeholder="ex: 3º ano do Ensino Médio" value="<?= $turmas['nome_turma'] ?? '' ?>" required>
 
-                            </div>
-                            <div class="col-sm-3 mb-3">
-                                <label for="grupo" class="form-label">Grupo (A / B)</label>
-                                <select name="grupo" class="form-control" id="grupo">
-                                    <option value="A"> Grupo A</option>
-                                    <option value="B"> Grupo B</option>
-                                </select>
-
-                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Editar</button>
                         <a href="./listTurma" class="btn btn-success">Voltar</a>

@@ -25,7 +25,7 @@
                                     <td class="text-center"><?= $estudante['id_estudante'] ?></td>
                                     <td><?= $estudante['nome_estudante'] ?></td>
                                     <td><?= $estudante['telefone_responsavel'] ?></td>
-                                    <td><?= $estudante['registro_matricula'] ?></td>
+                                    <td><?= $estudante['registro_matricula_escola'] ?></td>
                                     
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">

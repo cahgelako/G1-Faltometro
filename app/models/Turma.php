@@ -10,10 +10,9 @@ class Turma {
     }
 
     public function salvar($dados) {
-        $sql = "INSERT INTO turmas (nome_turma, grupo) VALUES (:nome_turma, :grupo)";
+        $sql = "INSERT INTO turmas (nome_turma) VALUES (:nome_turma)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':nome_turma', $dados['nome_turma']);
-        $stmt->bindParam(':grupo', $dados['grupo']);
         $stmt->execute();
     }
 
@@ -25,10 +24,9 @@ class Turma {
     }
 
     public function editar($dados){
-        $sql = "UPDATE turmas SET nome_turma = :nome_turma,  grupo = :grupo WHERE id_turma = :id_turma";
+        $sql = "UPDATE turmas SET nome_turma = :nome_turma WHERE id_turma = :id_turma";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':nome_turma', $dados['nome_turma']);
-        $stmt->bindParam(':grupo', $dados['grupo']);
+        $stmt->bindParam(':nome_turma', $dados['nome_turma']);  
         $stmt->bindParam(':id_turma', $dados['id_turma']);
         $stmt->execute();
     }

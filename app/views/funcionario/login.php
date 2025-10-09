@@ -9,7 +9,7 @@
             <form method="POST">
                 <div class="mb-3">
                     <label for="email" class="form-label">E-mail</label>
-                    <input type="email" class="form-control" id="email_funcionario" name="email_funcionario" placeholder="name@example.com" required>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" required>
                 </div>
 
                 <div class="mb-3">

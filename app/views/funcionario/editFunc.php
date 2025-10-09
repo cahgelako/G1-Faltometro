@@ -8,17 +8,10 @@
                         <div class="row">
                             <input type="hidden" name="id_funcionario" readonly value="<?= $funcionario['id_funcionario'] ?? '' ?>">
                             <div class="col-sm-6 mb-3">
-                            <label for="nome_funcionario" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="nome_funcionario" name="nome_funcionario" placeholder="Nome completo" value="<?= $funcionario['nome_funcionario'] ?? '' ?>" required>
+                            <label for="nome" class="form-label">Nome Completo</label>
+                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" value="<?= $funcionario['nome'] ?? '' ?>" required>
                         </div>
 
-                            <div class="col-sm-3 mb-3">
-                                <label for="senha" class="form-label">Status</label>
-                                <select name="ativo" class="form-control" id="ativo" required>
-                                    <option value="1" <?= isset($funcionario['ativo']) && $funcionario['ativo'] == 1 ? 'selected' : '' ?>>Ativo</option>
-                                    <option value="0" <?= isset($funcionario['ativo']) && $funcionario['ativo'] == 0 ? 'selected' : '' ?>>Inativo</option>
-                                </select>
-                            </div>
 
                             <div class="col-sm-3 mb-3">
                                 <label for="tipo_acesso" class="form-label">Perfil de Acesso</label>
@@ -36,7 +29,7 @@
                             <p>DADOS DE LOGIN</p>
                             <div class="col-sm-6 mb-3">
                                 <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email_funcionario" name="email_funcionario" placeholder="name@example.com" value="<?= $funcionario['email_funcionario'] ?? '' ?>" required>
+                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" value="<?= $funcionario['email'] ?? '' ?>" required>
                             </div>
 
                             <div class="col-sm-6 mb-3">
