@@ -8,14 +8,15 @@ class EstudanteController extends Controller {
         $this->view('estudante/listEstudante', ['estudantes' => $estudantes]);
     }
 
-    public function registar() {
+    public function registrar() {
         require_once 'app/core/auth.php';
         $model = $this->model('Estudante');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($POST);
+            var_dump($_POST); 
+            $model->salvar($_POST);
             header('Location: ./listEstudante');
         } else {
-            $this->view('estudante/registerEstudante');
+            $this->view('estudante/registerEstudantes');
         }
     }
 
@@ -26,7 +27,7 @@ class EstudanteController extends Controller {
             $model->editar($_POST);
             header('Location: ./listEstudante');
         } else if (isset($_GET['id'])) {
-            $estudante = $model->estudante_por_id($_GET['id']);
+            $estudantes = $model->estudante_por_id($_GET['id']);
             $this->view('estudante/editEstudante', ['estudantes' => $estudantes]);
         }
     }

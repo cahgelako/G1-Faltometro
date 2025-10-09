@@ -11,8 +11,8 @@
                             <input type="text" class="form-control" id="nome_estudante" name="nome_estudante" placeholder="Nome completo" value="<?=$estudantes['nome_estudante'] ?? '' ?>" required>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label for="nome_estudante" class="form-label">Telefone do responsável</label>
-                            <input type="text" class="form-control" id="nome_estudante" name="nome_estudante" placeholder="Telefone do responsável" value="<?= $estudantes['telefone_responsavel'] ?? '' ?>" required>
+                            <label for="telefone_responsavel" class="form-label">Telefone do responsável</label>
+                            <input type="text" class="form-control" id="telefone_responsavel" name="telefone_responsavel" placeholder="Telefone do responsável" value="<?= $estudantes['telefone_responsavel'] ?? '' ?>" required>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <label for="registro_matricula" class="form-label">Registro de Matrícula</label>

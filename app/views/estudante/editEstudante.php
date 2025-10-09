@@ -6,18 +6,18 @@
             <h2 class="card-title text-center mb-4">Editar Estudante</h2>
                 <form method="POST">
                     <div class="row">
-                        <input type="hidden" name="id_estudante" readonly value="<?=['id_estudante'] ?? '' ?>">
+                        <input type="hidden" name="id_estudante" readonly value="<?= $estudantes['id_estudante'] ?? '' ?>">
                         <div class="col-sm-6 mb-3">
                             <label for="nome_estudante" class="form-label">Nome completo</label>
-                            <input type="text" class="form-control" id="nome_estudante" name="nome_estudante" placeholder="Nome completo" value="<?=['nome_estudante'] ?? '' ?>" required>
+                            <input type="text" class="form-control" id="nome_estudante" name="nome_estudante" placeholder="Nome completo" value="<?= $estudantes['nome_estudante'] ?? '' ?>" required>
                         </div>
                         <div class="col-sm-6 mb-3">
-                            <label for="nome_estudante" class="form-label">Telefone do responsável</label>
-                            <input type="text" class="form-control" id="nome_estudante" name="nome_estudante" placeholder="Telefone do responsável" value="<?= ['telefone_responsavel'] ?? '' ?>" required>
+                            <label for="telefone_responsavel" class="form-label">Telefone do responsável</label>
+                            <input type="text" class="form-control" id="telefone_responsavel" name="telefone_responsavel" placeholder="Telefone do responsável" value="<?= $estudantes['telefone_responsavel'] ?? '' ?>" required>
                         </div>
                         <div class="col-sm-6 mb-3">
                             <label for="registro_matricula" class="form-label">Registro de Matrícula</label>
-                            <input type="text" class="form-control" id="registro_matricula" name="registro_matricula" placeholder="Registro de Matrícula" value="<?=['registro_matricula'] ?? '' ?>" required>
+                            <input type="text" class="form-control" id="registro_matricula" name="registro_matricula" placeholder="Registro de Matrícula" value="<?= $estudantes['registro_matricula'] ?? '' ?>" required>
                         </div>
                     </div>
 
