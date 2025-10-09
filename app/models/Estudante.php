@@ -38,4 +38,20 @@ class Estudante {
         $stmt->bindParam(':id_estudante', $id);
         $stmt->execute();
     }
+
+    public function estudante_por_id($id) {
+        $sql = "SELECT * FROM estudantes WHERE id_estudante = :id_estudante";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_estudante', $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
+    public function estudante_por_nome($nome) {
+        $sql = "SELECT * FROM estudantes WHERE nome_estudante LIKE '%:nome_estudante%'";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':nome_estudante', $nome);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }
