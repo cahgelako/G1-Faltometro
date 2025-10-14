@@ -14,7 +14,7 @@ class FuncionarioController extends Controller
                 echo var_dump($_POST);
                 echo "</pre>"; */
 
-                $dados = $modal->funcionario_por_email($_POST['email_funcionario']);
+                $dados = $modal->funcionario_por_email($_POST['email']);
 
                 if ($dados) {
                     $_SESSION['logged'] = true;
@@ -79,7 +79,7 @@ class FuncionarioController extends Controller
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
             $model = $this->model('Funcionario');
-            $model->delete($_GET['id']);
+            $model->deletar($_GET['id']);
         }
         header('Location: ./listFunc');
         exit;

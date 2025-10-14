@@ -38,17 +38,17 @@ $routes = [
     'registerMatricula' => ['controller' => 'MatriculaController', 'method' => 'registrar'], 
     'deleteMatricula' => ['controller' => 'MatriculaController', 'method' => 'deletar'], 
 
-    // Grade
-    'listGrade' => ['controller' => 'GradeController', 'method' => 'listar'],
-    'editGrade' => ['controller' => 'GradeController', 'method' => 'editar'],
-    'registerGrade' => ['controller' => 'GradeController', 'method' => 'registrar'],
-    'deleteGrade' => ['controller' => 'GradeController', 'method' => 'deletar'], 
+    // Classe
+    'listClasse' => ['controller' => 'ClasseController', 'method' => 'listar'],
+    'editClasse' => ['controller' => 'ClasseController', 'method' => 'editar'],
+    'registerClasse' => ['controller' => 'ClasseController', 'method' => 'registrar'],
+    'deleteClasse' => ['controller' => 'ClasseController', 'method' => 'deletar'], 
 
     // Dietas Especiais
-    'listDieta' => ['controller' => 'DietaController', 'method' => 'listar'],
-    'editDieta' => ['controller' => 'DietaController', 'method' => 'editar'],
-    'registerDieta' => ['controller' => 'DietaController', 'method' => 'registrar'],
-    'deleteDieta' => ['controller' => 'DietaController', 'method' => 'deletar'],
+    'listDieta' => ['controller' => 'DietaEspecialController', 'method' => 'listar'],
+    'editDieta' => ['controller' => 'DietaEspecialController', 'method' => 'editar'],
+    'registerDieta' => ['controller' => 'DietaEspecialController', 'method' => 'registrar'],
+    'deleteDieta' => ['controller' => 'DietaEspecialController', 'method' => 'deletar'],
 
     // Faltas
     'listFalta' => ['controller' => 'FaltaController', 'method' => 'listar'],

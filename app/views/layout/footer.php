@@ -2,7 +2,7 @@
     <div class="container px-5">
         <div class="row align-items-center justify-content-center flex-column flex-sm-row">
             <div class="col-auto">
-                <div class="small m-0 text-black">Copyright &copy; Carol Gelako, Beatriz Purissimo, Giordana Mirela, José Augusto e Matheus Barêa / 2025</div>
+                <div class="small m-0 text-black">Copyright &copy; Grupo 1 - Outubro/2025</div>
             </div>
         </div>
     </div>
