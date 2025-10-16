@@ -15,9 +15,11 @@
                 <div class="mb-3">
                     <label for="senha" class="form-label">Senha</label>
                     <input type="password" class="form-control" id="senha" name="senha" placeholder="Senha" required>
+                    <small class="form-text text-muted d-flex justify-content-end"><a href="./listFunc.php">Esqueceu a senha?</a></small>
                 </div>
 
-                <button type="submit" class="btn btn-success">Entrar</button>
+                <button type="submit" class="btn btn-primary">Entrar</button>
+                <button class="btn btn-outline-primary" src="">Manual de Uso</button>
             </form>
           </div>
         </div>

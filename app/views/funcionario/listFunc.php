@@ -40,7 +40,7 @@
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center gap-2">
                                                 <a href="./editFunc&id=<?= $user['id_funcionario'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>
-                                                <a href="./deleteFunc&id=<?= $user['id_funcionario'] ?>" title="Excluir" class="btn btn-sm btn-danger" id="deletar"><i class="fa fa-trash"></i></a>
+                                                <a href="./deleteFunc&id=<?= $user['id_funcionario'] ?>" title="Excluir" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
