@@ -20,17 +20,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php 
-                                    foreach ($funcionarios as $user): 
-                                        if ($user['tipo_acesso'] == 1) {
-                                            $perfil = "<span style='color: blue;'>Professores(a)</span>";
-                                        } elseif ($user['tipo_acesso'] == 2) {
-                                        $perfil = "<span style='color: black;'>Nutricionista</span>";  
-                                        }elseif($user['tipo_acesso'] == 3){
-                                            $perfil = "<span style='color: orange;'>Coordenação</span>";  
-                                        }else{
-                                            $perfil = "<span style='color: #CC0F87;;'>Administrador</span>";
-                                        }
+                                <?php
+                                foreach ($funcionarios as $user):
+                                    if ($user['tipo_acesso'] == 1) {
+                                        $perfil = "<span style='color: blue;'>Professores(a)</span>";
+                                    } elseif ($user['tipo_acesso'] == 2) {
+                                        $perfil = "<span style='color: black;'>Nutricionista</span>";
+                                    } elseif ($user['tipo_acesso'] == 3) {
+                                        $perfil = "<span style='color: orange;'>Coordenação</span>";
+                                    } else {
+                                        $perfil = "<span style='color: #CC0F87;;'>Administrador</span>";
+                                    }
                                 ?>
                                     <tr>
                                         <td class="text-center"><?= $user['id_funcionario'] ?></td>
@@ -40,7 +40,7 @@
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center gap-2">
                                                 <a href="./editFunc&id=<?= $user['id_funcionario'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>
-                                                <a href="./deleteFunc&id=<?= $user['id_funcionario'] ?>"   title="Excluir" class="btn btn-sm btn-danger" onclick="return confirm('Tem certeza que deseja excluir?')"><i class="fa fa-trash"></i></a>
+                                                <a href="./deleteFunc&id=<?= $user['id_funcionario'] ?>" title="Excluir" class="btn btn-sm btn-danger" id="deletar"><i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>
@@ -53,6 +53,7 @@
         </div>
     </div>
 </div>
-
-   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
+<script src="index.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.2/dist/sweetalert2.all.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.2/dist/sweetalert2.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
