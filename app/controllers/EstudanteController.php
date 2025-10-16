@@ -32,4 +32,14 @@ class EstudanteController extends Controller {
         }
     }
 
+    public function deletar() {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id'])) {
+            $model = $this->model('Estudante');
+            $model->deletar($_GET['id']);
+        }
+        header('Location: ./listEstudante');
+        exit;
+    }
+
 }

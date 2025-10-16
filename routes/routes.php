@@ -11,7 +11,7 @@ $routes = [
     'listEscola' => ['controller' => 'EscolaController', 'method' => 'listar'],
     'registerEs' => ['controller' => 'EscolaController', 'method' => 'registrar'],
     'editEscola' => ['controller' => 'EscolaController', 'method' => 'editar'],
-    'deleteEscola'=> ['controller' => 'TurmaController', 'method' => 'deletar'],
+    'deleteEscola'=> ['controller' => 'EscolaController', 'method' => 'deletar'],
 
     // Turmas
     'listTurma' => ['controller' => 'TurmaController', 'method' => 'listar'],
@@ -48,7 +48,7 @@ $routes = [
     'listDieta' => ['controller' => 'DietaEspecialController', 'method' => 'listar'],
     'editDieta' => ['controller' => 'DietaEspecialController', 'method' => 'editar'],
     'registerDieta' => ['controller' => 'DietaEspecialController', 'method' => 'registrar'],
-    'deleteDieta' => ['controller' => 'DietaEspecialController', 'method' => 'deletar'],
+    'deletedieta' => ['controller' => 'DietaEspecialController', 'method' => 'deletar'],
 
     // Faltas
     'listFalta' => ['controller' => 'FaltaController', 'method' => 'listar'],

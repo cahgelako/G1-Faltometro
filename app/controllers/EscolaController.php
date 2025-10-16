@@ -31,4 +31,14 @@ class EscolaController extends Controller {
             $this->view('escola/editEscola', ['escolas' => $escolas]);
         }
     }
+
+    public function deletar() {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id'])) {
+            $model = $this->model('Escola');
+            $model->deletar($_GET['id']);
+        }
+        header('Location: ./listEscola');
+        exit;
+    }
 }

@@ -66,9 +66,13 @@
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>
-                                            <li><a class="dropdown-item text-black" href="./listMatricula">Matrícula</a></li>
                                             <li><a class="dropdown-item text-black" href="./listDieta">Dietas Especiais</a></li>
                                             <li><a class="dropdown-item text-black" href="./listProjeto">Turmas Extracurriculares</a></li>
+                                            <li>
+                                                <hr class="dropdown-divider">
+                                            </li>
+                                            <li><a class="dropdown-item text-black" href="./listMatricula">Matrícula</a></li>
+                                            <li><a class="dropdown-item text-black" href="./listMatriculaProjeto">Matrícula dos Extracurriculares</a></li>
                                             <li>
                                                 <hr class="dropdown-divider">
                                             </li>

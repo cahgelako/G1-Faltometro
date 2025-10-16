@@ -37,4 +37,11 @@
             $stmt->bindParam(':id_escola', $dados['id_escola']);
             $stmt->execute();
         }
+
+        public function deletar($id){
+            $sql = "DELETE FROM escolas WHERE id_escola = :id_escola";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id_escola', $id);
+            $stmt->execute();
+        }
     }

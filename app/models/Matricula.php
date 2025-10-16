@@ -18,11 +18,11 @@ class Matricula {
     }
 
     public function listar() {
-        $sql = "SELECT t.nome_turma, c.turno, e.nome_estudante, m.data_matricula, c.ano_turma, es.nome_escola
+        $sql = "SELECT m.id_matricula, m.ativo, t.nome_turma, c.turno, e.nome_estudante, m.data_matricula, c.ano_turma, es.nome_escola
         FROM turmas t
         JOIN classes c ON c.id_turma = t.id_turma
         JOIN escolas es ON es.id_escola = c.id_escola
-        JOIN matricula_classe_estudante m ON m.id_classe = c.id_classe
+        JOIN matriculas_classe_estudante m ON m.id_classe = c.id_classe
         JOIN estudantes e ON e.id_estudante = m.id_estudante
         ORDER BY es.nome_escola";
         $stmt = $this->conn->prepare($sql);
@@ -48,12 +48,12 @@ class Matricula {
         $stmt->execute();
     }
 
-    public function matricula_por_nome_estudante($nome) {
+    public function matricula_por_nome_estudante($nome) { // arrumar se necessário
         $sql = "SELECT t.nome_turma, c.turno, e.nome_estudante, m.data_matricula, c.ano_turma, es.nome_escola
         FROM turmas t
         JOIN classes c ON c.id_turma = t.id_turma
         JOIN escolas es ON es.id_escola = c.id_escola
-        JOIN matricula_classe_estudante m ON m.id_classe = c.id_classe
+        JOIN matriculas_classe_estudante m ON m.id_classe = c.id_classe
         JOIN estudantes e ON e.id_estudante = m.id_estudante
         WHERE e.nome_estudante LIKE '%:nome_estudante%'";
         $stmt = $this->conn->prepare($sql);
@@ -63,13 +63,10 @@ class Matricula {
     }
 
     public function matricula_por_id($id) {
-        $sql = "SELECT t.nome_turma, c.turno, e.nome_estudante, m.data_matricula, c.ano_turma, es.nome_escola
-        FROM turmas t
-        JOIN classes c ON c.id_turma = t.id_turma
-        JOIN escolas es ON es.id_escola = c.id_escola
-        JOIN matricula_classe_estudante m ON m.id_classe = c.id_classe
-        JOIN estudantes e ON e.id_estudante = m.id_estudante
-        WHERE m.id_matricula = :id_matricula";
+        $sql = "SELECT m.* FROM matriculas_classe_estudante m, classes c, estudantes e
+        WHERE m.id_matricula = :id_matricula
+        AND m.id_classe = c.id_classe
+        AND m.id_estudante = e.id_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_matricula', $id);
         $stmt->execute();

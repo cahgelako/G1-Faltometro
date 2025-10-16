@@ -21,7 +21,7 @@ class MatriculaController extends Controller {
             $model->salvar($_POST);
             header('Location: ./listMatricula');
         } else {
-            $this->view('matricula/listMatricula', ['classes' => $classes, 'estudantes' => $estudantes]);
+            $this->view('matricula/registerMatricula', ['classes' => $classes, 'estudantes' => $estudantes]);
         }
     }
 
@@ -35,11 +35,11 @@ class MatriculaController extends Controller {
         $estudantes = $modelEstudante->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($_POST);
+            $model->editar($_POST);
             header('Location: ./listMatricula');
         } else if (isset($_GET['id'])){
             $matricula = $model->matricula_por_id($_GET['id']);
-            $this->view('matricula/listMatricula', ['classes' => $classes, 'estudantes' => $estudantes, 'matricula' => $matricula]);
+            $this->view('matricula/editMatricula', ['classes' => $classes, 'estudantes' => $estudantes, 'matricula' => $matricula]);
         }
     }
 

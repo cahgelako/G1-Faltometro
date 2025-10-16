@@ -31,4 +31,14 @@
             $this->view('projeto/editProjeto', ['projeto' => $projeto]);
         }
     }
+
+    public function deletar() {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id'])) {
+            $model = $this->model('Projeto');
+            $model->deletar($_GET['id']);
+        }
+        header('Location: ./listProjeto');
+        exit;
+    }
  }

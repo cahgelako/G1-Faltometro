@@ -35,11 +35,12 @@ class ClasseController extends Controller {
         $escolas = $modelEscola->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($_POST);
+            $model->editar($_POST);
             header('Location: ./listClasse');
         } else if (isset($_GET['id'])){
-            $classe = $model->classe_por_id($_GET['id']);
-            $this->view('classe/registerClasse', ['turmas' => $turmas, 'escolas' => $escolas, 'classe' => $classe]);
+            $classes = $model->classe_por_id($_GET['id']);
+            //echo '<pre>'; print_r($classe); echo '</pre>';
+            $this->view('classe/editClasse', ['turmas' => $turmas, 'escolas' => $escolas, 'classes' => $classes]);
         }
     }
 

@@ -38,4 +38,11 @@ class Turma {
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    public function deletar($id){
+        $sql = "DELETE FROM turmas WHERE id_turma = :id_turma";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_turma', $id);
+        $stmt->execute();
+    }
 }

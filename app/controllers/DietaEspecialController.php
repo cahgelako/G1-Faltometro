@@ -36,4 +36,14 @@ class DietaEspecialController extends Controller {
             $this->view('dieta/editDieta', ['dietas' => $dietas]);
         }
     }
+
+    public function deletar() {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id'])) {
+            $model = $this->model('DietaEspecial');
+            $model->deletar($_GET['id']);
+        }
+        header('Location: ./listDieta');
+        exit;
+    }
 }

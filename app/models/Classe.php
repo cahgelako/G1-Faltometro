@@ -8,7 +8,7 @@ class Classe {
     }
 
     public function listar() {
-        $sql = "SELECT e.nome_escola, t.nome_turma, c.ano_turma, c.turno, c.ativo  FROM escolas e
+        $sql = "SELECT c.id_classe, e.nome_escola, t.nome_turma, c.ano_turma, c.turno, c.ativo  FROM escolas e
         JOIN classes c ON c.id_escola = e.id_escola
         JOIN turmas t ON t.id_turma = c.id_turma
         ORDER BY e.nome_escola";
@@ -48,7 +48,12 @@ class Classe {
     }
 
     public function classe_por_id($id) {
-        $sql = "SELECT * FROM classes WHERE id_classe = :id_classe";
+        //echo '<pre>'; print_r($id); echo '</pre>'; exit;
+        $sql = "SELECT cla.*, t.nome_turma 
+            FROM escolas e, turmas t, classes cla 
+            where cla.id_classe = :id_classe 
+            and cla.id_turma = t.id_turma 
+            and cla.id_escola = e.id_escola";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_classe', $id);
         $stmt->execute();
