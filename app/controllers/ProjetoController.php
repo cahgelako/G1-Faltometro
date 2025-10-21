@@ -41,4 +41,18 @@
         header('Location: ./listProjeto');
         exit;
     }
+
+    public function visualizar() {
+        require_once 'app/core/auth.php';
+        $model = $this->model('Projeto');
+        $modelMatProjeto = $this->model('MatriculaProjeto');
+
+        if (isset($_GET['id'])) {
+            $projetos = $model->projeto_por_id();
+            $estudantes_do_projeto = $modelMatProjeto->estudantes_por_projeto();
+            $this->view('projeto/viewProjeto', ['projetos' => $projetos, 'estudantes_do_projeto' => $estudantes_do_projeto]);
+        } else {
+            $this->view('projeto/listProjeto');
+        }
+    }
  }

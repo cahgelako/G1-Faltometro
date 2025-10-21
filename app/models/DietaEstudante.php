@@ -13,25 +13,14 @@ class DietaEstudante
 
     public function listar()
     {
-        $sql = "SELECT t.nome_turma, e.nome_estudante, d.nome_dieta, cd.data_adicao_dieta, cd.ativo 
+        $sql = "SELECT t.nome_turma, e.nome_estudante, d.nome_dieta, cd.data_adicao_dieta,  e.registro_matricula_escola
         FROM dietas_especiais d
         JOIN cadastros_dietas_por_estudante cd ON cd.id_dieta = d.id_dieta
-        JOIN estudante e ON e.id_estudante = cd.id_estudante
-        JOIN matriculas_classe_estudante m ON m.id_estudante = e.id_classe
-        JOIN classes c ON c.id_turma = c.idturma
-        JOIN turmas t ON d.id_dieta = cd.id_dieta
+        JOIN estudantes e ON e.id_estudante = cd.id_estudante
+        JOIN matriculas_classe_estudante m ON m.id_estudante = e.id_estudante
+        JOIN classes c ON c.id_classe = m.id_classe
+        JOIN turmas t ON t.id_turma = c.id_turma
         ORDER BY t.nome_turma";
-
-        // SELECT BASE PARA O DE CIMA
-        // "SELECT t.nome_turma, e.nome_estudante, d.nome_dieta, cd.data_adicao_dieta, c.ativo 
-        // FROM turmas t
-        // JOIN classes c ON c.id_turma = c.idturma
-        // JOIN matricula m ON m.id_classe = c.id_classe
-        // JOIN estudante e ON e.id_estudante = m.id_estudante
-        // JOIN cadastros_dietas_por_estudante cd ON cd.id_estudante = e.id_estudante
-        // JOIN dietas_especiais d ON d.id_dieta = cd.id_dieta
-        // ORDER BY t.nome_turma";
-
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
@@ -66,15 +55,13 @@ class DietaEstudante
         $stmt->execute();
     }
 
-    public function dieta_estudante_por_id($id_estudante, $id_dieta)
-    {
-        $sql = "SELECT cd.* FROM cadastros_dietas_por_estudante cd, estudantes e, dietas_especiais d
-        WHERE cd.id_estudante = :id_estudante AND cd.id_dieta = :id_dieta
+    public function dietas_do_estudante($id_estudante) {
+        $sql = "SELECT e.nome_estudante, d.nome_dieta FROM cadastros_dietas_por_estudante cd, estudantes e, dietas_especiais d
+        WHERE cd.id_estudante = :id_estudante 
         AND cd.id_estudante = e.id_estudante
         AND cd.id_dieta = d.id_dieta";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id_estudante);
-        $stmt->bindParam(':id_dieta', $id_dieta);
         $stmt->execute();
     }
 }

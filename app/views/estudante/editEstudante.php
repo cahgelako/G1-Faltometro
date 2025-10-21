@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary"><?= isset($edit) ? 'Atualizar' : 'Cadastrar'?></button>
-                    <a href="./listUser" class="btn btn-secondary">Voltar</a>
+                    <a href="./listEstudante" class="btn btn-secondary">Voltar</a>
                 </form>
             </div>
         </div>

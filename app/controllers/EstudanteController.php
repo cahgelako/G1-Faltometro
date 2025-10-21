@@ -11,8 +11,8 @@ class EstudanteController extends Controller {
     public function registrar() {
         require_once 'app/core/auth.php';
         $model = $this->model('Estudante');
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            var_dump($_POST); 
             $model->salvar($_POST);
             header('Location: ./listEstudante');
         } else {
@@ -23,12 +23,19 @@ class EstudanteController extends Controller {
     public function editar() {
         require_once 'app/core/auth.php';
         $model = $this->model('Estudante');
+        $modelDieta = $this->model('DietaEspecial');
+        $modelDietaEs = $this->model('DietaEstudante');
+
+        $dietas = $modelDieta->listar();
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model->editar($_POST);
+            $modelDietaEs->salvar($_POST);
             header('Location: ./listEstudante');
         } else if (isset($_GET['id'])) {
             $estudantes = $model->estudante_por_id($_GET['id']);
-            $this->view('estudante/editEstudante', ['estudantes' => $estudantes]);
+            $this->view('estudante/editEstudante', ['estudantes' => $estudantes,'dietas' => $dietas]);
         }
     }
 
@@ -42,4 +49,20 @@ class EstudanteController extends Controller {
         exit;
     }
 
+    public function visualizar_estudante() {
+       require_once 'app/core/auth.php';
+        $model = $this->model('Estudante');
+        $modelMatProjeto = $this->model('MatriculaProjeto');
+        $modelDietasEs = $this->model('DietaEstudante');
+
+        if (isset($_GET['id'])) {
+            $estudantes = $model->estudante_por_id(isset($_GET['id']));
+            $participando = $modelMatProjeto->projetos_por_estudante(isset($_GET['id']));
+            $dietas = $modelDietasEs->dietas_do_estudante(isset($_GET['id']));
+            $this->view('estudante/viewEstudante', ['estudantes' => $estudantes, 'participando' => $participando, 'dietas' => $dietas]); 
+        } else {
+            $this->view('estudante/listEstudante'); 
+        }
+
+    }
 }

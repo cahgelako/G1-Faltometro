@@ -31,6 +31,7 @@ $routes = [
     'registerEstudantes' => ['controller' => 'EstudanteController', 'method' => 'registrar'],
     'editEstudante' => ['controller' => 'EstudanteController', 'method' => 'editar'],
     'deleteEstudante' => ['controller' => 'EstudanteController', 'method' => 'deletar'],
+    'viewEstudante' => ['controller' => 'EstudanteController', 'method' => 'visualizar_estudante'],
 
     // Matricula
     'listMatricula' => ['controller' => 'MatriculaController', 'method' => 'listar'], 
@@ -63,5 +64,19 @@ $routes = [
     'editProjeto' => ['controller' => 'ProjetoController', 'method' => 'editar'],
     'registerProjeto' => ['controller' => 'ProjetoController', 'method' => 'registrar'],
     'deleteProjeto' => ['controller' => 'ProjetoController', 'method' => 'deletar'],
+    'viewProjeto' => ['controller' => 'ProjetoController', 'method' => 'visualizar'],
+
+      // Matricula Projetos
+    'listMatProjeto' => ['controller' => 'MatriculaController', 'method' => 'listar'],
+    'editMatProjeto' => ['controller' => 'MatriculaController', 'method' => 'editar'],
+    'registerMatProjeto' => ['controller' => 'MatriculaController', 'method' => 'registrar'],
+    'deleteMatProjeto' => ['controller' => 'MatriculaController', 'method' => 'deletar'],
+
+    // Dietas por Estudante
+    'listDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'listar'],
+    'editDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'editar'],
+    'registerDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'registrar'],
+    'deleteDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'deletar'],
+
 
 ];
