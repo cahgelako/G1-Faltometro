@@ -7,10 +7,9 @@ class Estudante {
     }
 
     public function salvar($dados) {
-        $sql = "INSERT INTO estudantes (nome_estudante, telefone_responsavel, registro_matricula_escola) VALUES (:nome_estudante, :telefone_responsavel, :registro_matricula_escola)";
+        $sql = "INSERT INTO estudantes (nome_estudante, registro_matricula_escola) VALUES (:nome_estudante, :registro_matricula_escola)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
-        $stmt->bindParam(':telefone_responsavel', $dados['telefone_responsavel']);
         $stmt->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
         $stmt->execute();
     }
@@ -23,10 +22,9 @@ class Estudante {
     }
 
     public function editar($dados) {
-        $sql = "UPDATE estudantes SET nome_estudante = :nome_estudante, telefone_responsavel = :telefone_responsavel, registro_matricula_escola = :registro_matricula_escola WHERE id_estudante = :id_estudante";
+        $sql = "UPDATE estudantes SET nome_estudante = :nome_estudante, registro_matricula_escola = :registro_matricula_escola WHERE id_estudante = :id_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
-        $stmt->bindParam(':telefone_responsavel', $dados['telefone_responsavel']);
         $stmt->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
         $stmt->bindParam(':id_estudante', $dados['id_estudante']);
         $stmt->execute();

@@ -1,4 +1,6 @@
 <?php
+    include_once 'Debug.php';
+
     require_once 'app/core/Controller.php';
     require_once 'app/core/Database.php';
 

@@ -14,7 +14,6 @@
                                 <tr>
                                     <th class="text-center">Chave do Usuário</th>
                                     <th>Nome</th>
-                                    <th>Telefone do Responsável</th>
                                     <th class="text-center">Resgistro de Matrícula</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
@@ -24,7 +23,6 @@
                                 <tr>
                                     <td class="text-center"><?= $estudante['id_estudante'] ?></td>
                                     <td><?= $estudante['nome_estudante'] ?></td>
-                                    <td><?= $estudante['telefone_responsavel'] ?></td>
                                     <td><?= $estudante['registro_matricula_escola'] ?></td>
                                     
                                     <td class="text-center">

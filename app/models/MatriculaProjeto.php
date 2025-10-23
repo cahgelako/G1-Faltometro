@@ -14,7 +14,7 @@ class MatriculaProjeto {
     // rever lógica
     public function listar()
     {
-        $sql = "SELECT e.registro_matricula_escola, e.nome_estudante, t.nome_turma, c.ano_turma, c.turno, p.nome_projeto
+        $sql = "SELECT e.registro_matricula_escola, e.nome_estudante, t.nome_turma, c.ano_turma, c.turno, e.id_estudante, p.nome_projeto
         FROM turmas t
         JOIN classes c ON c.id_turma = t.id_turma
         JOIN matriculas_classe_estudante me ON me.id_classe = c.id_classe

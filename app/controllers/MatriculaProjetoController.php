@@ -6,7 +6,7 @@ class MatriculaProjetoController extends Controller
         require_once 'app/core/auth.php';
         $model = $this->model('MatriculaProjeto');
         $matriculas = $model->listar();
-        $this->view('matriculaprojeto/listMatProjeto', ['matriculas' => $matriculas]);
+        $this->view('projetoAluno/listAtriExtras', ['matriculas' => $matriculas]);
     }
 
     public function registrar()
@@ -22,9 +22,9 @@ class MatriculaProjetoController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model->salvar($_POST);
-            header('Location: ./listMatProjeto');
+            header('Location: ./listAtriExtras');
         } else {
-            $this->view('matriculaprojeto/registerMatProjeto', ['matriculas' => $matriculas, 'projetos' => $projetos, 'participando' => $participando]);
+            $this->view('projetoAluno/registerAtriExtras', ['matriculas' => $matriculas, 'projetos' => $projetos, 'participando' => $participando]);
         }
     }
 
@@ -43,7 +43,7 @@ class MatriculaProjetoController extends Controller
             header('Location: ./listMatProjeto');
         } else if (isset($_GET['id_projeto']) && isset($_GET['id_matricula'])) {
             $matprojetos = $model->matricula_proj_estudante_por_id($_GET['id_projeto'], $_GET['id_matricula']);
-            $this->view('matriculaprojeto/editMatProjeto', ['matriculas' => $matriculas, 'projetos' => $projetos, 'matprojetos' => $matprojetos]);
+            $this->view('projetoAluno/editAtriExtras', ['matriculas' => $matriculas, 'projetos' => $projetos, 'matprojetos' => $matprojetos]);
         }
     }
 
@@ -54,7 +54,7 @@ class MatriculaProjetoController extends Controller
             $model = $this->model('MatriculaProjeto');
             $model->deletar($_GET['id_projeto'], $_GET['id_matricula']);
         }
-        header('Location: ./listMatProjeto');
+        header('Location: ./listAtriExtras');
         exit;
     }
 }

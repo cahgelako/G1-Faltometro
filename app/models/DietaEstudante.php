@@ -13,7 +13,7 @@ class DietaEstudante
 
     public function listar()
     {
-        $sql = "SELECT t.nome_turma, e.nome_estudante, d.nome_dieta, cd.data_adicao_dieta,  e.registro_matricula_escola
+        $sql = "SELECT t.nome_turma, e.nome_estudante, d.nome_dieta, cd.data_adicao_dieta, e.id_estudante, c.ano_turma, c.turno,  e.registro_matricula_escola
         FROM dietas_especiais d
         JOIN cadastros_dietas_por_estudante cd ON cd.id_dieta = d.id_dieta
         JOIN estudantes e ON e.id_estudante = cd.id_estudante
@@ -55,13 +55,26 @@ class DietaEstudante
         $stmt->execute();
     }
 
-    public function dietas_do_estudante($id_estudante) {
-        $sql = "SELECT e.nome_estudante, d.nome_dieta FROM cadastros_dietas_por_estudante cd, estudantes e, dietas_especiais d
-        WHERE cd.id_estudante = :id_estudante 
-        AND cd.id_estudante = e.id_estudante
-        AND cd.id_dieta = d.id_dieta";
+    public function dietas_do_estudante($id_estudante)
+    {
+        // $sql = "SELECT cd.id_dieta, e.nome_estudante, d.nome_dieta FROM cadastros_dietas_por_estudante cd, estudantes e, dietas_especiais d
+        // WHERE cd.id_estudante = :id_estudante 
+        // AND cd.id_estudante = e.id_estudante
+        // AND cd.id_dieta = d.id_dieta";
+        $sql = "SELECT id_dieta FROM cadastros_dietas_por_estudante 
+        WHERE id_estudante = :id_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id_estudante);
         $stmt->execute();
+        $resultado = $stmt->fetchAll();
+
+        $dietas = [];
+        foreach ($resultado as $d) {
+            $dietas[] = $d['id_dieta'];
+        }
+
+
+
+        return $dietas;
     }
 }
