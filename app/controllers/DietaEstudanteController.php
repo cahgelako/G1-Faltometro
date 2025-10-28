@@ -37,14 +37,30 @@ class DietaEstudanteController extends Controller
         $dietas = $modelDieta->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // __meuDebug()->var_dump($_POST);
-            $model->salvar($_POST);
+            // verificar as mudanças do array e passaras funções de cada situação
+            // ainda está no array: nada acontece
+            // estava no array e não está mais: excluir (deletar)
+            // não estava antes e está agora: adicionar (salvar)
+
+            $dietaestudante = $model->dietas_do_estudante($_POST['id_estudante']);
+            $dietas_form = $_POST['arr_dieta_id'] ?? [];
+
+            // verificando quais dietas foram atribuídas (não existem em dietas estudante e existe no formulário)
+            $atribuidas = array_diff($dietas_form, $dietaestudante); // 1º - array principal | 2º - array de comparação
+            foreach ($atribuidas as $id) {
+                $model->salvar($_POST['id_estudante'], $id);
+            }
+
+            // verificando quais dietas foram excluídas (não existem no formulário e existe no dieta estudante)
+            $excluidas = array_diff($dietaestudante, $dietas_form); // 1º - array principal | 2º - array de comparação
+            foreach ($excluidas as $id) {
+                $model->deletar($_POST['id_estudante'], $id);
+            }
+
             header('Location: ./listAtriDieta');
         } else if (isset($_GET['id_estudante'])) {
             $estudante = $modelEstudante->estudante_por_id($_GET['id_estudante']);
             $dietaestudante = $model->dietas_do_estudante($_GET['id_estudante']);
-
-            // __meuDebug()->var_dump($dietaestudante);
 
             $this->view('dietaAluno/editAtriDieta', [
                 'estudante' => $estudante,

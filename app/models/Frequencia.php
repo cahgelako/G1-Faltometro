@@ -37,5 +37,9 @@ class Frequencia {
 
     }
 
+    public function filtro() {
+        $sql = "";
+    }
+
     
 }

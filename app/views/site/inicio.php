@@ -26,6 +26,7 @@
                         <div class="my-5 text-center text-xl-start">
                             <h1 class="display-5 fw-bolder text-black mb-2">Faltômetro</h1>
                             <p class="lead fw-normal text-black-50 mb-4">Da frequência à gestão: informação para cuidar do futuro!</p>
+                            <button class="btn btn-outline-info" src="">Manual de Uso</button>
                         </div>
                     </div>
                     <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center"><img class="img-fluid rounded-3 my-3 h-50 w-50" src="img/logo_novo.png" alt="..." /></div>

@@ -20,7 +20,10 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach ($matriculas as $projeto) :
+                            <?php 
+                                $frequencia_id = array_count_values($ids_estudantes);
+                                // var_dump($frequencia_id);
+                                foreach ($matriculas as $projeto) :
                                   
                                          if ($projeto['turno'] == 1) {
                                             $perfil = "<span>Manhã</span>";
@@ -29,14 +32,21 @@
                                         }else{
                                             $perfil = "<span>Integral</span>";
                                         }?>
-                                <tr>
+                                <tr> 
+                                    <!-- <?php 
+                                    //foreach ($frequencia_id as $key => $value) {
+                                        //if ($key[$value] > 1) { ?>
+                                            rowspan="<?php //$key[$value] ?>"
+                                            <?php // } 
+                                    //}
+                                    ?> -->
                                     <td class="text-center"><?= $projeto['registro_matricula_escola'] ?></td>
                                     <td><?= $projeto['nome_estudante'] ?></td>
                                     <td><?= $projeto['nome_turma']?> <?= $projeto['ano_turma']?> | <?=$perfil?></td>
                                     <td><?= $projeto['nome_projeto'] ?></td>
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
-                                            <a href="./editAtriExtras&id=<?= $projeto['id_estudante'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>
+                                            <a href="./editAtriExtras&id_matricula=<?= $projeto['id_matricula'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>
                                         </div>
                                     </td>
                                 </tr>

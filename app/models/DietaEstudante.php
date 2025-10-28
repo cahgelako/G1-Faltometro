@@ -26,12 +26,12 @@ class DietaEstudante
         return $stmt->fetchAll();
     }
 
-    public function salvar($dados)
+    public function salvar($id_estudante, $id_dieta)
     {
         $sql = "INSERT INTO cadastros_dietas_por_estudante (id_estudante, id_dieta, data_adicao_dieta) VALUES (:id_estudante, :id_dieta, CURDATE())";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_estudante', $dados['id_estudante']);
-        $stmt->bindParam(':id_dieta', $dados['id_dieta']);
+        $stmt->bindParam(':id_estudante', $id_estudante);
+        $stmt->bindParam(':id_dieta', $id_dieta);
         $stmt->execute();
     }
 
@@ -57,10 +57,6 @@ class DietaEstudante
 
     public function dietas_do_estudante($id_estudante)
     {
-        // $sql = "SELECT cd.id_dieta, e.nome_estudante, d.nome_dieta FROM cadastros_dietas_por_estudante cd, estudantes e, dietas_especiais d
-        // WHERE cd.id_estudante = :id_estudante 
-        // AND cd.id_estudante = e.id_estudante
-        // AND cd.id_dieta = d.id_dieta";
         $sql = "SELECT id_dieta FROM cadastros_dietas_por_estudante 
         WHERE id_estudante = :id_estudante";
         $stmt = $this->conn->prepare($sql);
@@ -68,12 +64,11 @@ class DietaEstudante
         $stmt->execute();
         $resultado = $stmt->fetchAll();
 
+        // retorna um array com os ids das dietas atribuidas
         $dietas = [];
         foreach ($resultado as $d) {
             $dietas[] = $d['id_dieta'];
         }
-
-
 
         return $dietas;
     }

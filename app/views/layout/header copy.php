@@ -11,27 +11,19 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color:#F0F8FF;">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#F0F8FF;">
+        
         <div class="container">
-
-            <a class="navbar-brand d-flex align-items-center" href="inicio">
-                <img class="w-25 h-50" src="img/logo_faltometro2.png" alt="">
-            </a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
-
-                    <?php
-                    require_once 'app/core/auth.php';
-                    if (isset($_SESSION['logged'])): ?>
+        <a class="navbar-brand d-flex align-items-center" href="inicio"><img class="w-25 h-50" src="img/logo_faltometro2.png" alt=""></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse  navbar-collapse justify-content-end" id="navbarSupportedContent">
+                <?php
+                require_once 'app/core/auth.php';
+                if (isset($_SESSION['logged'])): ?>
+                    <ul class="navbar-nav">
 
                         <?php
                         //  echo "<pre>";
@@ -102,14 +94,9 @@
                         }
                         ?>
                     <?php endif; ?>
-                </ul>
+                    </ul>
             </div>
+
         </div>
-
     </nav>
-
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script> -->
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="assets/jquery-3.7.1.min.js"></script>

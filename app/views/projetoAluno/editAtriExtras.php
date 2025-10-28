@@ -7,29 +7,29 @@
         <div class="col-md-12">
             <div class="card shadow-lg">
                 <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Atribuir Dieta</h2>
+                    <h2 class="card-title text-center mb-4">Atribuir Projeto</h2>
                     <form method="POST">
-                        <input type="hidden" readonly class="form-control" id="id_estudante" name="id_estudante" value="<?= $_GET['id_estudante'] ?>">
+                        <input type="hidden" readonly class="form-control" id="id_matricula" name="id_matricula" value="<?= $_GET['id_matricula'] ?>">
 
                         <div class="row">
                             <div class="col-sm-6 mb-3">
                             </div>
-                            <p>Dietas Disponíveis</p>
-                            
+                            <p>Projetos Disponíveis</p>
                             <div class="mb-3">
-                                <label for="dietas" class="form-label">Selecione as Dietas</label>
-                                <select class="form-select" name="arr_dieta_id[]" id="dietas" multiple>
-                                    <?php foreach ($dietas as $dieta) {
-                                        $op_selected = in_array($dieta['id_dieta'], $dietaestudante) ? 'selected' : '';
+                                <label for="projetos" class="form-label">Selecione os Projetos</label>
+                                <select class="form-select" name="arr_projetos_id[]" id="projetos" multiple>
+                                    <?php foreach ($projetos as $projeto) {
+                                        $op_selected = in_array($projeto['id_projeto'], $matprojetos) ? 'selected' : '';
                                     ?>
-                                        <option value="<?= $dieta['id_dieta'] ?>"
-                                            <?= $op_selected ?>><?= htmlspecialchars($dieta['nome_dieta']) ?></option>
+                                        <option value="<?= $projeto['id_projeto'] ?>"
+                                            <?= $op_selected ?>><?= htmlspecialchars($projeto['nome_projeto']) ?></option>
                                     <?php } ?>
+
                                 </select>
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary"><?= isset($edit) ? 'Atualizar' : 'Cadastrar' ?></button>
-                        <a href="./listAtriDieta" class="btn btn-secondary">Voltar</a>
+                        <a href="./listAtriExtras" class="btn btn-secondary">Voltar</a>
                     </form>
                 </div>
             </div>
@@ -45,16 +45,16 @@
 <script>
     document.addEventListener("DOMContentLoaded",
         function() {
-            const $dietas = $('#dietas');
+            const $projetos = $('#projetos');
 
-            $dietas.select2({
-                placeholder: 'Digite para buscar dietas...'
+            $projetos.select2({
+                placeholder: 'Digite para buscar projetos...'
             });
 
-            // Confirmação ao tentar remover uma dieta selecionada
-            $dietas.on('select2:unselecting', function(e) {
-                const dietaLabel = $(e.params.args.data.element).text();
-                const confirmacao = confirm(`Tem certeza que deseja remover a dieta: "${dietaLabel}"?`);
+            // Confirmação ao tentar remover um projeto selecionado
+            $projetos.on('select2:unselecting', function(e) {
+                const projetosLabel = $(e.params.args.data.element).text();
+                const confirmacao = confirm(`Tem certeza que deseja remover o projeto: "${projetosLabel}"?`);
 
                 if (!confirmacao) {
                     // Cancela a remoção

@@ -78,5 +78,7 @@ $routes = [
     'registerAtriDieta' => ['controller' => 'DietaEstudanteController', 'method' => 'registrar'],
     'deleteDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'deletar'],
 
+    // Relatórios
+
 
 ];

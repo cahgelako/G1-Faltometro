@@ -10,11 +10,10 @@ class MatriculaProjeto {
         $this->conn = new Database();
     }
 
-
     // rever lógica
     public function listar()
     {
-        $sql = "SELECT e.registro_matricula_escola, e.nome_estudante, t.nome_turma, c.ano_turma, c.turno, e.id_estudante, p.nome_projeto
+        $sql = "SELECT e.registro_matricula_escola, e.nome_estudante, t.nome_turma, c.ano_turma, c.turno, e.id_estudante, p.nome_projeto, mp.id_matricula
         FROM turmas t
         JOIN classes c ON c.id_turma = t.id_turma
         JOIN matriculas_classe_estudante me ON me.id_classe = c.id_classe
@@ -27,12 +26,12 @@ class MatriculaProjeto {
         return $stmt->fetchAll();
     }
 
-    public function salvar($dados)
+    public function salvar($id_projeto, $id_matricula)
     {
         $sql = "INSERT INTO matriculas_projetos (id_projeto, id_matricula) VALUES (:id_projeto, :id_matricula)";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_projeto', $dados['id_projeto']);
-        $stmt->bindParam(':id_matricula', $dados['id_matricula']);
+        $stmt->bindParam(':id_projeto', $id_projeto);
+        $stmt->bindParam(':id_matricula', $id_matricula);
         $stmt->execute();
     }
 
@@ -47,16 +46,22 @@ class MatriculaProjeto {
     }
 
     //rever
-    public function matricula_proj_estudante_por_id($id_projeto, $id_matricula)
+    public function matricula_proj_estudante_por_id($id_matricula)
     {
-        $sql = "SELECT mp.* FROM matriculas_projetos mp, projetos_extra p, matriculas_classe_estudante me
-        WHERE mp.id_projeto = :id_projeto AND mp.id_matricula = :id_matricula
-        AND mp.id_projeto = p.id_projeto
-        AND mp.id_matricula = me.id_matricula";
+        $sql = "SELECT id_projeto FROM matriculas_projetos mp
+        WHERE id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_projeto', $id_projeto);
         $stmt->bindParam(':id_matricula', $id_matricula);
         $stmt->execute();
+        $resultado = $stmt->fetchAll();
+
+        // retorna um array com os ids dos projetos atribuidas
+        $mat = [];
+        foreach ($resultado as $m) {
+            $mat[] = $m['id_projeto'];
+        }
+
+        return $mat;
     }
 
     public function estudantes_por_projeto($id_projeto) {

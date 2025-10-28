@@ -1,14 +1,18 @@
 <?php
 class Classe {
 
+    // Atributos
     private $conn;
 
+
+    // Métodos
     public function __construct() {
         $this->conn = new Database();
     }
 
     public function listar() {
-        $sql = "SELECT c.id_classe, e.nome_escola, t.nome_turma, c.ano_turma, c.turno, c.ativo  FROM escolas e
+        $sql = "SELECT c.id_classe, e.nome_escola, t.nome_turma, c.ano_turma, c.turno, c.ativo  
+        FROM escolas e
         JOIN classes c ON c.id_escola = e.id_escola
         JOIN turmas t ON t.id_turma = c.id_turma
         ORDER BY e.nome_escola";
@@ -48,12 +52,10 @@ class Classe {
     }
 
     public function classe_por_id($id) {
-        //echo '<pre>'; print_r($id); echo '</pre>'; exit;
         $sql = "SELECT cla.*, t.nome_turma 
-            FROM escolas e, turmas t, classes cla 
+            FROM turmas t, classes cla 
             where cla.id_classe = :id_classe 
-            and cla.id_turma = t.id_turma 
-            and cla.id_escola = e.id_escola";
+            and cla.id_turma = t.id_turma";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_classe', $id);
         $stmt->execute();

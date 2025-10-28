@@ -1,8 +1,11 @@
 <?php 
 class Matricula {
 
+    // Atributos
     private $conn;
 
+
+    // Métodos
     public function __construct() {
         $this->conn = new Database();
     }
