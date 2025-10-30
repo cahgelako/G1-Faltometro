@@ -16,7 +16,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color:#F0F8FF;">
+    <nav class="navbar navbar-expand-lg bg-body-light" style="background-color:#F0F8FF;">
         <div class="container">
 
             <a class="navbar-brand d-flex align-items-center" href="inicio">

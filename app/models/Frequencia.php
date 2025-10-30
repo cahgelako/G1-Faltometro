@@ -33,12 +33,16 @@ class Frequencia {
         $stmt->execute();
     }
 
-    public function editar() {
-
+    public function editar($dados) {
+        $sql = "UPDATE frequencia SET ";
     }
 
-    public function filtro() {
+    public function filtro_data_especifica($data) {
         $sql = "";
+    }
+
+    public function filtro_intervalo(){
+
     }
 
     
