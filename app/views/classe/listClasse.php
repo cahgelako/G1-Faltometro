@@ -13,6 +13,7 @@
                             <thead>
                                 <tr>
                                     <th class="text-center">Chave da Classe</th>
+                                    <th class="text-center">Imagem</th>
                                     <th>Nome da turma</th>
                                     <th>Nome da escola</th>
                                     <th>Ano</th>
@@ -40,11 +41,13 @@
                                 ?>
                                     <tr>
                                         <td class="text-center"><?= $user['id_classe'] ?></td>
+                                        <td><img src="img/<?= $user['img'] ?>" alt="" width="100px" height="100px"></td>
                                         <td><?= $user['nome_turma'] ?></td>
                                         <td><?= $user['nome_escola'] ?></td>
                                         <td><?= $user['ano_turma'] ?></td>
                                         <td class="text-center"><?= $perfil ?></td>
                                         <td class="text-center"><?= $status ?></td>
+
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center gap-2">
                                                 <a href="./editClasse&id=<?= $user['id_classe'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>

@@ -10,6 +10,10 @@
                             <label for="ano_turma" class="form-label">Ano da Classe</label>
                             <input type="text" class="form-control" id="ano_turma" name="ano_turma" placeholder="2025" required>
                         </div>
+                        <div class="col-sm-6 mb-3">
+                            <label for="img" class="form-label">Imagem da Classe</label>
+                            <input type="file" class="form-control" id="img" name="img">
+                        </div>
                         <div class="col-sm-3 mb-3">
                             <label for="turma" class="form-label">Turma</label>
                             <select name="id_turma" class="form-control" id="turma" required>

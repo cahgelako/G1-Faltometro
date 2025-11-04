@@ -1,7 +1,7 @@
 <?php
 class EstudanteController extends Controller {
 
-    public function listar() {
+    public function listar(): void {
         require_once 'app/core/auth.php';
         $model = $this->model('Estudante');
         $estudantes = $model->listar();

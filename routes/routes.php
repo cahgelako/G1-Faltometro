@@ -52,12 +52,12 @@ $routes = [
     'deletedieta' => ['controller' => 'DietaEspecialController', 'method' => 'deletar'],
 
     // Faltas
-    'listFalta' => ['controller' => 'FaltaController', 'method' => 'listar'],
-    'editFalta' => ['controller' => 'FaltaController', 'method' => 'editar'],
-    'registerFalta' => ['controller' => 'FaltaController', 'method' => 'registrar'],
-    'deleteFalta' => ['controller' => 'FaltaController', 'method' => 'delete'],
-    'relFalta' => ['controller' => 'FaltaController', 'method' => 'relatorio'],
-    'relPDFFalta' => ['controller' => 'FaltaController', 'method' => 'gerarPDF'],
+    'listFrenqTu' => ['controller' => 'FrequenciaController', 'method' => 'listar_turmas'],
+    'editFrenq' => ['controller' => 'FrequenciaController', 'method' => 'editar'],
+    'registerFrenqAluno' => ['controller' => 'FrequenciaController', 'method' => 'registrar'],
+    'deleteFalta' => ['controller' => 'FrequenciaController', 'method' => 'delete'],
+    'relFalta' => ['controller' => 'FrequenciaController', 'method' => 'relatorio'],
+    'relPDFFalta' => ['controller' => 'FrequenciaController', 'method' => 'gerarPDF'],
 
     // Projetos Especiais
     'listProjeto' => ['controller' => 'ProjetoController', 'method' => 'listar'],

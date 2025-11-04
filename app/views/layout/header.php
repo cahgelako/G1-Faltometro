@@ -41,7 +41,7 @@
                             case '1': ?>
                                 <li class="nav-item"><a class="nav-link text-black" href="./home">Início</a></li>
                                 <li class="nav-item"><a class="nav-link text-black" href="./conta">Conta</a></li>
-                                <li class="nav-item"><a class="nav-link text-black" href="./faltas">Frequência</a></li>
+                                <li class="nav-item"><a class="nav-link text-black" href="./listFrenqTu">Frequência</a></li>
                                 <li class="nav-item"><a class="nav-link text-black" href="./logout">Sair</a></li>
                             <?php break;
 

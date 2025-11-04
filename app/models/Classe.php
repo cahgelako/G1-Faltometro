@@ -11,35 +11,38 @@ class Classe {
     }
 
     public function listar() {
-        $sql = "SELECT c.id_classe, e.nome_escola, t.nome_turma, c.ano_turma, c.turno, c.ativo  
+        $sql = "SELECT c.id_classe, e.nome_escola, t.nome_turma, c.ano_turma, c.turno, c.ativo, c.img 
         FROM escolas e
         JOIN classes c ON c.id_escola = e.id_escola
         JOIN turmas t ON t.id_turma = c.id_turma
-        ORDER BY e.nome_escola";
+        WHERE c.ativo = 1
+        ORDER BY t.nome_turma";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();
     }
 
     public function salvar($dados) {
-        $sql = "INSERT INTO classes (id_turma, id_escola, ano_turma, turno, ativo) VALUES (:id_turma, :id_escola, :ano_turma, :turno, :ativo)";
+        $sql = "INSERT INTO classes (id_turma, id_escola, ano_turma, turno, ativo, img) VALUES (:id_turma, :id_escola, :ano_turma, :turno, :ativo, :img)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_turma', $dados['id_turma']);
         $stmt->bindParam(':id_escola', $dados['id_escola']);
         $stmt->bindParam(':ano_turma', $dados['ano_turma']);
         $stmt->bindParam(':turno', $dados['turno']);
         $stmt->bindParam(':ativo', $dados['ativo']);
+        $stmt->bindParam(':img', $dados['img']);
         $stmt->execute();
     }
 
     public function editar($dados) {
-        $sql = "UPDATE classes SET id_turma = :id_turma, id_escola = :id_escola, ano_turma = :ano_turma, turno = :turno, ativo = :ativo WHERE id_classe = :id_classe";
+        $sql = "UPDATE classes SET id_turma = :id_turma, id_escola = :id_escola, ano_turma = :ano_turma, turno = :turno, ativo = :ativo, img = :img WHERE id_classe = :id_classe";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_turma', $dados['id_turma']);
         $stmt->bindParam(':id_escola', $dados['id_escola']);
         $stmt->bindParam(':ano_turma', $dados['ano_turma']);
         $stmt->bindParam(':turno', $dados['turno']);
         $stmt->bindParam(':ativo', $dados['ativo']);
+        $stmt->bindParam(':img', $dados['img']);
         $stmt->bindParam(':id_classe', $dados['id_classe']);
         $stmt->execute();
     }

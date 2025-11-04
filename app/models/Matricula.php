@@ -75,4 +75,5 @@ class Matricula {
         $stmt->execute();
         return $stmt->fetch();  
     }
+
 }
