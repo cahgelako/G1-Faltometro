@@ -16,12 +16,13 @@
             // verificar quais foram checados. Se foi, status_presenca = 0, senão status_presenca = 1 
             $professor = $_SESSION['func_id_funcionario'];
 
-            foreach ($_POST as $key) {
-                echo $key;
-            }
+            // var_dump($_POST);
+            // foreach ($_POST as $key) {
+            //     echo $_POST[$key];
+            // }
 
-            $model->salvar($_POST);
-            header('Location: ./listEstudante');
+            // $model->salvar($_POST);
+            header('Location: ./listFrenqTu');
         } else if ($_GET['id_classe']) {
             $estudantes = $model->estudantes_por_classe($_GET['id_classe']);
             $this->view('frequencia/registerFrenqAluno', ['estudantes' => $estudantes]);

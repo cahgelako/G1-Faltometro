@@ -12,9 +12,10 @@
                                
                                 ?>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="<?= $estudante['id_matricula'] ?>" id="checkChecked">
+                                    <input class="form-check-input" type="checkbox" value="" name="id_matricula">
                                     <label class="form-check-label" for="checkChecked">
                                         <?= $estudante['nome_estudante'] ?>
+                                        <?= $estudante['id_matricula'] ?>
                                     </label>
                                 </div>
                             <?php endforeach; ?>

@@ -11,10 +11,6 @@ class Funcionario
     public function login($dados)
     {
 
-        /* echo "<pre>";
-        echo var_dump($dados);
-        echo "</pre>"; */
-
         $sql = "SELECT * FROM funcionarios WHERE email = :email";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':email', $dados['email']);
