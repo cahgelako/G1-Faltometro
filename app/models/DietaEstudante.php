@@ -20,7 +20,7 @@ class DietaEstudante
         JOIN matriculas_classe_estudante m ON m.id_estudante = e.id_estudante
         JOIN classes c ON c.id_classe = m.id_classe
         JOIN turmas t ON t.id_turma = c.id_turma
-        ORDER BY t.nome_turma";
+        ORDER BY e.nome_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll();

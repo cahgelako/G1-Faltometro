@@ -95,58 +95,58 @@
                 </div>
             </div>
         </div>
-        <!-- Blog preview section-->
+      <hr class="my-0">
+
         <section class="py-5">
-            <div class="container">
-                <div class="container px-5 my-5">
-                    <div class="row gx-5 justify-content-center">
-                        <div class="col-lg-8 col-xl-6">
-                            <div class="text-center">
-                                <h2 class="fw-bolder">Nosso Time</h2>
-                                <p class="lead fw-normal text-muted mb-5">Conheça a equipe</p>
-                            </div>
+            <div class="container px-5 my-5">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bolder fs-3">Conheça o Time</h2>
+                    <p class="lead fw-normal text-muted mb-0">A equipe por trás da plataforma.</p>
+                </div>
+                
+                <div class="row gx-5 justify-content-center">
+                    
+                    <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle mb-3" src="img/logo_faltometro" alt="Foto Ana Carolina" style="width: 120px; height: 120px; object-fit: cover;" />
+                            <h4 class="h6 fw-bold mb-0">Ana Carolina</h4>
+                            <p class="text-secondary mb-0">Desenvolvedora FrontEnd</p>
                         </div>
                     </div>
-                    <section class="page-section bg-light" id="team">
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="team-member">
-                                    <img class="mx-auto rounded-circle" src="img/logo_faltometro" alt="..." />
-                                    <h4>Ana Carolina Gelako Silva</h4>
-                                    <p class="text-muted">Desenvolvedora FrontEnd</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="team-member">
-                                    <img class="mx-auto rounded-circle" src="img/logo_novo.php" alt="..." />
-                                    <h4>Beatriz da Cruz Purissimo</h4>
-                                    <p class="text-muted">Desenvolvedora BackEnd</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="team-member">
-                                    <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
-                                    <h4>Giordana Mirela Borges Martins</h4>
-                                    <p class="text-muted">Documentação</p>
-                                </div>
-                            </div>
-                             <div class="col-lg-4">
-                                <div class="team-member">
-                                    <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
-                                    <h4>Matheus Barêa Coutinho Sevilha Silva</h4>
-                                    <p class="text-muted">Documentação</p>
-                                </div>
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="team-member">
-                                    <img class="mx-auto rounded-circle" src="assets/img/team/3.jpg" alt="..." />
-                                    <h4>José Augusto dos Santos Piedade</h4>
-                                    <p class="text-muted">Documentação</p>
-                                </div>
-                            </div>
+                    
+                    <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle mb-3" src="img/logo_novo.php" alt="Foto Beatriz da Cruz" style="width: 120px; height: 120px; object-fit: cover;" />
+                            <h4 class="h6 fw-bold mb-0">Beatriz Purissimo</h4>
+                            <p class="text-secondary mb-0">Desenvolvedora BackEnd</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle mb-3" src="assets/img/team/3.jpg" alt="Foto Giordana Mirela" style="width: 120px; height: 120px; object-fit: cover;" />
+                            <h4 class="h6 fw-bold mb-0">Giordana Martins</h4>
+                            <p class="text-secondary mb-0">Documentação</p>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle mb-3" src="assets/img/team/3.jpg" alt="Foto Matheus Barêa" style="width: 120px; height: 120px; object-fit: cover;" />
+                            <h4 class="h6 fw-bold mb-0">Matheus Silva</h4>
+                            <p class="text-secondary mb-0">Documentação</p>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
+                        <div class="team-member">
+                            <img class="mx-auto rounded-circle mb-3" src="assets/img/team/3.jpg" alt="Foto José Augusto" style="width: 120px; height: 120px; object-fit: cover;" />
+                            <h4 class="h6 fw-bold mb-0">José Piedade</h4>
+                            <p class="text-secondary mb-0">Documentação</p>
+                        </div>
+                    </div>
                 </div>
-        </section>
-        </div>
+            </div>
         </section>
     </main>
     <!-- Footer-->

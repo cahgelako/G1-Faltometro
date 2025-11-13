@@ -25,6 +25,7 @@ $routes = [
     'editFunc' => ['controller' => 'FuncionarioController', 'method' => 'editar'],
     'deleteFunc' => ['controller' => 'FuncionarioController', 'method' => 'deletar'],
     'registrarFunc' => ['controller' => 'FuncionarioController', 'method' => 'registrar'],
+    'conta' => ['controller' => 'FuncionarioController', 'method' => 'perfil'],
 
     // Estudantes
     'listEstudante' => ['controller' => 'EstudanteController', 'method' => 'listar'],
@@ -58,27 +59,29 @@ $routes = [
     'deleteFalta' => ['controller' => 'FrequenciaController', 'method' => 'delete'],
     'relFalta' => ['controller' => 'FrequenciaController', 'method' => 'relatorio'],
     'relPDFFalta' => ['controller' => 'FrequenciaController', 'method' => 'gerarPDF'],
-
+    'confirmFrenq' => ['controller' => 'FrequenciaController', 'method' => 'registrar'],
+    
     // Projetos Especiais
     'listProjeto' => ['controller' => 'ProjetoController', 'method' => 'listar'],
     'editProjeto' => ['controller' => 'ProjetoController', 'method' => 'editar'],
     'registerProjeto' => ['controller' => 'ProjetoController', 'method' => 'registrar'],
     'deleteProjeto' => ['controller' => 'ProjetoController', 'method' => 'deletar'],
     'viewProjeto' => ['controller' => 'ProjetoController', 'method' => 'visualizar'],
-
-      // Matricula Projetos
+    
+    // Matricula Projetos
     'listAtriExtras' => ['controller' => 'MatriculaProjetoController', 'method' => 'listar'],
     'editAtriExtras' => ['controller' => 'MatriculaProjetoController', 'method' => 'editar'],
     'registerAtriExtras' => ['controller' => 'MatriculaProjetoController', 'method' => 'registrar'],
     'deleteMatProjeto' => ['controller' => 'MatriculaProjetoController', 'method' => 'deletar'],
-
+    
     // Dietas por Estudante
     'listAtriDieta' => ['controller' => 'DietaEstudanteController', 'method' => 'listar'],
     'editAtriDieta' => ['controller' => 'DietaEstudanteController', 'method' => 'editar'],
     'registerAtriDieta' => ['controller' => 'DietaEstudanteController', 'method' => 'registrar'],
     'deleteDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'deletar'],
-
+    
     // Relatórios
-
+    'listRelTu' => ['controller' => 'FrequenciaController', 'method' => 'listar_turmas'],
+    'listRelFrenCo' => ['controller' => 'FrequenciaController', 'method' => 'filtro'],
 
 ];

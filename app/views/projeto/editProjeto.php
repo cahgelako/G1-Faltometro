@@ -1,40 +1,71 @@
-<div class="container mt-5">
+<div class="container my-5">
     <div class="row justify-content-center">
-      <div class="col-md-12">
-        <div class="card shadow-lg">
-          <div class="card-body">
-            <h2 class="card-title text-center mb-4">Edição Turma Extracurricular</h2>
-                <form method="POST">
-                    <div class="row">
-                         <input type="hidden" name="id_projeto" readonly value="<?= $projeto['id_projeto'] ?? '' ?>">
-                        <div class="col-sm-6 mb-3">
-                            <label for="nome_projeto" class="form-label">Nome da Turma</label>
-                            <input type="text" class="form-control" id="nome_projeto" name="nome_projeto" placeholder="Comitê Juventudes AntiMisoginia" value="<?= $projeto['nome_projeto'] ?? '' ?>" required>
+        <div class="col-lg-8 col-xl-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <h2 class="card-title text-center fw-bold text-dark mb-4">
+                        <i class="fas fa-puzzle-piece me-2 text-secondary"></i> 
+                        Edição Turma Extracurricular
+                    </h2>
+                    
+                    <form method="POST">
+                        <input type="hidden" name="id_projeto" readonly value="<?= $projeto['id_projeto'] ?? '' ?>">
+                        
+                        <h5 class="mb-3 text-secondary border-bottom pb-1">Detalhes do Projeto</h5>
+                        
+                        <div class="row">
+                            
+                            <div class="col-sm-12 mb-4">
+                                <label for="nome_projeto" class="form-label small text-muted">Nome da Turma</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-graduation-cap"></i></span>
+                                    <input type="text" class="form-control" id="nome_projeto" name="nome_projeto" 
+                                           placeholder="Ex: Comitê Juventudes AntiMisoginia" 
+                                           value="<?= $projeto['nome_projeto'] ?? '' ?>" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-6 mb-4">
+                                <label for="turno" class="form-label small text-muted">Turno</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-clock"></i></span>
+                                    <select name="turno" class="form-select" id="turno" required>
+                                        <option value="0" <?= ($projeto['turno'] ?? '') == 0 ? 'selected' : '' ?>>Escolha um Turno</option>
+                                        <option value="1" <?= ($projeto['turno'] ?? '') == 1 ? 'selected' : '' ?>>Manhã</option>
+                                        <option value="2" <?= ($projeto['turno'] ?? '') == 2 ? 'selected' : '' ?>>Tarde</option>
+                                        <option value="3" <?= ($projeto['turno'] ?? '') == 3 ? 'selected' : '' ?>>Integral</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="col-sm-6 mb-4">
+                                <label for="status" class="form-label small text-muted">Status</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-toggle-on"></i></span>
+                                    <select name="status" class="form-select" id="status" required>
+                                        <option value="0" <?= ($projeto['status'] ?? '') == 0 ? 'selected' : '' ?>>Escolha um Status</option>
+                                        <option value="1" <?= ($projeto['status'] ?? '') == 1 ? 'selected' : '' ?>>Ativado</option>
+                                        <option value="2" <?= ($projeto['status'] ?? '') == 2 ? 'selected' : '' ?>>Desativado</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+                        
+                        <hr class="mt-4 mb-3">
 
-                        <div class="col-sm-3 mb-3">
-                            <label for="turno" class="form-label">Turno</label>
-                            <select name="turno" class="form-control" id="turno" required>
-                                <option value="0" <?= isset($projeto['turno']) && $projeto['turno'] == 0 ? 'selected' : '' ?>>Escolha um Turno</option>
-                                <option value="1" <?= isset($projeto['turno']) && $projeto['turno'] == 1 ? 'selected' : '' ?>>Manhã</option>
-                                <option value="2" <?= isset($projeto['turno']) && $projeto['turno'] == 2 ? 'selected' : '' ?>>Tarde</option>
-                                <option value="3" <?= isset($projeto['turno']) && $projeto['turno'] == 2 ? 'selected' : '' ?>>Integral</option>
-                                </select>
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="./listProjeto" class="btn btn-secondary px-4">
+                                <i class="fas fa-arrow-left me-1"></i> Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                                <i class="fas fa-sync-alt me-1"></i> Atualizar Dados
+                            </button>
                         </div>
-                        <div class="col-sm-3 mb-3">
-                            <label for="status" class="form-label">Status</label>
-                            <select name="status" class="form-control" id="status" required>
-                                <option value="0" <?= isset($projeto['status']) && $projeto['status'] == 0 ? 'selected' : '' ?>>Escolha um Status</option>
-                                <option value="1" <?= isset($projeto['status']) && $projeto['status'] == 1 ? 'selected' : '' ?>>Ativado</option>
-                                <option value="2" <?= isset($projeto['status']) && $projeto['status'] == 2 ? 'selected' : '' ?>>Desativado</option>
-                                </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary"><?= isset($edit) ? 'Atualizar' : 'Cadastrar'?></button>
-                    <a href="./listProjeto" class="btn btn-secondary">Voltar</a>
-                </form>
+                        
+                    </form>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </div>

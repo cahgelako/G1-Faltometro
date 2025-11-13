@@ -8,7 +8,7 @@ class Frequencia {
     }
 
     public function listar_por_classe_dia($id_classe) {
-        $sql = "SELECT f.data_falta, fu.nome, t.nome_turma, c.ano_turma, e.nome_estudante 
+        $sql = "SELECT f.data_falta, fu.nome, t.nome_turma, c.ano_turma, c.turno, e.nome_estudante, e.registro_matricula_escola
         FROM turmas t
         RIGHT JOIN classes c ON t.id_turma = c.id_turma
         RIGHT JOIN matriculas_classe_estudante m ON m.id_classe = c.id_classe
@@ -17,6 +17,7 @@ class Frequencia {
         RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
         WHERE c.id_classe = :id_classe
         AND c.ativo = 1
+        AND f.status_presenca = 0
         AND f.data_falta = CURDATE()"; 
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_classe', $id_classe);
@@ -25,8 +26,13 @@ class Frequencia {
     }
 
     public function salvar($dados) {
-        $sql = "INSERT INTO frequencia (data_falta, id_matricula, id_funcionario, hora, status_presenca) VALUES (CURDATE(), :id_matricula, :id_funcionario, CURTIME(), :status_presenca)";
+        $sql = "INSERT INTO frequencia (data_falta, id_matricula, id_funcionario, hora, status_presenca)
+        VALUES (:data_falta, :id_matricula, :id_funcionario, CURTIME(), :status_presenca)
+        ON DUPLICATE KEY UPDATE
+        status_presenca = VALUES(status_presenca),
+        id_funcionario = VALUES(id_funcionario)";
         $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':data_falta', $dados['data_falta']);
         $stmt->bindParam(':id_matricula', $dados['id_matricula']);
         $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
         $stmt->bindParam(':status_presenca', $dados['status_presenca']);
@@ -53,6 +59,7 @@ class Frequencia {
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
             WHERE c.id_classe = :id_classe
             AND c.ativo = 1
+            AND f.status_presenca = 0
             AND f.data_falta BETWEEN :dta_inicial AND :dta_final
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
@@ -73,6 +80,7 @@ class Frequencia {
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
             WHERE c.id_classe = :id_classe
             AND c.ativo = 1
+            AND f.status_presenca = 0
             AND f.data_falta = :dta_inicial 
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
@@ -92,6 +100,7 @@ class Frequencia {
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
             WHERE c.id_classe = :id_classe
             AND c.ativo = 1
+            AND f.status_presenca = 0
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id_classe', $dados['id_classe']);
@@ -121,6 +130,5 @@ class Frequencia {
         $stmt->execute();
         return $stmt->fetchAll();
     }
-
     
 }

@@ -77,15 +77,15 @@ class MatriculaProjeto {
         return $stmt->fetchAll();
     }
 
-    public function projetos_por_estudante($id_estudante) {
-        $sql = "SELECT p.nome_projeto, e.nome_estudante 
+    public function projetos_por_estudante($id_matricula) {
+        $sql = "SELECT p.nome_projeto, e.nome_estudante, p.id_projeto 
         FROM projetos_extra p 
         LEFT JOIN matriculas_projetos mp ON mp.id_projeto = p.id_projeto
         LEFT JOIN matriculas_classe_estudante me ON me.id_matricula = mp.id_matricula
         LEFT JOIN estudantes e ON e.id_estudante = me.id_estudante
-        WHERE e.id_estudante = :id_estudante";
+        WHERE me.id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_estudante', $id_estudante);
+        $stmt->bindParam(':id_matricula', $id_matricula);
         $stmt->execute();
         return $stmt->fetchAll();
     }

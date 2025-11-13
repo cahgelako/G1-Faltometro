@@ -33,8 +33,8 @@
                                 Ano Letivo: **<?= $turma["ano_turma"] ?>**
                             </p>
                             
-                            <a href="registerFrenqAluno?id_classe=<?= $turma["id_classe"]?>" 
-                               class="btn btn-info mt-auto w-100" style="color:whitesmoke">
+                            <a href="listRelFrenqCo?id_classe=<?= $turma["id_classe"]?>" 
+                               class="btn btn-primary mt-auto w-100">
                                 Acessar Turma
                             </a>
                         </div>

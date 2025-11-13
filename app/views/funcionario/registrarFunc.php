@@ -1,47 +1,78 @@
-<div class="container mt-5">
+<div class="container my-5">
     <div class="row justify-content-center">
-      <div class="col-md-12">
-        <div class="card shadow-lg">
-          <div class="card-body">
-            <h2 class="card-title text-center mb-4">Cadastrar Funcionário</h2>
-                <form method="POST">
-                    <div class="row">
-                        <div class="col-sm-6 mb-3">
-                            <label for="nome" class="form-label">Nome Completo</label>
-                            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" value="<?= $funcionarios['nome'] ?? '' ?>" required>
-                        </div>
-
-                        <div class="col-sm-3 mb-3">
-                            <label for="tipo_acesso" class="form-label">Perfil de Acesso</label>
-                            <select name="tipo_acesso" class="form-control" id="tipo_acesso" required>
-                                <option value="0" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 0 ? 'selected' : '' ?>>Escolha um nível de acesso</option>
-                                <option value="1" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 1 ? 'selected' : '' ?>>Professor(a)</option>
-                                <option value="2" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 2 ? 'selected' : '' ?>>Nutricionista</option>
-                                <option value="3" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 3 ? 'selected' : '' ?>>Coordenação</option>
-                                <option value="4" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 4 ? 'selected' : '' ?>>Administrador</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-12 mb-3 border border-dark p-2">
-                        <p>DADOS DE LOGIN</p>
+        <div class="col-lg-8 col-xl-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <h2 class="card-title text-center fw-bold text-dark mb-4">
+                        <i class="fas fa-user-plus me-2 text-secondary"></i> 
+                        Cadastrar Funcionário
+                    </h2>
+                    
+                    <form method="POST">
+                        
+                        <h5 class="mb-3 text-secondary border-bottom pb-1">Dados Pessoais</h5>
                         <div class="row">
-                            <div class="col-sm-6 mb-3">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com" value="<?= $funcionarios['email'] ?? '' ?>" required>
-                            </div>
                             
-                            <div class="col-sm-6 mb-3">
-                                <label for="senha" class="form-label">Senha de Login</label>
-                                <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite nova senha (opcional)">
+                            <div class="col-md-7 mb-3">
+                                <label for="nome" class="form-label small text-muted">Nome Completo</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome completo" value="<?= $funcionarios['nome'] ?? '' ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-5 mb-3">
+                                <label for="tipo_acesso" class="form-label small text-muted">Perfil de Acesso</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                    <select name="tipo_acesso" class="form-select" id="tipo_acesso" required>
+                                        <option value="" disabled <?= !isset($funcionarios['tipo_acesso']) || $funcionarios['tipo_acesso'] == 0 ? 'selected' : '' ?>>Escolha um nível de acesso</option>
+                                        <option value="1" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 1 ? 'selected' : '' ?>>Professor(a)</option>
+                                        <option value="2" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 2 ? 'selected' : '' ?>>Nutricionista</option>
+                                        <option value="3" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 3 ? 'selected' : '' ?>>Coordenação</option>
+                                        <option value="4" <?= isset($funcionarios['tipo_acesso']) && $funcionarios['tipo_acesso'] == 4 ? 'selected' : '' ?>>Administrador</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary"><?= isset($edit) ? 'Atualizar' : 'Cadastrar'?></button>
-                    <a href="./listFunc" class="btn btn-secondary">Voltar</a>
-                </form>
+
+                        <hr class="my-4">
+
+                        <h5 class="mb-3 text-secondary border-bottom pb-1">Dados de Acesso (Login)</h5>
+                        <div class="row">
+                            
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label small text-muted">E-mail</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" name="email" placeholder="nome@exemplo.com" value="<?= $funcionarios['email'] ?? '' ?>" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="senha" class="form-label small text-muted">Senha de Login</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                    <input type="password" class="form-control" id="senha" name="senha" placeholder="Digite a senha inicial" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="mt-4 mb-3">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="./listFunc" class="btn btn-secondary px-4">
+                                <i class="fas fa-arrow-left me-1"></i> Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                                <i class="fas fa-save me-1"></i> Cadastrar
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </div>

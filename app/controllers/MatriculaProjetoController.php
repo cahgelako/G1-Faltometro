@@ -69,8 +69,14 @@ class MatriculaProjetoController extends Controller
             }
             header('Location: ./listAtriExtras');
         } else if (isset($_GET['id_matricula'])) {
+            $pestudante = $model->projetos_por_estudante($_GET['id_matricula']);
+            foreach ($variable as $key => $value) {
+                # code...
+            }
+            $nome_estudante = $pestudante['nome_estudante'];
+
             $matprojetos = $model->matricula_proj_estudante_por_id($_GET['id_matricula']);
-            $this->view('projetoAluno/editAtriExtras', ['matriculas' => $matriculas, 'projetos' => $projetos, 'matprojetos' => $matprojetos]);
+            $this->view('projetoAluno/editAtriExtras', ['matriculas' => $matriculas, 'projetos' => $projetos, 'matprojetos' => $matprojetos, 'nome_estudante' => $nome_estudante]);
         }
     }
 

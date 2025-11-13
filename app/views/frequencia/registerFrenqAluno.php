@@ -1,32 +1,76 @@
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card shadow-lg">
-                <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Contagem de Faltas</h2>
-                    <form method="POST">
-                        <div class="col-sm-3 mb-3">
-                            <label for="id_estudante" class="form-label">Estudante</label>
+        <div class="col-lg-7 col-md-9"> 
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="card-title text-center text-dark mb-4 pb-2 border-bottom">
+                        <i class="fas fa-user-times me-2"></i> 
+                        Registro de Faltas (Chamada)
+                    </h2>
+                    
+                    <?php 
+                    /* // Se a variável $nome_classe estiver disponível:
+                    if (isset($nome_classe)) { ?>
+                        <p class="text-center lead mb-4 text-muted">Classe: <strong><?= htmlspecialchars($nome_classe) ?></strong></p>
+                    <?php } 
+                    */
+                    ?>
 
-                            <?php foreach ($estudantes as $estudante): 
-                               
-                                ?>
-                                <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" value="" name="id_matricula">
-                                    <label class="form-check-label" for="checkChecked">
-                                        <?= $estudante['nome_estudante'] ?>
-                                        <?= $estudante['id_matricula'] ?>
-                                    </label>
-                                </div>
-                            <?php endforeach; ?>
-                            </select>
+                    <form method="POST">
+                        <input type="hidden" name="id_classe" value="<?= htmlspecialchars($_GET['id_classe']) ?>">
+
+                        <div class="row mb-4">
+                            <div class="col-md-6 offset-md-3">
+                                <label for="data_falta" class="form-label fw-bold text-danger">
+                                    <i class="fas fa-calendar-alt me-1"></i> Data da Falta
+                                </label>
+                                <input type="date" name="data_falta" id="data_falta" class="form-control form-control-lg" required>
+                            </div>
                         </div>
+
+                        <hr>
+                        
+                        <div class="mb-4">
+                            <h5 class="fw-bold mb-3 text-dark">
+                                <i class="fas fa-list-check me-1"></i> Marque os alunos **AUSENTES**:
+                            </h5>
+
+                            <div class="p-3 border rounded-3 bg-light" style="max-height: 300px; overflow-y: auto;">
+                                
+                                <?php if (!empty($estudantes)): ?>
+                                    <div class="list-group list-group-flush">
+                                        <?php foreach ($estudantes as $estudante): ?>
+                                            <div class="list-group-item d-flex align-items-center bg-light">
+                                                <input class="form-check-input me-3 mt-0" type="checkbox" 
+                                                       value="<?= htmlspecialchars($estudante['id_matricula']) ?>" 
+                                                       name="id_matricula[]" id="matricula_<?= htmlspecialchars($estudante['id_matricula']) ?>">
+                                                
+                                                <label class="form-check-label w-100 fw-medium" 
+                                                       for="matricula_<?= htmlspecialchars($estudante['id_matricula']) ?>">
+                                                    <?= htmlspecialchars($estudante['nome_estudante']) ?>
+                                                </label>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                <?php else: ?>
+                                    <p class="text-center text-muted m-0">Nenhum estudante encontrado nesta classe.</p>
+                                <?php endif; ?>
+
+                            </div>
+                        </div>
+
+                        <div class="d-flex justify-content-end mt-4 pt-3 border-top">
+                            <a href="./listFrenqTu" class="btn btn-outline-secondary me-2">
+                                <i class="fas fa-arrow-left me-1"></i> Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="fas fa-save me-1"></i> 
+                                <?= isset($edit) ? 'Atualizar Faltas' : 'Registrar Faltas' ?>
+                            </button>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="btn btn-primary"><?= isset($edit) ? 'Atualizar' : 'Cadastrar' ?></button>
-                <a href="./listFrenqTu" class="btn btn-secondary">Voltar</a>
-                </form>
             </div>
         </div>
     </div>
-</div>
 </div>

@@ -1,65 +1,107 @@
 <head>
     <link href="assets/select2/select2.min.css" rel="stylesheet" />
     <link href="assets/select2-bootstrap.min.css" rel="stylesheet" />
+    
+    <style>
+        /* Opcional: Estilo de tags de seleção para maior destaque (ex: cor info/azul) */
+        .select2-container .select2-selection--multiple .select2-selection__choice {
+            background-color: #0d6efd !important; /* Cor Primária do Bootstrap (azul) */
+            color: #ffffff !important; 
+            border: 1px solid #0b5ed7 !important;
+            border-radius: 0.3rem !important;
+        }
+        .select2-container .select2-selection--multiple .select2-selection__choice__remove {
+            color: #ffffff !important; 
+             background-color: #0d6efd;
+            border:1px solid #0d6efd ;
+            margin-right: 5px !important;
+        }
+        .select2-results__option {
+            color: #000000 !important; /* Garante que as opções no dropdown sejam pretas */
+        }
+    </style>
 </head>
+
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card shadow-lg">
-                <div class="card-body">
-                    <h2 class="card-title text-center mb-4">Atribuir Projeto</h2>
+        <div class="col-lg-6 col-md-8"> 
+            <div class="card shadow-lg border-0 rounded-3"> 
+                <div class="card-body p-4 p-md-5">
+                    <h2 class="card-title text-center text-dark mb-4 pb-2 border-bottom">
+                        <i class="fas fa-puzzle-piece me-2"></i> 
+                        Atribuição de Projetos Extracurriculares
+                    </h2>
+                    
+                    <p class="text-center lead mb-4 text-muted">
+                        Matrícula ID: <strong><?= htmlspecialchars($_GET['id_matricula']) ?></strong>
+                    </p>
+
                     <form method="POST">
-                        <input type="hidden" readonly class="form-control" id="id_matricula" name="id_matricula" value="<?= $_GET['id_matricula'] ?>">
+                        <input type="hidden" readonly id="id_matricula" name="id_matricula" value="<?= htmlspecialchars($_GET['id_matricula']) ?>">
 
                         <div class="row">
-                            <div class="col-sm-6 mb-3">
-                            </div>
-                            <p>Projetos Disponíveis</p>
-                            <div class="mb-3">
-                                <label for="projetos" class="form-label">Selecione os Projetos</label>
-                                <select class="form-select" name="arr_projetos_id[]" id="projetos" multiple>
-                                    <?php foreach ($projetos as $projeto) {
-                                        $op_selected = in_array($projeto['id_projeto'], $matprojetos) ? 'selected' : '';
-                                    ?>
-                                        <option value="<?= $projeto['id_projeto'] ?>"
-                                            <?= $op_selected ?>><?= htmlspecialchars($projeto['nome_projeto']) ?></option>
-                                    <?php } ?>
-
-                                </select>
+                            <div class="col-12">
+                                <div class="mb-4">
+                                    <label for="projetos" class="form-label fw-bold text-muted">
+                                        <i class="fas fa-th-list me-1"></i> Selecione os Projetos
+                                    </label>
+                                    <select class="form-select select2-custom" name="arr_projetos_id[]" id="projetos" multiple data-placeholder="Digite para buscar e selecionar os projetos...">
+                                        <?php foreach ($projetos as $projeto) {
+                                            $projeto_id = htmlspecialchars($projeto['id_projeto']);
+                                            $projeto_nome = htmlspecialchars($projeto['nome_projeto']);
+                                            $op_selected = in_array($projeto['id_projeto'], $matprojetos) ? 'selected' : '';
+                                        ?>
+                                            <option value="<?= $projeto_id ?>" <?= $op_selected ?>><?= $projeto_nome ?></option>
+                                        <?php } ?>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-primary"><?= isset($edit) ? 'Atualizar' : 'Cadastrar' ?></button>
-                        <a href="./listAtriExtras" class="btn btn-secondary">Voltar</a>
+                        
+                        <div class="d-flex justify-content-end mt-4 pt-3 border-top">
+                            <a href="./listAtriExtras" class="btn btn-outline-secondary me-2">
+                                <i class="fas fa-arrow-left me-1"></i> Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary btn-lg shadow-sm">
+                                <i class="fas fa-save me-1"></i> 
+                                <?= isset($edit) ? 'Atualizar Atribuição' : 'Atribuir Projetos' ?>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<!-- jQuery + Select2 + Bootstrap -->
-<!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-<!-- <script src="assets/jquery-3.7.1.min.js"></script> -->
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
 
-<!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-<!-- <script src="assets/select2/select2.full.min.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <script>
     document.addEventListener("DOMContentLoaded",
         function() {
-            const $projetos = $('#projetos');
+            // Verifica se jQuery e Select2 estão disponíveis
+            if (typeof jQuery !== 'undefined' && typeof jQuery.fn.select2 !== 'undefined') {
+                const $projetos = $('#projetos');
 
-            $projetos.select2({
-                placeholder: 'Digite para buscar projetos...'
-            });
+                $projetos.select2({
+                    theme: "bootstrap", // Usa o tema Bootstrap
+                    placeholder: $projetos.attr('data-placeholder') || 'Digite para buscar projetos...',
+                    allowClear: true // Permite limpar a seleção
+                });
 
-            // Confirmação ao tentar remover um projeto selecionado
-            $projetos.on('select2:unselecting', function(e) {
-                const projetosLabel = $(e.params.args.data.element).text();
-                const confirmacao = confirm(`Tem certeza que deseja remover o projeto: "${projetosLabel}"?`);
+                // Confirmação ao tentar remover um projeto selecionado
+                $projetos.on('select2:unselecting', function(e) {
+                    const projetosLabel = $(e.params.args.data.element).text();
+                    // Mensagem de confirmação mais clara
+                    const confirmacao = confirm(`Confirma a desvinculação? O projeto "${projetosLabel}" será removido desta matrícula.`);
 
-                if (!confirmacao) {
-                    // Cancela a remoção
-                    e.preventDefault();
-                }
-            });
+                    if (!confirmacao) {
+                        e.preventDefault(); // Cancela a remoção
+                    }
+                });
+            } else {
+                console.error("jQuery ou Select2 não estão carregados. Verifique as tags <script>.");
+            }
         });
 </script>

@@ -93,4 +93,27 @@ class Funcionario
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    public function editar_perfil($dados) {
+        if (!empty($dados['senha'])) {
+            $sql = "UPDATE funcionarios SET nome = :nome, email = :email, 
+            senha = :senha, tipo_acesso = :tipo_acesso WHERE id_funcionario = :id_funcionario";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':nome', $dados['nome']);
+            $stmt->bindParam(':email', $dados['email']);
+            $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
+            $stmt->bindParam(':senha', $senha);
+            $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
+            $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
+            $stmt->execute();
+        } else {
+            $sql = "UPDATE funcionarios SET nome = :nome, email = :email, tipo_acesso = :tipo_acesso WHERE id_funcionario = :id_funcionario";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':nome', $dados['nome']);
+            $stmt->bindParam(':email', $dados['email']);
+            $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
+            $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
+            $stmt->execute();
+        }
+    }
 }

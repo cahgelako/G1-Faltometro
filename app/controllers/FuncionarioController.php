@@ -100,4 +100,18 @@ class FuncionarioController extends Controller
             $this->view('funcionario/editFunc', ['funcionario' => $funcionario]);
         }
     }
+
+    public function perfil() {
+        require_once 'app/core/auth.php';
+        $model = $this->model('Funcionario');
+         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $dados = $_POST;
+            $model->editar($dados);
+            header('Location: ./listFunc');
+            exit;
+        } else {
+            $funcionario = $model->funcionario_por_id($_SESSION['func_id_funcionario']);
+            $this->view('funcionario/conta', ['funcionario' => $funcionario]);
+        }
+    }
 }

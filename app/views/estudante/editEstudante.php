@@ -1,27 +1,52 @@
-<div class="container mt-5">
+<div class="container my-5">
     <div class="row justify-content-center">
-      <div class="col-md-12">
-        <div class="card shadow-lg">
-          <div class="card-body">
-            <h2 class="card-title text-center mb-4">Editar Estudante</h2>
-                <form method="POST">
-                    <div class="row">
+        <div class="col-lg-8 col-xl-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+                    
+                    <h2 class="card-title text-center fw-bold text-dark mb-4">
+                        <i class="fas fa-user-edit me-2 text-secondary"></i> 
+                        Editar Estudante
+                    </h2>
+                    
+                    <form method="POST">
                         <input type="hidden" name="id_estudante" readonly value="<?= $estudantes['id_estudante'] ?? '' ?>">
-                        <div class="col-sm-6 mb-3">
-                            <label for="nome_estudante" class="form-label">Nome completo</label>
-                            <input type="text" class="form-control" id="nome_estudante" name="nome_estudante" placeholder="Nome completo" value="<?= $estudantes['nome_estudante'] ?? '' ?>" required>
-                        </div>
-                        <div class="col-sm-6 mb-3">
-                            <label for="registro_matricula_escola" class="form-label">Registro de Matrícula</label>
-                            <input type="text" class="form-control" id="registro_matricula_escola" name="registro_matricula_escola" placeholder="Registro de Matrícula" value="<?= $estudantes['registro_matricula_escola'] ?? '' ?>" required>
-                        </div>
-                    </div>
+                        
+                        <h5 class="mb-3 text-secondary border-bottom pb-1">Informações do Aluno</h5>
+                        
+                        <div class="row">
+                            
+                            <div class="col-md-7 mb-3">
+                                <label for="nome_estudante" class="form-label small text-muted">Nome Completo</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" id="nome_estudante" name="nome_estudante" placeholder="Nome completo" value="<?= $estudantes['nome_estudante'] ?? '' ?>" required>
+                                </div>
+                            </div>
 
-                    <button type="submit" class="btn btn-primary"><?= isset($edit) ? 'Atualizar' : 'Cadastrar'?></button>
-                    <a href="./listEstudante" class="btn btn-secondary">Voltar</a>
-                </form>
+                            <div class="col-md-5 mb-3">
+                                <label for="registro_matricula_escola" class="form-label small text-muted">Registro de Matrícula</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                                    <input type="text" class="form-control" id="registro_matricula_escola" name="registro_matricula_escola" placeholder="Matrícula" value="<?= $estudantes['registro_matricula_escola'] ?? '' ?>" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <hr class="mt-4 mb-3">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a href="./listEstudante" class="btn btn-secondary px-4">
+                                <i class="fas fa-arrow-left me-1"></i> Voltar
+                            </a>
+                            <button type="submit" class="btn btn-primary px-4 shadow-sm">
+                                <i class="fas fa-sync-alt me-1"></i> Atualizar Dados
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
             </div>
         </div>
-      </div>
     </div>
 </div>
