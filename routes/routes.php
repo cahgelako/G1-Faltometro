@@ -69,8 +69,9 @@ $routes = [
     'viewProjeto' => ['controller' => 'ProjetoController', 'method' => 'visualizar'],
     
     // Matricula Projetos
+    'editAlunoProjeto' => ['controller' => 'MatriculaProjetoController', 'method' => 'editar'],
     'listAtriExtras' => ['controller' => 'MatriculaProjetoController', 'method' => 'listar'],
-    'editAtriExtras' => ['controller' => 'MatriculaProjetoController', 'method' => 'editar'],
+    /* 'editAtriExtras' => ['controller' => 'MatriculaProjetoController', 'method' => 'editar'], */
     'registerAtriExtras' => ['controller' => 'MatriculaProjetoController', 'method' => 'registrar'],
     'deleteMatProjeto' => ['controller' => 'MatriculaProjetoController', 'method' => 'deletar'],
     

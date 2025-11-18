@@ -40,43 +40,40 @@ class MatriculaProjetoController extends Controller
     public function editar()
     {
         require_once 'app/core/auth.php';
+        
         $model = $this->model('MatriculaProjeto');
         $modelMatriculas = $this->model('Matricula');
         $modelProjetos = $this->model('Projeto');
 
         $matriculas = $modelMatriculas->listar();
         $projetos = $modelProjetos->listar();
-    
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            // verificar as mudanças do array e passaras funções de cada situação
+            // verificar as mudanças do array e passar as funções de cada situação
             // ainda está no array: nada acontece
             // estava no array e não está mais: excluir (deletar)
             // não estava antes e está agora: adicionar (salvar)
 
-            $matprojetos = $model->matricula_proj_estudante_por_id($_POST['id_matricula']);
-            $proj_form = $_POST['arr_projetos_id'] ?? [];
+            $matprojetos = $model->matriculas_por_id_projeto($_POST['id_projeto']);
+            $mat_form = $_POST['arr_mat_id'] ?? [];
 
             // verificando quais projetos foram atribuídas (não existem em projeto estudante e existe no formulário)
-            $atribuidas = array_diff($proj_form, $matprojetos); // 1º - array principal | 2º - array de comparação
-            foreach ($atribuidas as $id) {
-                $model->salvar($id, $_POST['id_matricula']);
+            $matriculados = array_diff($mat_form, $matprojetos); // 1º - array principal | 2º - array de comparação
+            foreach ($matriculados as $id) {
+                $model->salvar($id, $_POST['id_projeto']);
             }
 
             // verificando quais projetos foram excluídas (não existem no formulário e existe no projeto estudante)
-            $excluidas = array_diff($matprojetos, $proj_form); // 1º - array principal | 2º - array de comparação
-            foreach ($excluidas as $id) {
-                $model->deletar($id, $_POST['id_matricula']);
+            $excluidos = array_diff($matprojetos, $mat_form); // 1º - array principal | 2º - array de comparação
+            foreach ($excluidos as $id) {
+                $model->deletar($id, $_POST['id_projeto']);
             }
             header('Location: ./listAtriExtras');
-        } else if (isset($_GET['id_matricula'])) {
-            $pestudante = $model->projetos_por_estudante($_GET['id_matricula']);
-            foreach ($variable as $key => $value) {
-                # code...
-            }
-            $nome_estudante = $pestudante['nome_estudante'];
-
-            $matprojetos = $model->matricula_proj_estudante_por_id($_GET['id_matricula']);
-            $this->view('projetoAluno/editAtriExtras', ['matriculas' => $matriculas, 'projetos' => $projetos, 'matprojetos' => $matprojetos, 'nome_estudante' => $nome_estudante]);
+        } else if (isset($_GET['id_projeto'])) {
+            $estudantes = $model->estudantes_por_projeto($_GET['id_projeto']);
+            //$estudantes = $model->estudantes_por_projeto(2);
+            $this->view('projeto/editAlunoProjeto', ['matriculas' => $matriculas, 'estudantes' => $estudantes]);
         }
     }
 

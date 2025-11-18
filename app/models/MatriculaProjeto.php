@@ -64,8 +64,27 @@ class MatriculaProjeto {
         return $mat;
     }
 
+    // retorna somnt os ids das matriculas
+    public function matriculas_por_id_projeto($id_projeto)
+    {
+        $sql = "SELECT id_matricula FROM matriculas_projetos mp
+        WHERE id_projeto = :id_projeto";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_projeto', $id_projeto);
+        $stmt->execute();
+        $resultado = $stmt->fetchAll();
+
+        // retorna um array com os ids dos alunos matriculados
+        $mat = [];
+        foreach ($resultado as $m) {
+            $mat[] = $m['id_matricula'];
+        }
+
+        return $mat;
+    }
+
     public function estudantes_por_projeto($id_projeto) {
-        $sql = "SELECT p.nome_projeto, e.nome_estudante 
+        $sql = "SELECT DISTINCT p.nome_projeto, e.nome_estudante, mp.id_matricula
         FROM projetos_extra p 
         RIGHT JOIN matriculas_projetos mp ON mp.id_projeto = p.id_projeto
         RIGHT JOIN matriculas_classe_estudante me ON me.id_matricula = mp.id_matricula

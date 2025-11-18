@@ -598,6 +598,15 @@ footer span a:hover {
     background-color: #9ac2d5; 
     border-color: #9ac2d5;
 }
+.text-primary {
+    background-color: #ADD8E6; 
+    border-color: #ADD8E6;
+    color: #333333; /* Texto escuro no botão claro */
+}
+.text-primary:hover {
+    background-color: #9ac2d5; 
+    border-color: #9ac2d5;
+}
 
 .table-img {
     width: 50px; /* Reduzido para melhor visualização na tabela */
@@ -622,5 +631,7 @@ footer span a:hover {
 .turno-manha { color: #007bff; }
 .turno-tarde { color: #28a745; }
 .turno-integral { color: #6f42c1; }
+
+
 
 /* Fim da pagina contato */

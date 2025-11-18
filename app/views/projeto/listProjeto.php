@@ -38,7 +38,7 @@
                             <thead>
                                 <tr class="table-light">
                                     <th class="text-center small">ID</th>
-                                    <th>Nome da Turma</th>
+                                    <th>Nome do Projeto</th>
                                     <th class="text-center">Turno</th>
                                     <th class="text-center">Status</th>
                                     <th class="text-center">Ações</th>
@@ -57,8 +57,9 @@
                                                 
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center gap-2">
-                                                        <a href="./editProjeto&id=<?= $user['id_projeto'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
                                                         <a href="./deleteProjeto&id=<?= $user['id_projeto'] ?>" title="Excluir" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir esta turma?')"><i class="fa fa-trash"></i></a>
+                                                        <a href="./editProjeto&id=<?= $user['id_projeto'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
+                                                        <a href="./editAlunoProjeto&id_projeto=<?= $user['id_projeto'] ?>" title="Editar Participantes" class="btn btn-sm btn-outline-warning"><i class="fa fa-users"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

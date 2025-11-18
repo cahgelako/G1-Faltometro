@@ -1,56 +1,70 @@
-<div class="container mt-3">
+<?php
+// Função helper para gerar o badge do turno com cores Bootstrap
+function getTurnoBadge($turno) {
+    switch ($turno) {
+        case 1: return '<span class="badge text-bg-primary">Manhã</span>'; // Azul
+        case 2: return '<span class="badge text-bg-success">Tarde</span>';  // Verde
+        default: return '<span class="badge text-bg-info">Integral</span>'; // Ciano
+    }
+}
+?>
+
+<div class="container my-5">
     <?php require 'app/core/auth.php'; ?>
-    <h2 class="card-title mb-4">Atribuição de Projetos</h2>
+    
+    <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
+        <h2 class="fw-bold text-dark mb-0">
+            <i class="fas fa-list-check me-20"></i> 
+            Atribuição de Projetos Extracurriculares
+        </h2>
+        <a href="./editAtriExtras" class="btn btn-primary fw-bold shadow-sm">
+            <i class="fas fa-plus me-1"></i> Nova Atribuição
+        </a>
+    </div>
     <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card shadow-lg">
-                <div class="card-body">
-                    <div class="col-md-12 mb-3">
-                        <a href="./registerAtriExtras" class="btn btn-primary">Novo</a>
-                    </div>
+        <div class="col-md-12"> 
+            <div class="card shadow-lg border-0 rounded-3">
+                <div class="card-body p-4">
+                    
                     <div class="table-responsive">
-                        <table id="idtabela" class="table table-bordered" cellpadding="5">
+                        <table id="idtabela" class="table table-striped table-hover align-middle" style="width:100%">
                             <thead>
-                                <tr>
-                                    <th class="text-center">RM</th>
-                                    <th>Nome</th>
-                                    <th class="text-center">Classe</th>
-                                    <th class="text-center">Projeto Extracurricular</th>
-                                    <th class="text-center">Ações</th>
+                                <tr class="table-light"> <th class="text-center small">RM</th>
+                                    <th>Nome do Estudante</th>
+                                    <th class="text-center">Turma/Período</th>
+                                    <th>Projeto Extracurricular</th>
                                 </tr>
                             </thead>
                             <tbody>
                             <?php 
-                                $frequencia_id = array_count_values($ids_estudantes);
-                                // var_dump($frequencia_id);
+                            if (!empty($matriculas)) {
                                 foreach ($matriculas as $projeto) :
-                                  
-                                         if ($projeto['turno'] == 1) {
-                                            $perfil = "<span>Manhã</span>";
-                                        } elseif ($projeto['turno'] == 2) {
-                                        $perfil = "<span>Tarde</span>";  
-                                        }else{
-                                            $perfil = "<span>Integral</span>";
-                                        }?>
+                            ?>
                                 <tr> 
-                                    <!-- <?php 
-                                    //foreach ($frequencia_id as $key => $value) {
-                                        //if ($key[$value] > 1) { ?>
-                                            rowspan="<?php //$key[$value] ?>"
-                                            <?php // } 
-                                    //}
-                                    ?> -->
-                                    <td class="text-center"><?= $projeto['registro_matricula_escola'] ?></td>
-                                    <td><?= $projeto['nome_estudante'] ?></td>
-                                    <td><?= $projeto['nome_turma']?> <?= $projeto['ano_turma']?> | <?=$perfil?></td>
-                                    <td><?= $projeto['nome_projeto'] ?></td>
-                                    <td class="text-center">
-                                        <div class="d-flex justify-content-center gap-2">
-                                            <a href="./editAtriExtras&id_matricula=<?= $projeto['id_matricula'] ?>" title="Editar" class="btn btn-sm btn-warning"><i class="fa fa-edit text-"></i></a>
-                                        </div>
+                                    <td class="text-center small text-muted"><?= htmlspecialchars($projeto['registro_matricula_escola']) ?></td>
+                                    <td class="fw-medium"><?= htmlspecialchars($projeto['nome_estudante']) ?></td>
+                                    <td>
+                                        <?= htmlspecialchars($projeto['nome_turma']) ?> <?= htmlspecialchars($projeto['ano_turma']) ?> 
+                                        <br>
+                                        <?= getTurnoBadge($projeto['turno']) ?>
                                     </td>
+                                    <td class="fw-semibold text-dark"><?= htmlspecialchars($projeto['nome_projeto']) ?></td>
+                                    <!-- <td class="text-center">
+                                        <div class="d-flex justify-content-center gap-2">
+                                            <a href="./editAtriExtras&id_projeto=<?= htmlspecialchars($projeto['id_matricula']) ?>" 
+                                               title="Editar Atribuições" 
+                                               class="btn btn-sm btn-primary shadow-sm">
+                                                <i class="fa fa-edit"></i> Editar
+                                            </a>
+                                        </div>
+                                    </td> -->
                                 </tr>
-                                <?php endforeach; ?>
+                            <?php 
+                                endforeach; 
+                            } else {
+                                echo '<tr><td colspan="5" class="text-center text-muted">Nenhuma atribuição de projeto encontrada.</td></tr>';
+                            }
+                            ?>
                             </tbody>
                         </table>
                     </div>
@@ -60,6 +74,3 @@
     </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-   
-
