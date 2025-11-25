@@ -84,7 +84,7 @@ class MatriculaProjeto {
     }
 
     public function estudantes_por_projeto($id_projeto) {
-        $sql = "SELECT DISTINCT p.nome_projeto, e.nome_estudante, mp.id_matricula
+        $sql = "SELECT DISTINCT e.nome_estudante, mp.id_matricula
         FROM projetos_extra p 
         RIGHT JOIN matriculas_projetos mp ON mp.id_projeto = p.id_projeto
         RIGHT JOIN matriculas_classe_estudante me ON me.id_matricula = mp.id_matricula

@@ -110,8 +110,6 @@
                                     <a class="nav-link dropdown-toggle text-dark fw-medium" href="#" id="funcionalidadesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-tools me-1"></i> Funcionalidades</a>
                                     <ul class="dropdown-menu" aria-labelledby="funcionalidadesDropdown">
                                         <li><a class="dropdown-item" href="./listAtriDieta">Atribuição de Dietas</a></li>
-                                        <li><hr class="dropdown-divider"></li>
-                                        <li><a class="dropdown-item" href="./listAtriExtras">Atribuição de Extracurriculares</a></li>
                                     </ul>
                                 </li>
 

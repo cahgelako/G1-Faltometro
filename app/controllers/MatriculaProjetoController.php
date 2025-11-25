@@ -46,7 +46,7 @@ class MatriculaProjetoController extends Controller
         $modelProjetos = $this->model('Projeto');
 
         $matriculas = $modelMatriculas->listar();
-        $projetos = $modelProjetos->listar();
+        // $projetos = $modelProjetos->listar();
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -71,9 +71,10 @@ class MatriculaProjetoController extends Controller
             }
             header('Location: ./listAtriExtras');
         } else if (isset($_GET['id_projeto'])) {
-            $estudantes = $model->estudantes_por_projeto($_GET['id_projeto']);
+            $estudantes = $model->matriculas_por_id_projeto($_GET['id_projeto']);
+            $projeto = $modelProjetos->projeto_por_id($_GET['id_projeto']);
             //$estudantes = $model->estudantes_por_projeto(2);
-            $this->view('projeto/editAlunoProjeto', ['matriculas' => $matriculas, 'estudantes' => $estudantes]);
+            $this->view('projeto/editAlunoProjeto', ['matriculas' => $matriculas, 'estudantes' => $estudantes, 'projeto' => $projeto]);
         }
     }
 

@@ -64,7 +64,7 @@
                                             $aluno_nome = htmlspecialchars($aluno['nome_estudante']);
                                             $op_selected = in_array($aluno['id_matricula'], $matprojeto) ? 'selected' : '';
                                         ?>
-                                            <option   value="<?= $aluno_id ?>" <?= $op_selected ?>><?= $aluno_nome ?></option>
+                                            <option value="<?= $aluno_id ?>" <?= $op_selected ?>><?= $aluno_nome ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
