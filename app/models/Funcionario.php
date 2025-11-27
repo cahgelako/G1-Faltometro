@@ -35,13 +35,14 @@ class Funcionario
             // Já existe um funcionário com esse email
             return false;
         } else {
-            $sql = "INSERT INTO funcionarios (nome, email, senha, tipo_acesso) VALUES (:nome, :email, :senha, :tipo_acesso)";
+            $sql = "INSERT INTO funcionarios (nome, email, senha, tipo_acesso, ativo) VALUES (:nome, :email, :senha, :tipo_acesso, :ativo)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':nome', $dados['nome']);
             $stmt->bindParam(':email', $dados['email']);
             $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
             $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
+            $stmt->bindParam(':ativo', $dados['ativo']);
             $stmt->execute();
         }
     }
