@@ -41,12 +41,23 @@ class DietaEspecial
 
     public function editar($dados)
     {
-        $sql = "UPDATE dietas_especiais SET nome_dieta = :nome_dieta, observacoes = :observacoes WHERE id_dieta = :id_dieta";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':nome_dieta', $dados['nome_dieta']);
-        $stmt->bindParam(':observacoes', $dados['observacoes']);
-        $stmt->bindParam(':id_dieta', $dados['id_dieta']);
-        $stmt->execute();
+        $verificacao = "SELECT COUNT(*) FROM dietas_especiais WHERE nome_dieta = :nome_dieta";
+        $stmtVerificacao = $this->conn->prepare($verificacao);
+        $stmtVerificacao->bindParam(':nome_dieta', $dados['nome_dieta']);
+        $stmtVerificacao->execute();
+        $count = $stmtVerificacao->fetchColumn();
+
+        if ($count > 0) {
+            // Já existe uma dieta especial com esse nome
+            return false;
+        } else {
+            $sql = "UPDATE dietas_especiais SET nome_dieta = :nome_dieta, observacoes = :observacoes WHERE id_dieta = :id_dieta";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':nome_dieta', $dados['nome_dieta']);
+            $stmt->bindParam(':observacoes', $dados['observacoes']);
+            $stmt->bindParam(':id_dieta', $dados['id_dieta']);
+            $stmt->execute();
+        }
     }
 
     public function deletar($id)

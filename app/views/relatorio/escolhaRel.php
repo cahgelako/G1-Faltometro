@@ -1,7 +1,7 @@
 <div class="container py-5">
     <?php require 'app/core/auth.php'; ?>
     <div class="row">
-        <h2 class="display-5 fw-bold mb-5 text-center text-dark"> Escolha a Turma</h2>
+        <h2 class="display-5 fw-bold mb-5 text-center text-dark"> Escolha o relatório</h2>
         
         <div class="row justify-content-center g-4">
             <?php
@@ -35,7 +35,25 @@
                             
                             <a href="listRelFrenqCo?id_classe=<?= $turma["id_classe"]?>" 
                                class="btn btn-primary mt-auto w-100">
-                                Acessar Turma
+                                Acessar Relatório
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
+                    
+                    <div class="card h-100 shadow-lg border-0 rounded-4 overflow-hidden">
+                        
+                        <img src="./img/nutricionista" class="card-img-top object-fit-cover" 
+                             alt="Imagem da Turma">
+                        
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title text-truncate mb-1 text-dark fw-bold">
+                               Nutricionista
+                            </h5>
+                            <a href="listRelFrenqCo?id_classe=<?= $turma["id_classe"]?>" 
+                               class="btn btn-primary mt-auto w-100">
+                                Acessar Relatório
                             </a>
                         </div>
                     </div>

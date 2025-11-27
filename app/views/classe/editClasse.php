@@ -3,27 +3,27 @@
         <div class="col-lg-9 col-xl-8">
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4 p-md-5">
-                    
+
                     <h2 class="card-title text-center fw-bold text-dark mb-4">
-                        <i class="fas fa-edit me-2 text-secondary"></i> 
+                        <i class="fas fa-edit me-2 text-secondary"></i>
                         Editar Classe
                     </h2>
                     
                     <form method="POST" enctype="multipart/form-data">
-                        <input type="hidden" readonly name="id_classe" value="<?= $classes['id_classe'] ?? ''?>">
-                        
+                        <input type="hidden" readonly name="id_classe" value="<?= $classes['id_classe'] ?? '' ?>">
+
                         <h5 class="mb-3 text-secondary border-bottom pb-1">Detalhes da Classe</h5>
-                        
+
                         <div class="row">
-                            
+
                             <div class="col-md-4 mb-4">
                                 <label for="ano_turma" class="form-label small text-muted">Ano da Classe (YYYY)</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                    <input type="text" class="form-control" id="ano_turma" name="ano_turma" placeholder="Ex: 2025" value="<?= $classes['ano_turma'] ?? ''?>" required>
+                                    <input type="text" class="form-control" id="ano_turma" name="ano_turma" placeholder="Ex: 2025" value="<?= $classes['ano_turma'] ?? '' ?>" required>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-8 mb-4">
                                 <label for="img" class="form-label small text-muted d-block">Imagem da Classe (Atual: <span class="fw-bold"><?= $classes['img'] ?? 'N/A' ?></span>)</label>
                                 <div class="d-flex align-items-center">
@@ -44,12 +44,12 @@
                                     <select name="id_turma" class="form-select" id="id_turma" required>
                                         <option value="">Escolha uma Turma</option>
                                         <?php foreach ($turmas as $turma): ?>
-                                            <option value="<?= $turma['id_turma']?>" <?= ($classes['id_turma'] ?? '') == $turma['id_turma'] ? 'selected' : '' ?>><?= $turma['nome_turma']?></option>
+                                            <option value="<?= $turma['id_turma'] ?>" <?= ($classes['id_turma'] ?? '') == $turma['id_turma'] ? 'selected' : '' ?>><?= $turma['nome_turma'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-4 mb-4">
                                 <label for="id_escola" class="form-label small text-muted">Escola</label>
                                 <div class="input-group">
@@ -57,12 +57,12 @@
                                     <select name="id_escola" class="form-select" id="id_escola" required>
                                         <option value="">Escolha sua escola</option>
                                         <?php foreach ($escolas as $escola): ?>
-                                            <option value="<?= $escola['id_escola']?>" <?= ($classes['id_escola'] ?? '') == $escola['id_escola'] ? 'selected' : '' ?>><?= $escola['nome_escola']?></option>
+                                            <option value="<?= $escola['id_escola'] ?>" <?= ($classes['id_escola'] ?? '') == $escola['id_escola'] ? 'selected' : '' ?>><?= $escola['nome_escola'] ?></option>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-4 mb-4">
                                 <label for="turno" class="form-label small text-muted">Turno</label>
                                 <div class="input-group">
@@ -101,10 +101,12 @@
                                 <i class="fas fa-sync-alt me-1"></i> Atualizar Dados
                             </button>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

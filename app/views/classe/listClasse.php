@@ -75,6 +75,7 @@
                                                         <a href="./ativarClasse&id=<?= $class['id_classe'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar esta classe?')"><i class="fa fa-check"></i></a>
                                                         <?php endif; ?>
                                                         <a href="./editClasse&id=<?= $class['id_classe'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
+                                                         <a href="./editAlunoClasse&id=<?= $class['id_classe'] ?>" title="Editar Participantes" class="btn btn-sm btn-outline-warning"><i class="fa fa-users"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

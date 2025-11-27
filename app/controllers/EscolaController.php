@@ -1,6 +1,8 @@
 <?php
-class EscolaController extends Controller {
-    public function listar() {
+class EscolaController extends Controller
+{
+    public function listar()
+    {
         require "app/core/auth.php";
         $model = $this->model('Escola');
         $escolas = $model->listar();
@@ -11,21 +13,29 @@ class EscolaController extends Controller {
         }
         $this->view('escola/listEscola', $data);
     }
-    
-    public function registrar() {
+
+    public function registrar()
+    {
         require "app/core/auth.php";
         $model = $this->model('Escola');
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($_POST['nome_escola']);
-            $_SESSION['msg'] = "Escola registrada com sucesso!";
-            header("Location: ./listEscola");
+            if ($model->salvar($_POST['nome_escola'])) {
+                $_SESSION['msg'] = "Escola registrada com sucesso!";
+                header("Location: ./listEscola");
+                exit;
+            } else {
+                $_SESSION['msg'] = "Erro: Escola já existe!";
+                header("Location: ./listEscola");
+                exit;
+            }
         } else {
             $this->view('escola/registerEs');
         }
     }
-    
-    public function editar() {
+
+    public function editar()
+    {
         require "app/core/auth.php";
         $model = $this->model('Escola');
 
@@ -39,13 +49,26 @@ class EscolaController extends Controller {
         }
     }
 
-    public function deletar() {
+    public function desativar()
+    {
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
             $model = $this->model('Escola');
-            $model->deletar($_GET['id']);
+            $model->desativar($_GET['id']);
         }
-        $_SESSION['msg'] = 'Escola deletada com sucesso!';
+        $_SESSION['msg'] = 'Escola desativada com sucesso!';
+        header('Location: ./listEscola');
+        exit;
+    }
+
+    public function ativar()
+    {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id'])) {
+            $model = $this->model('Escola');
+            $model->ativar($_GET['id']);
+        }
+        $_SESSION['msg'] = 'Escola ativada com sucesso!';
         header('Location: ./listEscola');
         exit;
     }

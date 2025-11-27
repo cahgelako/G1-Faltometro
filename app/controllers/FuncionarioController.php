@@ -118,10 +118,15 @@ class FuncionarioController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dados = $_POST;
-            $model->editar($dados);
-            $_SESSION['msg'] = 'Funcionário editado com sucesso!';
-            header('Location: ./listFunc');
-            exit;
+            if ($model->editar($dados)) {
+                $_SESSION['msg'] = 'Funcionário editado com sucesso!';
+                header('Location: ./listFunc');
+                exit;
+            } else {
+                $_SESSION['msg'] = 'Erro: Já existe um funcionário com esse email.';
+                header('Location: ./listFunc');
+                exit;
+            }
         } else {
             $funcionario = $model->funcionario_por_id($_GET['id']);
             $this->view('funcionario/editFunc', ['funcionario' => $funcionario]);

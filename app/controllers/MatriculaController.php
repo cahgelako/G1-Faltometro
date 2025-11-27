@@ -22,12 +22,25 @@ class MatriculaController extends Controller
         $modelClasse = $this->model('Classe');
         $modelEstudante = $this->model('Estudante');
 
-        $classes = $modelClasse->listar();
         $estudantes = $modelEstudante->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($model->salvar($_POST)) {
-                $_SESSION['msg'] = 'Matrícula cadastrada com sucesso!';
+                $matestudantes = $model->dietas_do_estudante($_POST['id_estudante']);
+                $mats_form = $_POST['arr_mat_id'] ?? [];
+
+                // verificando quais dietas foram atribuídas (não existem em dietas estudante e existe no formulário)
+                $atribuidas = array_diff($mats_form, $matestudantes); // 1º - array principal | 2º - array de comparação
+                foreach ($atribuidas as $id) {
+                    $model->salvar([$_POST['id_clsse'], $id, $_POST['data_matricula'], $_POST['ativo']]);
+                }
+
+                // verificando quais dietas foram excluídas (não existem no formulário e existe no dieta estudante)
+                $excluidas = array_diff($matestudantes, $mats_form); // 1º - array principal | 2º - array de comparação
+                foreach ($excluidas as $id) {
+                    $model->desativar($id);
+                }
+                $_SESSION['msg'] = 'Matrículas cadastradas com sucesso!';
                 header('Location: ./listMatricula');
                 exit;
             } else {
@@ -35,11 +48,12 @@ class MatriculaController extends Controller
                 header('Location: ./listMatricula');
                 exit;
             }
-        } else {
-            $this->view('matricula/registerMatricula', ['classes' => $classes, 'estudantes' => $estudantes]);
+        } else if (isset($_GET['id'])) {
+            $classe = $modelClasse->classe_por_id($_GET['id']);
+            $matriculas = $model->matricula_por_id_classe($_GET['id']);
+            $this->view('classe/editAlunoClasse', ['classe' => $classe, 'estudantes' => $estudantes, 'matriculas' => $matriculas]);
         }
     }
-       
 
     public function editar()
     {
@@ -48,16 +62,48 @@ class MatriculaController extends Controller
         $modelClasse = $this->model('Classe');
         $modelEstudante = $this->model('Estudante');
 
-        $classes = $modelClasse->listar();
+        // $classes = $modelClasse->listar();
         $estudantes = $modelEstudante->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->editar($_POST);
-            $_SESSION['msg'] = 'Matrícula editada com sucesso!';
+
+            $matestudantes = $model->matricula_por_id_classe($_POST['id_classe']);
+            $mats_form = $_POST['arr_mat_id'] ?? [];
+
+            // verificando quais dietas foram atribuídas (não existem em dietas estudante e existe no formulário)
+            $atribuidas = array_diff($mats_form, $matestudantes); // 1º - array principal | 2º - array de comparação
+            foreach ($atribuidas as $cod_estudante) {
+                //var_dump($cod_estudante); exit;
+                // echo $_POST['id_classe'];
+                $model->salvar(['id_classe' => $_POST['id_classe'], 'id_estudante' => $cod_estudante]);
+            }
+
+            // Se a Model retornar FALSE, significa duplicidade (pois desativamos o INSERT no if)
+            if ($resultado === false) {
+                $erros_duplicidade[] = htmlspecialchars($cod_estudante);
+            }
+
+
+            if (!empty($erros_duplicidade)) {
+                $lista_erros = implode(', ', $erros_duplicidade); //junta os elementos de um array em uma única string.
+                $_SESSION['msg'] = 'Erro: Os estudantes com IDs (' . $lista_erros . ') já estão matriculados em outra turma ATIVA no ano letivo. A edição foi cancelada.';
+                header('Location: ./listMatricula');
+                exit;
+            }
+
+            $id_classe = $_POST['id_classe'];
+            // verificando quais dietas foram excluídas (não existem no formulário e existe no dieta estudante)
+            $excluidas = array_diff($matestudantes, $mats_form); // 1º - array principal | 2º - array de comparação
+            foreach ($excluidas as $idEstudante) {
+                $model->desativar($id_classe, $idEstudante);
+            }
+            $_SESSION['msg'] = 'Matrículas editadas com sucesso!';
             header('Location: ./listMatricula');
         } else if (isset($_GET['id'])) {
-            $matricula = $model->matricula_por_id($_GET['id']);
-            $this->view('matricula/editMatricula', ['classes' => $classes, 'estudantes' => $estudantes, 'matricula' => $matricula]);
+            $matriculas = $model->matricula_por_id_classe($_GET['id']);
+            $classe = $modelClasse->classe_por_id($_GET['id']);
+            //echo "<pre>"; var_dump($classe); echo "</pre>"; exit;
+            $this->view('classe/editAlunoClasse', ['classe' => $classe, 'estudantes' => $estudantes, 'matriculas' => $matriculas]);
         }
     }
 

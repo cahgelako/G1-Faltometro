@@ -26,7 +26,7 @@ class EstudanteController extends Controller
                 header('Location: ./listEstudante');
                 exit;
             } else {
-                $_SESSION['msg'] = "Erro: Já existe um estudante com esse nome.";
+                $_SESSION['msg'] = "Erro: Já existe um estudante com esse registro de matricula.";
                 header('Location: ./listEstudante');
                 exit;
             }
@@ -45,13 +45,34 @@ class EstudanteController extends Controller
         $dietas = $modelDieta->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->editar($_POST);
-            $modelDietaEs->editar($_POST);
-            $_SESSION['msg'] = "Estudante editado com sucesso!";
-            header('Location: ./listEstudante');
+            if ($model->editar($_POST)) {
+                $dietaestudante = $model->dietas_do_estudante($_POST['id_estudante']);
+                $dietas_form = $_POST['arr_dieta_id'] ?? [];
+
+                // verificando quais dietas foram atribuídas (não existem em dietas estudante e existe no formulário)
+                $atribuidas = array_diff($dietas_form, $dietaestudante); // 1º - array principal | 2º - array de comparação
+                foreach ($atribuidas as $id) {
+                    $model->salvar($_POST['id_estudante'], $id);
+                }
+
+                // verificando quais dietas foram excluídas (não existem no formulário e existe no dieta estudante)
+                $excluidas = array_diff($dietaestudante, $dietas_form); // 1º - array principal | 2º - array de comparação
+                foreach ($excluidas as $id) {
+                    $model->deletar($_POST['id_estudante'], $id);
+                }
+
+                $_SESSION['msg'] = "Estudante editado com sucesso!";
+                header('Location: ./listEstudante');
+                exit;
+            } else {
+                $_SESSION['msg'] = "Erro: Já existe um estudante com esse registro de matricula.";
+                header('Location: ./listEstudante');
+                exit;
+            }
         } else if (isset($_GET['id'])) {
             $estudantes = $model->estudante_por_id($_GET['id']);
-            $this->view('estudante/editEstudante', ['estudantes' => $estudantes, 'dietas' => $dietas]);
+            $dietasestudante = $modelDietaEs->dietas_do_estudante($_GET['id']);
+            $this->view('estudante/editEstudante', ['estudantes' => $estudantes, 'dietas' => $dietas, 'dietasestudante' => $dietasestudante]);
         }
     }
 

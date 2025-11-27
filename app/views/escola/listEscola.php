@@ -38,8 +38,16 @@
                                             <td class="fw-medium"><?= $escola['nome_escola'] ?></td>
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-2">
+                                                    <?php switch ($escola['ativo']) {
+                                                        case 1: ?>
+                                                        <a href="./desativarEscola&id=<?= $escola['id_escola'] ?>" title="Desativar" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-ban"></i></a>
+                                                        <?php break;
+                                                        
+                                                        case 0: ?>
+                                                            <a href="./ativarEscola&id=<?= $escola['id_escola'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-check"></i></a>
+                                                           <?php break;
+                                                    }?>
                                                     <a href="./editEscola&id=<?= $escola['id_escola'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
-                                                    <a href="./deleteEscola&id=<?= $escola['id_escola'] ?>" title="Excluir" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
@@ -59,4 +67,5 @@
     </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -32,11 +32,11 @@ class ClasseController extends Controller
                 exit;
             } else {
                 $_SESSION['msg'] = 'Erro: Já existe uma classe para essa combinação de turma e escola.';
-                header(header: 'Location: ./listClasse');
+                header(header: 'Location: ./editClasse');
                 exit;
             }
         } else {
-            $this->view('classe/registerClasse', ['turmas' => $turmas, 'escolas' => $escolas]);
+            $this->view('classe/registerClasse', ['classes' => $classes, 'turmas' => $turmas, 'escolas' => $escolas, 'msg' => $msg ?? '']);
         }
     }
 
@@ -51,9 +51,13 @@ class ClasseController extends Controller
         $escolas = $modelEscola->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->editar($_POST);
-            $_SESSION['msg'] = 'Classe editada com sucesso!';
-            header('Location: ./listClasse');
+            if ($model->editar($_POST)) {
+                $_SESSION['msg'] = 'Classe editada com sucesso!';
+                header('Location: ./listClasse');
+            } else {
+                $_SESSION['msg'] = 'Erro: Já existe uma classe para essa combinação de turma e escola.';
+                $this->view('classe/editClasse', ['turmas' => $turmas, 'escolas' => $escolas, 'classes' => $_POST]);
+            }
         } else if (isset($_GET['id'])) {
             $classes = $model->classe_por_id($_GET['id']);
             $this->view('classe/editClasse', ['turmas' => $turmas, 'escolas' => $escolas, 'classes' => $classes]);

@@ -11,7 +11,8 @@ $routes = [
     'listEscola' => ['controller' => 'EscolaController', 'method' => 'listar'],
     'registerEs' => ['controller' => 'EscolaController', 'method' => 'registrar'],
     'editEscola' => ['controller' => 'EscolaController', 'method' => 'editar'],
-    'deleteEscola'=> ['controller' => 'EscolaController', 'method' => 'deletar'],
+    'desativarEscola'=> ['controller' => 'EscolaController', 'method' => 'desativar'],
+    'ativarEscola'=> ['controller' => 'EscolaController', 'method' => 'ativar'],
 
     // Turmas
     'listTurma' => ['controller' => 'TurmaController', 'method' => 'listar'],
@@ -37,10 +38,11 @@ $routes = [
 
     // Matricula
     'listMatricula' => ['controller' => 'MatriculaController', 'method' => 'listar'], 
-    'editMatricula' => ['controller' => 'MatriculaController', 'method' => 'editar'], 
+    'editAlunoClasse' => ['controller' => 'MatriculaController', 'method' => 'editar'], 
     'registerMatricula' => ['controller' => 'MatriculaController', 'method' => 'registrar'], 
     'desativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'desativar'], 
     'ativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
+    // 'editAlunoClasse' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
 
     // Classe
     'listClasse' => ['controller' => 'ClasseController', 'method' => 'listar'],

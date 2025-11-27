@@ -64,8 +64,8 @@
                                                     case 1: ?>
                                                         <a href="./desativarFunc&id=<?= $func['id_funcionario'] ?>" title="Excluir" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar esse funcionario?')"><i class="fa fa-ban"></i></a>
                                                     <?php break;
-                                                    case 2: ?>
-                                                        <a href="./ativarFunc&id=<?= $func['id_funcionario'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar esse funcionario?')"><i class="fa fa-check-check"></i></a>
+                                                    case 0: ?>
+                                                        <a href="./ativarFunc&id=<?= $func['id_funcionario'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar esse funcionario?')"><i class="fa fa-check"></i></a>
                                                 <?php break;
                                                 } ?>
                                                 <a href="./editFunc&id=<?= $func['id_funcionario'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>

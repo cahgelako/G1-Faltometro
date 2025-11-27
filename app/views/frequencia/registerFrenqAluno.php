@@ -22,7 +22,7 @@
                         <div class="row mb-4">
                             <div class="col-md-6 offset-md-3">
                                 <label for="data_falta" class="form-label fw-bold text-danger">
-                                    <i class="fas fa-calendar-alt me-1"></i> Data da Falta
+                                    <i class="fas fa-calendar-alt me-1"></i> Data do Registro
                                 </label>
                                 <input type="date" name="data_falta" id="data_falta" class="form-control form-control-lg" required>
                             </div>
@@ -74,3 +74,5 @@
         </div>
     </div>
 </div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

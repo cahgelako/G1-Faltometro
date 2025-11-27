@@ -39,9 +39,16 @@ class DietaEspecialController extends Controller
         require_once 'app/core/auth.php';
         $model = $this->model('DietaEspecial');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->editar($_POST);
-            $_SESSION['msg'] = "Dieta especial editada com sucesso!";
-            header('Location: ./listDieta');
+            if ($model->editar($_POST)) {
+                $_SESSION['msg'] = "Dieta especial editada com sucesso!";
+                header('Location: ./listDieta');
+                exit;
+            } else {
+                $_SESSION['msg'] = "Erro: Já existe uma dieta especial com esse nome.";
+                header('Location: ./listDieta');
+                exit;
+
+            }
         } else if (isset($_GET['id'])) {
             $dietas = $model->dieta_por_id($_GET['id']);
             $this->view('dieta/editDieta', ['dietas' => $dietas]);

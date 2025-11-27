@@ -52,16 +52,28 @@ class Classe
 
     public function editar($dados)
     {
-        $sql = "UPDATE classes SET id_turma = :id_turma, id_escola = :id_escola, ano_turma = :ano_turma, turno = :turno, ativo = :ativo, img = :img WHERE id_classe = :id_classe";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_turma', $dados['id_turma']);
-        $stmt->bindParam(':id_escola', $dados['id_escola']);
-        $stmt->bindParam(':ano_turma', $dados['ano_turma']);
-        $stmt->bindParam(':turno', $dados['turno']);
-        $stmt->bindParam(':ativo', $dados['ativo']);
-        $stmt->bindParam(':img', $dados['img']);
-        $stmt->bindParam(':id_classe', $dados['id_classe']);
-        $stmt->execute();
+        $verificacao = "SELECT COUNT(*) FROM classes WHERE id_turma = :id_turma AND id_escola = :id_escola";
+        $stmtVerificacao = $this->conn->prepare($verificacao);
+        $stmtVerificacao->bindParam(':id_turma', $dados['id_turma']);
+        $stmtVerificacao->bindParam(':id_escola', $dados['id_escola']);
+        $stmtVerificacao->execute();
+        $count = $stmtVerificacao->fetchColumn();
+
+        if ($count > 0) {
+            // Já existe uma classe para essa combinação de id_turma e id_escola
+            return false;
+        } else {
+            $sql = "UPDATE classes SET id_turma = :id_turma, id_escola = :id_escola, ano_turma = :ano_turma, turno = :turno, ativo = :ativo, img = :img WHERE id_classe = :id_classe";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id_turma', $dados['id_turma']);
+            $stmt->bindParam(':id_escola', $dados['id_escola']);
+            $stmt->bindParam(':ano_turma', $dados['ano_turma']);
+            $stmt->bindParam(':turno', $dados['turno']);
+            $stmt->bindParam(':ativo', $dados['ativo']);
+            $stmt->bindParam(':img', $dados['img']);
+            $stmt->bindParam(':id_classe', $dados['id_classe']);
+            $stmt->execute();
+        }
     }
 
     public function desativar($id)
