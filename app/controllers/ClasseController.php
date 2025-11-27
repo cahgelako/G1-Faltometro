@@ -1,14 +1,22 @@
 <?php
-class ClasseController extends Controller {
+class ClasseController extends Controller
+{
 
-    public function listar() {
+    public function listar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Classe');
         $classes = $model->listar();
-        $this->view('classe/listClasse', ['classes' => $classes]);
+        $data = ['classes' => $classes];
+        if (isset($_SESSION['msg'])) {
+            $data['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        $this->view('classe/listClasse', $data);
     }
 
-    public function registrar() {
+    public function registrar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Classe');
         $modelTurma = $this->model('Turma');
@@ -18,14 +26,22 @@ class ClasseController extends Controller {
         $escolas = $modelEscola->listar();
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($_POST);
-            header('Location: ./listClasse');
+            if ($model->salvar($_POST)) {
+                $_SESSION['msg'] = 'Classe cadastrada com sucesso!';
+                header(header: 'Location: ./listClasse');
+                exit;
+            } else {
+                $_SESSION['msg'] = 'Erro: Já existe uma classe para essa combinação de turma e escola.';
+                header(header: 'Location: ./listClasse');
+                exit;
+            }
         } else {
             $this->view('classe/registerClasse', ['turmas' => $turmas, 'escolas' => $escolas]);
         }
     }
 
-    public function editar() {
+    public function editar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Classe');
         $modelTurma = $this->model('Turma');
@@ -36,20 +52,34 @@ class ClasseController extends Controller {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model->editar($_POST);
+            $_SESSION['msg'] = 'Classe editada com sucesso!';
             header('Location: ./listClasse');
-        } else if (isset($_GET['id'])){
+        } else if (isset($_GET['id'])) {
             $classes = $model->classe_por_id($_GET['id']);
-            //echo '<pre>'; print_r($classe); echo '</pre>';
             $this->view('classe/editClasse', ['turmas' => $turmas, 'escolas' => $escolas, 'classes' => $classes]);
         }
     }
 
-    public function deletar() {
+    public function desativar()
+    {
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
             $model = $this->model('Classe');
-            $model->deletar($_GET['id']);
+            $model->desativar($_GET['id']);
         }
+        $_SESSION['msg'] = 'Classe desativada com sucesso!';
+        header('Location: ./listClasse');
+        exit;
+    }
+
+    public function ativar()
+    {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id'])) {
+            $model = $this->model('Classe');
+            $model->ativar($_GET['id']);
+        }
+        $_SESSION['msg'] = 'Classe ativada com sucesso!';
         header('Location: ./listClasse');
         exit;
     }

@@ -41,7 +41,7 @@
                 <div class="card-body p-4 p-md-5">
                     <h2 class="card-title text-center text-dark mb-4 pb-2 border-bottom">
                         <i class="fas fa-utensils me-2"></i> 
-                        Atribuir estudantes ao projeto <?php if (isset($projeto['nome_projeto'])) { ?>
+                        Editar estudantes do projeto <?php if (isset($projeto['nome_projeto'])) { ?>
                         <p class="text-center lead mb-4"> <strong><?= htmlspecialchars($projeto['nome_projeto']) ?></strong></p>
                     <?php } ?>
                     </h2>
@@ -71,7 +71,7 @@
                         </div>
                         
                         <div class="d-flex justify-content-end mt-4 pt-3 border-top">
-                            <a href="./listAtriDieta" class="btn btn-outline-secondary me-2">
+                            <a href="./listProjeto" class="btn btn-outline-secondary me-2">
                                 <i class="fas fa-arrow-left me-1"></i> Voltar
                             </a>
                             <button type="submit" class="btn btn-primary btn-lg shadow-sm">

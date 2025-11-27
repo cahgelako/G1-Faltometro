@@ -6,7 +6,12 @@ class DietaEstudanteController extends Controller
         require_once 'app/core/auth.php';
         $model = $this->model('DietaEstudante');
         $dietas = $model->listar();
-        $this->view('dietaAluno/listAtriDieta', ['dietas' => $dietas]);
+        $data = ['dietas' => $dietas];
+        if (isset($_SESSION['msg'])) {
+            $data['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        $this->view('dietaAluno/listAtriDieta', $data);
     }
 
     public function registrar()
@@ -21,6 +26,7 @@ class DietaEstudanteController extends Controller
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model->salvar($_POST);
+            $_SESSION['msg'] = "Dieta atribuída ao estudante com sucesso!";
             header('Location: ./listAtriDieta');
         } else {
             $this->view('dietaAluno/registerAtriDieta', ['estudantes' => $estudantes, 'dietas' => $dietas]);
@@ -57,6 +63,7 @@ class DietaEstudanteController extends Controller
                 $model->deletar($_POST['id_estudante'], $id);
             }
 
+            $_SESSION['msg'] = "Atribuições de dieta atualizadas com sucesso!";
             header('Location: ./listAtriDieta');
         } else if (isset($_GET['id_estudante'])) {
             $estudante = $modelEstudante->estudante_por_id($_GET['id_estudante']);
@@ -77,6 +84,7 @@ class DietaEstudanteController extends Controller
             $model = $this->model('DietaEstudante');
             $model->deletar($_GET['id_estudante'], $_GET['id_dieta']);
         }
+        $_SESSION['msg'] = 'Atribuições de dieta deletadas com sucesso!';
         header('Location: ./listAtriDieta');
         exit;
     }

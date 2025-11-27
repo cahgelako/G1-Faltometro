@@ -17,25 +17,27 @@ class MatriculaProjetoController extends Controller
         $this->view('projetoAluno/listAtriExtras', ['matriculas' => $matriculas, 'ids_estudantes' => $ids_estudantes]);
     }
 
-    public function registrar()
-    {
-        require_once 'app/core/auth.php';
-        $model = $this->model('MatriculaProjeto');
-        $modelMatriculas = $this->model('Matricula');
-        // $modelProjetos = $this->model('Projeto');
 
-        $matriculas = $modelMatriculas->listar();
+    // inutilizado
+    // public function registrar()
+    // {
+    //     require_once 'app/core/auth.php';
+    //     $model = $this->model('MatriculaProjeto');
+    //     $modelMatriculas = $this->model('Matricula');
+    //     // $modelProjetos = $this->model('Projeto');
 
-        // var_dump($matriculas);
-        // exit;
+    //     $matriculas = $modelMatriculas->listar();
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($_POST);
-            header('Location: ./listAtriExtras');
-        } else {
-            $this->view('projetoAluno/registerAtriExtras', ['matriculas' => $matriculas]);
-        }
-    }
+    //     // var_dump($matriculas);
+    //     // exit;
+
+    //     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    //         $model->salvar($_POST);
+    //         header('Location: ./listAtriExtras');
+    //     } else {
+    //         $this->view('projetoAluno/registerAtriExtras', ['matriculas' => $matriculas]);
+    //     }
+    // }
 
     public function editar()
     {
@@ -46,9 +48,8 @@ class MatriculaProjetoController extends Controller
         $modelProjetos = $this->model('Projeto');
 
         $matriculas = $modelMatriculas->listar();
-        // $projetos = $modelProjetos->listar();
-
-
+        
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // verificar as mudanças do array e passar as funções de cada situação
             // ainda está no array: nada acontece
@@ -61,19 +62,22 @@ class MatriculaProjetoController extends Controller
             // verificando quais projetos foram atribuídas (não existem em projeto estudante e existe no formulário)
             $matriculados = array_diff($mat_form, $matprojetos); // 1º - array principal | 2º - array de comparação
             foreach ($matriculados as $id) {
-                $model->salvar($id, $_POST['id_projeto']);
+                $model->salvar($_POST['id_projeto'], $id);
             }
-
+            
             // verificando quais projetos foram excluídas (não existem no formulário e existe no projeto estudante)
             $excluidos = array_diff($matprojetos, $mat_form); // 1º - array principal | 2º - array de comparação
             foreach ($excluidos as $id) {
-                $model->deletar($id, $_POST['id_projeto']);
+                $model->deletar($_POST['id_projeto'], $id);
             }
-            header('Location: ./listAtriExtras');
+            
+            $_SESSION['msg'] = 'Participantes editados com sucesso!';
+            header('Location: ./listProjeto');
+            exit;
+
         } else if (isset($_GET['id_projeto'])) {
             $estudantes = $model->matriculas_por_id_projeto($_GET['id_projeto']);
             $projeto = $modelProjetos->projeto_por_id($_GET['id_projeto']);
-            //$estudantes = $model->estudantes_por_projeto(2);
             $this->view('projeto/editAlunoProjeto', ['matriculas' => $matriculas, 'estudantes' => $estudantes, 'projeto' => $projeto]);
         }
     }

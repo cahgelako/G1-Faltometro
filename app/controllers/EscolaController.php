@@ -4,7 +4,12 @@ class EscolaController extends Controller {
         require "app/core/auth.php";
         $model = $this->model('Escola');
         $escolas = $model->listar();
-        $this->view('escola/listEscola', ['escolas' => $escolas]);
+        $data = ['escolas' => $escolas];
+        if (isset($_SESSION['msg'])) {
+            $data['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        $this->view('escola/listEscola', $data);
     }
     
     public function registrar() {
@@ -13,6 +18,7 @@ class EscolaController extends Controller {
         
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model->salvar($_POST['nome_escola']);
+            $_SESSION['msg'] = "Escola registrada com sucesso!";
             header("Location: ./listEscola");
         } else {
             $this->view('escola/registerEs');
@@ -25,6 +31,7 @@ class EscolaController extends Controller {
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $model->editar($_POST);
+            $_SESSION['msg'] = "Escola editada com sucesso!";
             header("Location: ./listEscola");
         } elseif (isset($_GET['id'])) {
             $escolas = $model->filtrar($_GET['id']);
@@ -38,6 +45,7 @@ class EscolaController extends Controller {
             $model = $this->model('Escola');
             $model->deletar($_GET['id']);
         }
+        $_SESSION['msg'] = 'Escola deletada com sucesso!';
         header('Location: ./listEscola');
         exit;
     }

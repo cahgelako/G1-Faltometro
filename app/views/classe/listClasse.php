@@ -11,6 +11,10 @@
         </a>
     </div>
 
+    <?php if (isset($msg)) { ?>
+        <p class="text-dark"> <?php echo $msg; ?></p>
+    <?php } ?>
+
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card shadow-sm border-0">
@@ -50,23 +54,27 @@
                             <tbody>
                                 <?php 
                                     if (!empty($classes)) {
-                                        foreach ($classes as $user): 
+                                        foreach ($classes as $class): 
                                 ?>
                                             <tr>
-                                                <td class="text-center small text-muted"><?= $user['id_classe'] ?></td>
+                                                <td class="text-center small text-muted"><?= $class['id_classe'] ?></td>
                                                 <td class="text-center">
-                                                    <img src="img/<?= $user['img'] ?>" alt="Imagem da Classe" class="table-img">
+                                                    <img src="img/<?= $class['img'] ?>" alt="Imagem da Classe" class="table-img">
                                                 </td>
-                                                <td class="fw-medium"><?= $user['nome_turma'] ?></td>
-                                                <td><?= $user['nome_escola'] ?></td>
-                                                <td class="text-center"><?= $user['ano_turma'] ?></td>
-                                                <td class="text-center"><?= getTurnoBadge($user['turno']) ?></td>
-                                                <td class="text-center"><?= getStatusBadge($user['ativo']) ?></td>
+                                                <td class="fw-medium"><?= $class['nome_turma'] ?></td>
+                                                <td><?= $class['nome_escola'] ?></td>
+                                                <td class="text-center"><?= $class['ano_turma'] ?></td>
+                                                <td class="text-center"><?= getTurnoBadge($class['turno']) ?></td>
+                                                <td class="text-center"><?= getStatusBadge($class['ativo']) ?></td>
                                                 
                                                 <td class="text-center">
                                                     <div class="d-flex justify-content-center gap-2">
-                                                        <a href="./editClasse&id=<?= $user['id_classe'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
-                                                        <a href="./deleteClasse&id=<?= $user['id_classe'] ?>" title="Excluir" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir esta classe?')"><i class="fa fa-trash"></i></a>
+                                                        <?php if ($class['ativo'] == 1): ?>
+                                                        <a href="./desativarClasse&id=<?= $class['id_classe'] ?>" title="Desativar" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar esta classe?')"><i class="fa fa-ban"></i></a>
+                                                        <?php else: ?>
+                                                        <a href="./ativarClasse&id=<?= $class['id_classe'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar esta classe?')"><i class="fa fa-check"></i></a>
+                                                        <?php endif; ?>
+                                                        <a href="./editClasse&id=<?= $class['id_classe'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
                                                     </div>
                                                 </td>
                                             </tr>

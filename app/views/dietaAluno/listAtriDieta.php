@@ -10,6 +10,10 @@
         </a>
     </div>
 
+    <?php if (isset($msg)) { ?>
+        <p class="text-dark"> <?php echo $msg; ?></p>
+    <?php } ?>
+    
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card shadow-sm border-0">

@@ -11,13 +11,26 @@ class Matricula {
     }
 
     public function salvar($dados) {
-        $sql = "INSERT INTO matriculas_classe_estudante (id_classe, id_estudante, data_matricula, ativo) VALUES (:id_classe, :id_estudante, :data_matricula, :ativo)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_classe', $dados['id_classe']);
-        $stmt->bindParam(':id_estudante', $dados['id_estudante']);
-        $stmt->bindParam(':data_matricula', $dados['data_matricula']);
-        $stmt->bindParam(':ativo', $dados['ativo']);
-        $stmt->execute();
+        $verificacao = "SELECT COUNT(*) FROM matriculas_classe_estudante WHERE id_classe = :id_classe AND id_estudante = :id_estudante";
+        $stmtVerificacao = $this->conn->prepare($verificacao);
+        $stmtVerificacao->bindParam(':id_classe', $dados['id_classe']);
+        $stmtVerificacao->bindParam(':id_estudante', $dados['id_estudante']);
+        $stmtVerificacao->execute();
+        $count = $stmtVerificacao->fetchColumn();
+
+        if ($count > 0) {
+            // Já existe uma matrícula para essa combinação de id_classe e id_estudante
+            return false;
+        } else {
+            $sql = "INSERT INTO matriculas_classe_estudante (id_classe, id_estudante, data_matricula, ativo) VALUES (:id_classe, :id_estudante, :data_matricula, :ativo)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id_classe', $dados['id_classe']);
+            $stmt->bindParam(':id_estudante', $dados['id_estudante']);
+            $stmt->bindParam(':data_matricula', $dados['data_matricula']);
+            $stmt->bindParam(':ativo', $dados['ativo']);
+            $stmt->execute();
+        }
+
     }
 
     public function listar() {
@@ -44,8 +57,15 @@ class Matricula {
         $stmt->execute();
     }
 
-    public function deletar($id) {
-        $sql = "DELETE FROM matriculas_classe_estudante WHERE id_matricula = :id_matricula";
+    public function desativar($id) {
+        $sql = "UPDATE matriculas_classe_estudante SET ativo = 0  WHERE id_matricula = :id_matricula";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_matricula', $id);
+        $stmt->execute();
+    }
+
+    public function ativar($id) {
+        $sql = "UPDATE matriculas_classe_estudante SET ativo = 1  WHERE id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_matricula', $id);
         $stmt->execute();

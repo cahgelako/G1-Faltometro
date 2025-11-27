@@ -1,48 +1,61 @@
 <?php
-class DietaEspecialController extends Controller {
+class DietaEspecialController extends Controller
+{
 
-    public function listar() {
+    public function listar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('DietaEspecial');
         $dietas = $model->listar();
-        $this->view('dieta/listDieta', ['dietas' => $dietas]);
+        $data = ['dietas' => $dietas];
+        if (isset($_SESSION['msg'])) {
+            $data['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        $this->view('dieta/listDieta', $data);
     }
 
-    public function registrar() {
+    public function registrar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('DietaEspecial');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($_POST);
-            header('Location: ./listDieta');
+            if ($model->salvar($_POST)) {
+                $_SESSION['msg'] = "Dieta especial registrada com sucesso!";
+                header('Location: ./listDieta');
+                exit;
+            } else {
+                $_SESSION['msg'] = "Erro: Já existe uma dieta especial com esse nome.";
+                header('Location: ./listDieta');
+                exit;
+            }
         } else {
             $this->view('dieta/registerDieta');
         }
     }
 
-    public function editar() {
+    public function editar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('DietaEspecial');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            var_dump($_POST);
-
             $model->editar($_POST);
+            $_SESSION['msg'] = "Dieta especial editada com sucesso!";
             header('Location: ./listDieta');
         } else if (isset($_GET['id'])) {
             $dietas = $model->dieta_por_id($_GET['id']);
-
-            //var_dump($dietas);
-
             $this->view('dieta/editDieta', ['dietas' => $dietas]);
         }
     }
 
-    public function deletar() {
+    public function deletar()
+    {
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
             $model = $this->model('DietaEspecial');
             $model->deletar($_GET['id']);
         }
+        $_SESSION['msg'] = "Dieta especial deletada com sucesso!";
         header('Location: ./listDieta');
         exit;
     }

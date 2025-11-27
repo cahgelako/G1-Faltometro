@@ -3,35 +3,35 @@
         <div class="col-lg-9 col-xl-8">
             <div class="card shadow-sm border-0">
                 <div class="card-body p-4 p-md-5">
-                    
+
                     <h2 class="card-title text-center fw-bold text-dark mb-4">
-                        <i class="fas fa-user-plus me-2 text-secondary"></i> 
+                        <i class="fas fa-user-plus me-2 text-secondary"></i>
                         Realizar Matrícula
                     </h2>
-                    
+
                     <form method="POST">
-                        
+
                         <h5 class="mb-3 text-secondary border-bottom pb-1">Detalhes da Matrícula</h5>
-                        
+
                         <div class="row">
-                            
+
                             <div class="col-md-6 mb-4">
                                 <label for="data_matricula" class="form-label small text-muted">Data da Matrícula</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
-                                    <input type="date" class="form-control" id="data_matricula" name="data_matricula" 
-                                           placeholder="YYYY-MM-DD" value="<?= date('Y-m-d') ?>" required>
+                                    <input type="date" class="form-control" id="data_matricula" name="data_matricula"
+                                        placeholder="YYYY-MM-DD" value="<?= date('Y-m-d') ?>" required>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6 mb-4">
                                 <label for="ativo" class="form-label small text-muted">Status</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-toggle-on"></i></span>
                                     <select name="ativo" class="form-select" id="ativo" required>
-                                        <option value="0">Escolha um Status</option>
+                                        <option value="">Escolha um Status</option>
                                         <option value="1" selected>Ativada (Padrão)</option>
-                                        <option value="2">Desativada</option>
+                                        <option value="0">Desativada</option>
                                     </select>
                                 </div>
                             </div>
@@ -40,15 +40,15 @@
                         <h5 class="mb-3 mt-3 text-secondary border-bottom pb-1">Associações (Classe e Estudante)</h5>
 
                         <div class="row">
-                            
+
                             <div class="col-md-6 mb-4">
                                 <label for="id_classe" class="form-label small text-muted">Classe (Turma/Ano/Turno)</label>
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-school"></i></span>
                                     <select name="id_classe" class="form-select" id="id_classe" required>
                                         <option value="">Escolha uma Turma</option>
-                                        <?php 
-                                        foreach ($classes as $classe): 
+                                        <?php
+                                        foreach ($classes as $classe):
                                             // Define o estilo do Turno
                                             $turno_display = '';
                                             $turno_class = '';
@@ -62,18 +62,18 @@
                                                 $turno_display = "Integral";
                                                 $turno_class = "turno-integral";
                                             }
-                                            
+
                                             // Apenas exibe classes ativas no dropdown (ativo == 1)
                                             if (isset($classe['ativo']) && $classe['ativo'] == 1) { ?>
                                                 <option value="<?= $classe['id_classe'] ?>" class="<?= $turno_class ?>">
-                                                    <?= $classe['nome_turma']?> | <?= $classe['ano_turma']?> | <?= $turno_display ?>
+                                                    <?= $classe['nome_turma'] ?> | <?= $classe['ano_turma'] ?> | <?= $turno_display ?>
                                                 </option>
                                             <?php } ?>
                                         <?php endforeach; ?>
                                     </select>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6 mb-4">
                                 <label for="id_estudante" class="form-label small text-muted">Estudante</label>
                                 <div class="input-group">
@@ -82,7 +82,7 @@
                                         <option value="">Escolha um Estudante</option>
                                         <?php foreach ($estudantes as $estudante): ?>
                                             <option value="<?= $estudante['id_estudante'] ?>">
-                                                <?= $estudante['nome_estudante']?>
+                                                <?= $estudante['nome_estudante'] ?>
                                             </option>
                                         <?php endforeach; ?>
                                     </select>
@@ -100,7 +100,7 @@
                                 <i class="fas fa-check-circle me-1"></i> Cadastrar
                             </button>
                         </div>
-                        
+
                     </form>
                 </div>
             </div>

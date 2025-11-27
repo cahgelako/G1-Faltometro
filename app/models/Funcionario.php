@@ -25,14 +25,25 @@ class Funcionario
 
     public function salvar($dados)
     {
-        $sql = "INSERT INTO funcionarios (nome, email, senha, tipo_acesso) VALUES (:nome, :email, :senha, :tipo_acesso)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':nome', $dados['nome']);
-        $stmt->bindParam(':email', $dados['email']);
-        $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
-        $stmt->bindParam(':senha', $senha);
-        $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
-        $stmt->execute();
+        $verificacao = "SELECT COUNT(*) FROM funcionarios WHERE email = :email";
+        $stmtVerificacao = $this->conn->prepare($verificacao);
+        $stmtVerificacao->bindParam(':email', $dados['email']);
+        $stmtVerificacao->execute();
+        $count = $stmtVerificacao->fetchColumn();
+
+        if ($count > 0) {
+            // Já existe um funcionário com esse email
+            return false;
+        } else {
+            $sql = "INSERT INTO funcionarios (nome, email, senha, tipo_acesso) VALUES (:nome, :email, :senha, :tipo_acesso)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':nome', $dados['nome']);
+            $stmt->bindParam(':email', $dados['email']);
+            $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
+            $stmt->bindParam(':senha', $senha);
+            $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
+            $stmt->execute();
+        }
     }
 
     public function listar()
@@ -43,9 +54,17 @@ class Funcionario
         return $stmt->fetchAll();
     }
 
-    public function deletar($id)
+    public function desativar($id)
     {
-        $sql = "DELETE FROM funcionarios WHERE id_funcionario = :id_funcionario";
+        $sql = "UPDATE funcionarios SET ativo = 0 WHERE id_funcionario = :id_funcionario";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_funcionario', $id);
+        $stmt->execute();
+    }
+
+    public function ativar($id)
+    {
+        $sql = "UPDATE funcionarios SET ativo = 1 WHERE id_funcionario = :id_funcionario";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_funcionario', $id);
         $stmt->execute();
@@ -94,7 +113,8 @@ class Funcionario
         return $stmt->fetch();
     }
 
-    public function editar_perfil($dados) {
+    public function editar_perfil($dados)
+    {
         if (!empty($dados['senha'])) {
             $sql = "UPDATE funcionarios SET nome = :nome, email = :email, 
             senha = :senha, tipo_acesso = :tipo_acesso WHERE id_funcionario = :id_funcionario";

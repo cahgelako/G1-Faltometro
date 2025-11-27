@@ -5,7 +5,12 @@
         require_once 'app/core/auth.php';
         $modelClasse = $this->model('Classe');
         $turmas = $modelClasse->listar();
-        $this->view('frequencia/listFrenqTu', ['turmas' => $turmas]);
+        $data = ['turmas' => $turmas];
+        if (isset($_SESSION['msg'])) {
+            $data['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        $this->view('frequencia/listFrenqTu', $data);
     }
 
     public function registrar() {
@@ -34,10 +39,9 @@
                 ]);
             }
 
-            $turmas = $modelTu->listar();
-
-            $this->view('frequencia/listFrenqTu', ['turmas' => $turmas]);
-        } else if ($_GET['id_classe']) {
+            $_SESSION['msg'] = "Frequência registrada com sucesso!";
+            header('Location: ./listFrenqTu');
+        } else if (isset($_GET['id_classe'])) {
             $estudantes = $model->estudantes_por_classe($_GET['id_classe']);
             $this->view('frequencia/registerFrenqAluno', ['estudantes' => $estudantes]);
         }
@@ -54,7 +58,7 @@
                 $frequencia = $model->listar_por_classe_dia($_GET['id_classe']);
                 $this->view('relatorio/listRelFrenCo', ['frequencia' => $frequencia]);
             }
-        } else if ($_GET['id_classe']) {
+        } else if (isset($_GET['id_classe'])) {
             $frequencia = $model->listar_por_classe_dia($_GET['id_classe']);
             $this->view('relatorio/listRelFrenCo', ['frequencia' => $frequencia]);
         }

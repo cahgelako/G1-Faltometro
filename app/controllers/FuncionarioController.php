@@ -59,7 +59,12 @@ class FuncionarioController extends Controller
         require_once 'app/core/auth.php'; // verifica se a sessão existe
         $model = $this->model('Funcionario');
         $funcionarios = $model->listar();
-        $this->view('funcionario/listFunc', ['funcionarios' => $funcionarios]);
+        $data = ['funcionarios' => $funcionarios];
+        if (isset($_SESSION['msg'])) {
+            $data['msg'] = $_SESSION['msg'];
+            unset($_SESSION['msg']);
+        }
+        $this->view('funcionario/listFunc', $data);
     }
 
     public function registrar()
@@ -67,20 +72,41 @@ class FuncionarioController extends Controller
         require_once 'app/core/auth.php';
         $model = $this->model('Funcionario');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $model->salvar($_POST);
-            header('Location: ./listFunc');
+            if ($model->salvar($_POST)) {
+                $model->salvar($_POST);
+                $_SESSION['msg'] = 'Funcionário cadastrado com sucesso!';
+                header('Location: ./listFunc');
+                exit;
+            } else {
+                $_SESSION['msg'] = 'Erro: Já existe um funcionário com esse email.';
+                header('Location: ./listFunc');
+                exit;
+            }
         } else {
             $this->view('funcionario/registrarFunc');
         }
     }
 
-    public function deletar()
+    public function desativar()
     {
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
             $model = $this->model('Funcionario');
-            $model->deletar($_GET['id']);
+            $model->desativar($_GET['id']);
         }
+        $_SESSION['msg'] = 'Funcionário desativado com sucesso!';
+        header('Location: ./listFunc');
+        exit;
+    }
+
+    public function ativar()
+    {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id'])) {
+            $model = $this->model('Funcionario');
+            $model->ativar($_GET['id']);
+        }
+        $_SESSION['msg'] = 'Funcionário ativado com sucesso!';
         header('Location: ./listFunc');
         exit;
     }
@@ -93,6 +119,7 @@ class FuncionarioController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $dados = $_POST;
             $model->editar($dados);
+            $_SESSION['msg'] = 'Funcionário editado com sucesso!';
             header('Location: ./listFunc');
             exit;
         } else {

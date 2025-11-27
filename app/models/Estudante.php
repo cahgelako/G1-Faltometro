@@ -7,11 +7,22 @@ class Estudante {
     }
 
     public function salvar($dados) {
-        $sql = "INSERT INTO estudantes (nome_estudante, registro_matricula_escola) VALUES (:nome_estudante, :registro_matricula_escola)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
-        $stmt->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
-        $stmt->execute();
+        $verificacao = "SELECT COUNT(*) FROM estudantes WHERE nome_estudante = :nome_estudante";
+        $stmtVerificacao = $this->conn->prepare($verificacao);
+        $stmtVerificacao->bindParam(':nome_estudante', $dados['nome_estudante']);
+        $stmtVerificacao->execute();
+        $count = $stmtVerificacao->fetchColumn();
+
+        if ($count > 0) {
+            // Já existe um estudante com esse nome
+            return false;
+        } else {
+            $sql = "INSERT INTO estudantes (nome_estudante, registro_matricula_escola) VALUES (:nome_estudante, :registro_matricula_escola)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
+            $stmt->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
+            $stmt->execute();
+        }
     }
 
     public function listar() {

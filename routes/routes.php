@@ -23,7 +23,8 @@ $routes = [
     'login'    => ['controller' => 'FuncionarioController', 'method' => 'login'],
     'listFunc' => ['controller' => 'FuncionarioController', 'method' => 'listar'],
     'editFunc' => ['controller' => 'FuncionarioController', 'method' => 'editar'],
-    'deleteFunc' => ['controller' => 'FuncionarioController', 'method' => 'deletar'],
+    'desativarFunc' => ['controller' => 'FuncionarioController', 'method' => 'desativar'],
+    'ativarFunc' => ['controller' => 'FuncionarioController', 'method' => 'ativar'],
     'registrarFunc' => ['controller' => 'FuncionarioController', 'method' => 'registrar'],
     'conta' => ['controller' => 'FuncionarioController', 'method' => 'perfil'],
 
@@ -38,13 +39,15 @@ $routes = [
     'listMatricula' => ['controller' => 'MatriculaController', 'method' => 'listar'], 
     'editMatricula' => ['controller' => 'MatriculaController', 'method' => 'editar'], 
     'registerMatricula' => ['controller' => 'MatriculaController', 'method' => 'registrar'], 
-    'deleteMatricula' => ['controller' => 'MatriculaController', 'method' => 'deletar'], 
+    'desativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'desativar'], 
+    'ativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
 
     // Classe
     'listClasse' => ['controller' => 'ClasseController', 'method' => 'listar'],
     'editClasse' => ['controller' => 'ClasseController', 'method' => 'editar'],
     'registerClasse' => ['controller' => 'ClasseController', 'method' => 'registrar'],
-    'deleteClasse' => ['controller' => 'ClasseController', 'method' => 'deletar'], 
+    'desativarClasse' => ['controller' => 'ClasseController', 'method' => 'desativar'], 
+    'ativarClasse' => ['controller' => 'ClasseController', 'method' => 'ativar'], 
 
     // Dietas Especiais
     'listDieta' => ['controller' => 'DietaEspecialController', 'method' => 'listar'],
@@ -65,7 +68,8 @@ $routes = [
     'listProjeto' => ['controller' => 'ProjetoController', 'method' => 'listar'],
     'editProjeto' => ['controller' => 'ProjetoController', 'method' => 'editar'],
     'registerProjeto' => ['controller' => 'ProjetoController', 'method' => 'registrar'],
-    'deleteProjeto' => ['controller' => 'ProjetoController', 'method' => 'deletar'],
+    'desativarProjeto' => ['controller' => 'ProjetoController', 'method' => 'desativar'],
+    'ativarProjeto' => ['controller' => 'ProjetoController', 'method' => 'ativar'],
     'viewProjeto' => ['controller' => 'ProjetoController', 'method' => 'visualizar'],
     
     // Matricula Projetos
