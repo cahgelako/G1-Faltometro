@@ -3,8 +3,8 @@
 
     public function listar_turmas() {
         require_once 'app/core/auth.php';
-        $modelClasse = $this->model('Classe');
-        $turmas = $modelClasse->listar();
+        $modelTurma = $this->model('Turma');
+        $turmas = $modelTurma->listar();
         $data = ['turmas' => $turmas];
         if (isset($_SESSION['msg'])) {
             $data['msg'] = $_SESSION['msg'];
@@ -16,14 +16,14 @@
     public function registrar() {
         require_once 'app/core/auth.php';
         $model = $this->model('Frequencia');
-        $modelTu = $this->model('Classe');
+        $modelTurma = $this->model('Turma');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // pegar os dados do POST[], percorrer o array e inserir um por um
             // verificar quais foram checados. Se foi, status_presenca = 0, senão status_presenca = 1 
             $professor = $_SESSION['func_id_funcionario'];
 
             // cadastrando todos como presentes
-            $todos = $model->estudantes_por_classe($_POST['id_classe']);
+            $todos = $model->estudantes_por_turma($_POST['id_turma']);
             $faltosos = $_POST['id_matricula'] ?? []; // evita erro se nenhum checkbox for marcado
 
             foreach ($todos as $t) {
@@ -41,8 +41,8 @@
 
             $_SESSION['msg'] = "Frequência registrada com sucesso!";
             header('Location: ./listFrenqTu');
-        } else if (isset($_GET['id_classe'])) {
-            $estudantes = $model->estudantes_por_classe($_GET['id_classe']);
+        } else if (isset($_GET['id_turma'])) {
+            $estudantes = $model->estudantes_por_turma($_GET['id_turma']);
             $this->view('frequencia/registerFrenqAluno', ['estudantes' => $estudantes]);
         }
     }
@@ -55,11 +55,11 @@
             if ($relatorio) {
                 $this->view('relatorio/listRelFrenCo', ['relatorio' => $relatorio]);
             } else {
-                $frequencia = $model->listar_por_classe_dia($_GET['id_classe']);
+                $frequencia = $model->listar_por_turma_dia($_GET['id_turma']);
                 $this->view('relatorio/listRelFrenCo', ['frequencia' => $frequencia]);
             }
-        } else if (isset($_GET['id_classe'])) {
-            $frequencia = $model->listar_por_classe_dia($_GET['id_classe']);
+        } else if (isset($_GET['id_turma'])) {
+            $frequencia = $model->listar_por_turma_dia($_GET['id_turma']);
             $this->view('relatorio/listRelFrenCo', ['frequencia' => $frequencia]);
         }
     }

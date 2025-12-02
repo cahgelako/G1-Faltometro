@@ -10,10 +10,9 @@ class Estudante
 
     public function salvar($dados)
     {
-        $verificacao = "SELECT COUNT(*) FROM estudantes WHERE nome_estudante = :nome_estudante AND registro_matricula_escola = :registro_matricula_escola";
+        $verificacao = "SELECT COUNT(*) FROM estudantes WHERE nome_estudante = :nome_estudante";
         $stmtVerificacao = $this->conn->prepare($verificacao);
         $stmtVerificacao->bindParam(':nome_estudante', $dados['nome_estudante']);
-        $stmtVerificacao->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
         $stmtVerificacao->execute();
         $count = $stmtVerificacao->fetchColumn();
 
@@ -21,11 +20,11 @@ class Estudante
             // Já existe um estudante com esse nome
             return false;
         } else {
-            $sql = "INSERT INTO estudantes (nome_estudante, registro_matricula_escola) VALUES (:nome_estudante, :registro_matricula_escola)";
+            $sql = "INSERT INTO estudantes (nome_estudante) VALUES (:nome_estudante)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
-            $stmt->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
             $stmt->execute();
+            return true;
         }
     }
 
@@ -39,9 +38,9 @@ class Estudante
 
     public function editar($dados)
     {
-        $verificacao = "SELECT COUNT(*) FROM estudantes WHERE registro_matricula_escola = :registro_matricula_escola";
+        $verificacao = "SELECT COUNT(*) FROM estudantes WHERE nome_estudante LIKE '%:nome_estudante%'";
         $stmtVerificacao = $this->conn->prepare($verificacao);
-        $stmtVerificacao->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
+        $stmtVerificacao->bindParam(':nome_estudante', $dados['nome_estudante']);
         $stmtVerificacao->execute();
         $count = $stmtVerificacao->fetchColumn();
 
@@ -49,10 +48,9 @@ class Estudante
             // Já existe um estudante com esse nome
             return false;
         } else {
-            $sql = "UPDATE estudantes SET nome_estudante = :nome_estudante, registro_matricula_escola = :registro_matricula_escola WHERE id_estudante = :id_estudante";
+            $sql = "UPDATE estudantes SET nome_estudante = :nome_estudante WHERE id_estudante = :id_estudante";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
-            $stmt->bindParam(':registro_matricula_escola', $dados['registro_matricula_escola']);
             $stmt->bindParam(':id_estudante', $dados['id_estudante']);
             $stmt->execute();
         }

@@ -24,13 +24,13 @@ class FuncionarioController extends Controller
                     header('Location: ./inicio');
                     exit;
                 } else {
-                    $this->view('funcionario/login', ['error' => 'Usuário não encontrado']);
+                    $this->view('funcionario/login', ['error' => 'Usuário não encontrado'], false);
                 }
             } else {
-                $this->view('funcionario/login', ['error' => 'Login inválido']);
+                $this->view('funcionario/login', ['error' => 'Login inválido'], false);
             }
         } else {
-            $this->view('funcionario/login');
+            $this->view('funcionario/login', [], false);
         }
     }
 

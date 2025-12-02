@@ -26,7 +26,7 @@ class EstudanteController extends Controller
                 header('Location: ./listEstudante');
                 exit;
             } else {
-                $_SESSION['msg'] = "Erro: Já existe um estudante com esse registro de matricula.";
+                $_SESSION['msg'] = "Erro: Já existe um estudante com esse nome.";
                 header('Location: ./listEstudante');
                 exit;
             }

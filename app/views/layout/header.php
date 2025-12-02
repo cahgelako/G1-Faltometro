@@ -95,12 +95,10 @@
                                         <li><a class="dropdown-item" href="./listEstudante">Alunos</a></li>
                                         <li><a class="dropdown-item" href="./listEscola">Escolas</a></li>
                                         <li><a class="dropdown-item" href="./listTurma">Turmas</a></li>
-                                        <li><a class="dropdown-item" href="./listClasse">Classes</a></li>
                                         <li><hr class="dropdown-divider"></li>
-                                        <li><h6 class="dropdown-header">Especiais e Matrículas</h6></li>
+                                        <li><h6 class="dropdown-header">Especiais</h6></li>
                                         <li><a class="dropdown-item" href="./listDieta">Dietas Especiais</a></li>
                                         <li><a class="dropdown-item" href="./listProjeto">Turmas Extracurriculares</a></li>
-                                        <li><a class="dropdown-item" href="./listMatricula">Matrícula</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <li><a class="dropdown-item" href="./listRelTu"><i class="fas fa-chart-line me-2"></i> Relatórios Gerais</a></li>
                                     </ul>

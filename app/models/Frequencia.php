@@ -7,20 +7,19 @@ class Frequencia {
         $this->conn = new Database();
     }
 
-    public function listar_por_classe_dia($id_classe) {
-        $sql = "SELECT f.data_falta, fu.nome, t.nome_turma, c.ano_turma, c.turno, e.nome_estudante, e.registro_matricula_escola
+    public function listar_por_turma_dia($id_turma) {
+        $sql = "SELECT f.data_falta, fu.nome, t.nome_turma, t.ano_turma, t.turno, e.nome_estudante, e.registro_matricula_escola
         FROM turmas t
-        RIGHT JOIN classes c ON t.id_turma = c.id_turma
-        RIGHT JOIN matriculas_classe_estudante m ON m.id_classe = c.id_classe
+        RIGHT JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
         RIGHT JOIN estudantes e ON e.id_estudante = m.id_estudante
         RIGHT JOIN frequencia f ON f.id_matricula = m.id_matricula
         RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
-        WHERE c.id_classe = :id_classe
-        AND c.ativo = 1
+        WHERE t.id_turma = :id_turma
+        AND t.ativo = 'ativo'
         AND f.status_presenca = 0
         AND f.data_falta = CURDATE()"; 
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_classe', $id_classe);
+        $stmt->bindParam(':id_turma', $id_turma);
         $stmt->execute();
         return $stmt->fetchAll();
     }
@@ -50,20 +49,19 @@ class Frequencia {
 
     public function filtro_intervalo($dados){
         if($dados['dta_inicial'] && $dados['dta_final'] && $dados['nome_estudante']) {
-            $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, c.ano_turma, e.nome_estudante
+            $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, t.ano_turma, e.nome_estudante
             FROM turmas t
-            RIGHT JOIN classes c ON t.id_turma = c.id_turma
-            RIGHT JOIN matriculas_classe_estudante m ON m.id_classe = c.id_classe
+            RIGHT JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
             RIGHT JOIN estudantes e ON e.id_estudante = m.id_estudante
             RIGHT JOIN frequencia f ON f.id_matricula = m.id_matricula
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
-            WHERE c.id_classe = :id_classe
-            AND c.ativo = 1
+            WHERE t.id_turma = :id_turma
+            AND t.ativo = 'ativo'
             AND f.status_presenca = 0
             AND f.data_falta BETWEEN :dta_inicial AND :dta_final
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id_classe', $dados['id_classe']);
+            $stmt->bindParam(':id_turma', $dados['id_turma']);
             $stmt->bindParam(':dta_inicial', $dados['dta_inicial']);
             $stmt->bindParam(':dta_final', $dados['dta_final']);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
@@ -71,39 +69,37 @@ class Frequencia {
             return $stmt->fetchAll();
 
         } else if ($dados['dta_inicial'] && $dados['nome_estudante']) {
-            $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, c.ano_turma, e.nome_estudante
+            $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, t.ano_turma, e.nome_estudante
             FROM turmas t
-            RIGHT JOIN classes c ON t.id_turma = c.id_turma
-            RIGHT JOIN matriculas_classe_estudante m ON m.id_classe = c.id_classe
+            RIGHT JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
             RIGHT JOIN estudantes e ON e.id_estudante = m.id_estudante
             RIGHT JOIN frequencia f ON f.id_matricula = m.id_matricula
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
-            WHERE c.id_classe = :id_classe
-            AND c.ativo = 1
+            WHERE t.id_turma = :id_turma
+            AND t.ativo = 'ativo'
             AND f.status_presenca = 0
             AND f.data_falta = :dta_inicial 
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id_classe', $dados['id_classe']);
+            $stmt->bindParam(':id_turma', $dados['id_turma']);
             $stmt->bindParam(':dta_inicial', $dados['dta_inicial']);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
             $stmt->execute();
             return $stmt->fetchAll();
 
         } else if($dados['nome_estudante']) {
-            $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, c.ano_turma, e.nome_estudante
+            $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, t.ano_turma, e.nome_estudante
             FROM turmas t
-            RIGHT JOIN classes c ON t.id_turma = c.id_turma
-            RIGHT JOIN matriculas_classe_estudante m ON m.id_classe = c.id_classe
+            RIGHT JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
             RIGHT JOIN estudantes e ON e.id_estudante = m.id_estudante
             RIGHT JOIN frequencia f ON f.id_matricula = m.id_matricula
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
-            WHERE c.id_classe = :id_classe
-            AND c.ativo = 1
+            WHERE t.id_turma = :id_turma
+            AND t.ativo = 'ativo'
             AND f.status_presenca = 0
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id_classe', $dados['id_classe']);
+            $stmt->bindParam(':id_turma', $dados['id_turma']);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
             $stmt->execute();
             return $stmt->fetchAll();
@@ -119,14 +115,14 @@ class Frequencia {
     }
 
     
-    public function estudantes_por_classe($id_classe) {
+    public function estudantes_por_turma($id_turma) {
         $sql = "SELECT e.nome_estudante, m.id_matricula
-        FROM matriculas_classe_estudante m, estudantes e, classes c
-        WHERE m.id_classe = :id_classe
-        AND c.id_classe = m.id_classe
+        FROM matriculas_turma_estudante m, estudantes e, turmas t
+        WHERE m.id_turma = :id_turma
+        AND t.id_turma = m.id_turma
         AND m.id_estudante = e.id_estudante";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_classe', $id_classe);
+        $stmt->bindParam(':id_turma', $id_turma);
         $stmt->execute();
         return $stmt->fetchAll();
     }

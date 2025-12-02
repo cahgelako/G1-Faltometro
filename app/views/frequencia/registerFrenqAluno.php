@@ -17,7 +17,7 @@
                     ?>
 
                     <form method="POST">
-                        <input type="hidden" name="id_classe" value="<?= htmlspecialchars($_GET['id_classe']) ?>">
+                        <input type="hidden" name="id_turma" value="<?= htmlspecialchars($_GET['id_turma']) ?>">
 
                         <div class="row mb-4">
                             <div class="col-md-6 offset-md-3">

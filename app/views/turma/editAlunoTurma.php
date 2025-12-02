@@ -41,14 +41,14 @@
                 <div class="card-body p-4 p-md-5">
                     <h2 class="card-title text-center text-dark mb-4 pb-2 border-bottom">
                         <i class="fas fa-utensils me-2"></i> 
-                        Editar estudantes da Classe <?php if (isset($classe['nome_turma'])) { ?>
-                        <p class="text-center lead mb-4"> <strong><?= htmlspecialchars($classe['nome_turma']) ?></strong></p>
+                        Editar estudantes da Turma <?php if (isset($turma['nro_turma']) && isset($turma['tipo_ensino'])) { ?>
+                        <p class="text-center lead mb-4"> <strong><?= htmlspecialchars(isset($turma['nro_turma']) . 'º do ' . isset($turma['tipo_ensino'])) ?></strong></p>
                     <?php } ?>
                     </h2>
                     
 
                     <form method="POST">
-                        <input type="hidden" readonly id="id_classe" name="id_classe" value="<?= htmlspecialchars($_GET['id']) ?>">
+                        <input type="hidden" readonly id="id_turma" name="id_turma" value="<?= htmlspecialchars($_GET['id']) ?>">
 
                         <div class="row">
                             <div class="col-12">
@@ -71,7 +71,7 @@
                         </div>
                         
                         <div class="d-flex justify-content-end mt-4 pt-3 border-top">
-                            <a href="./listClasse" class="btn btn-outline-secondary me-2">
+                            <a href="./listTurma" class="btn btn-outline-secondary me-2">
                                 <i class="fas fa-arrow-left me-1"></i> Voltar
                             </a>
                             <button type="submit" class="btn btn-primary btn-lg shadow-sm">

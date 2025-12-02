@@ -39,7 +39,7 @@
 
                         <div class="card-body d-flex flex-column p-4">
                             <h5 class="card-title text-truncate mb-2 text-dark fw-bolder">
-                                <?= $turma["nome_turma"] ?>
+                                <?= $turma["nro_turma"] ?>º do <?= $turma["tipo_ensino"] ?>
                             </h5>
 
                             <p class="card-subtitle mb-3">
@@ -52,7 +52,7 @@
                                 Ano Letivo: <span class="fw-semibold text-dark"><?= $turma["ano_turma"] ?></span>
                             </p>
 
-                            <a href="registerFrenqAluno?id_classe=<?= $turma["id_classe"] ?>"
+                            <a href="registerFrenqAluno?id_turma=<?= $turma["id_turma"] ?>"
                                 class="btn btn-primary mt-auto w-100 btn-acessar-turma">
                                 <i class="bi bi-box-arrow-in-right me-1"></i> Acessar Turma
                             </a>

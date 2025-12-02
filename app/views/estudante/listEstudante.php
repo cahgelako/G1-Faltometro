@@ -25,7 +25,6 @@
                                 <tr>
                                     <th class="text-center small">ID</th>
                                     <th>Nome do Estudante</th>
-                                    <th class="text-center">Matrícula</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
                             </thead>
@@ -34,7 +33,6 @@
                                 <tr>
                                     <td class="text-center small text-muted"><?= $estudante['id_estudante'] ?></td>
                                     <td class="fw-medium"><?= $estudante['nome_estudante'] ?></td>
-                                    <td class="text-center text-muted"><?= $estudante['registro_matricula_escola'] ?></td>
                                     
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">

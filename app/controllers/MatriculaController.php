@@ -19,7 +19,7 @@ class MatriculaController extends Controller
     {
         require_once 'app/core/auth.php';
         $model = $this->model('Matricula');
-        $modelClasse = $this->model('Classe');
+        $modelTurma = $this->model('Turma');
         $modelEstudante = $this->model('Estudante');
 
         $estudantes = $modelEstudante->listar();
@@ -44,14 +44,14 @@ class MatriculaController extends Controller
                 header('Location: ./listMatricula');
                 exit;
             } else {
-                $_SESSION['msg'] = 'Erro: Já existe uma matrícula para essa combinação de classe e estudante.';
+                $_SESSION['msg'] = 'Erro: Já existe uma matrícula para essa combinação de turma e estudante.';
                 header('Location: ./listMatricula');
                 exit;
             }
         } else if (isset($_GET['id'])) {
-            $classe = $modelClasse->classe_por_id($_GET['id']);
-            $matriculas = $model->matricula_por_id_classe($_GET['id']);
-            $this->view('classe/editAlunoClasse', ['classe' => $classe, 'estudantes' => $estudantes, 'matriculas' => $matriculas]);
+            $turma = $modelturma->turma_por_id($_GET['id']);
+            $matriculas = $model->matricula_por_id_turma($_GET['id']);
+            $this->view('turma/editAlunoturma', ['turma' => $turma, 'estudantes' => $estudantes, 'matriculas' => $matriculas]);
         }
     }
 
@@ -59,51 +59,52 @@ class MatriculaController extends Controller
     {
         require_once 'app/core/auth.php';
         $model = $this->model('Matricula');
-        $modelClasse = $this->model('Classe');
+        $modelTurma = $this->model('Turma');
         $modelEstudante = $this->model('Estudante');
 
-        // $classes = $modelClasse->listar();
         $estudantes = $modelEstudante->listar();
+        $erros_duplicidade = [];
+        $resultado = true;
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-            $matestudantes = $model->matricula_por_id_classe($_POST['id_classe']);
+            $matestudantes = $model->matricula_por_id_turma($_POST['id_turma']);
             $mats_form = $_POST['arr_mat_id'] ?? [];
 
             // verificando quais dietas foram atribuídas (não existem em dietas estudante e existe no formulário)
             $atribuidas = array_diff($mats_form, $matestudantes); // 1º - array principal | 2º - array de comparação
             foreach ($atribuidas as $cod_estudante) {
                 //var_dump($cod_estudante); exit;
-                // echo $_POST['id_classe'];
-                $model->salvar(['id_classe' => $_POST['id_classe'], 'id_estudante' => $cod_estudante]);
+                // echo $_POST['id_turma'];
+                $resultado = $model->salvar(['id_turma' => $_POST['id_turma'], 'id_estudante' => $cod_estudante]);
+                
+                // Se a Model retornar FALSE, significa duplicidade (pois desativamos o INSERT no if)
+                if ($resultado === false) {
+                    $erros_duplicidade[] = htmlspecialchars($cod_estudante);
+                }
             }
 
-            // Se a Model retornar FALSE, significa duplicidade (pois desativamos o INSERT no if)
-            if ($resultado === false) {
-                $erros_duplicidade[] = htmlspecialchars($cod_estudante);
-            }
 
 
             if (!empty($erros_duplicidade)) {
                 $lista_erros = implode(', ', $erros_duplicidade); //junta os elementos de um array em uma única string.
                 $_SESSION['msg'] = 'Erro: Os estudantes com IDs (' . $lista_erros . ') já estão matriculados em outra turma ATIVA no ano letivo. A edição foi cancelada.';
-                header('Location: ./listMatricula');
+                header('Location: ./listTurma');
                 exit;
             }
 
-            $id_classe = $_POST['id_classe'];
+            $id_turma = $_POST['id_turma'];
             // verificando quais dietas foram excluídas (não existem no formulário e existe no dieta estudante)
             $excluidas = array_diff($matestudantes, $mats_form); // 1º - array principal | 2º - array de comparação
             foreach ($excluidas as $idEstudante) {
-                $model->desativar($id_classe, $idEstudante);
+                $model->desativar($id_turma, $idEstudante);
             }
             $_SESSION['msg'] = 'Matrículas editadas com sucesso!';
-            header('Location: ./listMatricula');
+            header('Location: ./listTurma');
         } else if (isset($_GET['id'])) {
-            $matriculas = $model->matricula_por_id_classe($_GET['id']);
-            $classe = $modelClasse->classe_por_id($_GET['id']);
-            //echo "<pre>"; var_dump($classe); echo "</pre>"; exit;
-            $this->view('classe/editAlunoClasse', ['classe' => $classe, 'estudantes' => $estudantes, 'matriculas' => $matriculas]);
+            $matriculas = $model->matricula_por_id_turma($_GET['id']);
+            $turma = $modelTurma->turma_por_id($_GET['id']);
+            $this->view('turma/editAlunoTurma', ['turma' => $turma, 'estudantes' => $estudantes, 'matriculas' => $matriculas]);
         }
     }
 

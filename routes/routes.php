@@ -18,7 +18,8 @@ $routes = [
     'listTurma' => ['controller' => 'TurmaController', 'method' => 'listar'],
     'registerTurma'=> ['controller' => 'TurmaController', 'method' => 'registrar'],
     'editTurma'=> ['controller' => 'TurmaController', 'method' => 'editar'],
-    'deleteTurma'=> ['controller' => 'TurmaController', 'method' => 'deletar'],
+    'desativarTurma' => ['controller' => 'TurmaController', 'method' => 'desativar'], 
+    'ativarTurma' => ['controller' => 'TurmaController', 'method' => 'ativar'], 
 
     // Funcionarios
     'login'    => ['controller' => 'FuncionarioController', 'method' => 'login'],
@@ -38,18 +39,18 @@ $routes = [
 
     // Matricula
     'listMatricula' => ['controller' => 'MatriculaController', 'method' => 'listar'], 
-    'editAlunoClasse' => ['controller' => 'MatriculaController', 'method' => 'editar'], 
+    'editAlunoTurma' => ['controller' => 'MatriculaController', 'method' => 'editar'], 
     'registerMatricula' => ['controller' => 'MatriculaController', 'method' => 'registrar'], 
     'desativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'desativar'], 
     'ativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
     // 'editAlunoClasse' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
 
     // Classe
-    'listClasse' => ['controller' => 'ClasseController', 'method' => 'listar'],
-    'editClasse' => ['controller' => 'ClasseController', 'method' => 'editar'],
-    'registerClasse' => ['controller' => 'ClasseController', 'method' => 'registrar'],
-    'desativarClasse' => ['controller' => 'ClasseController', 'method' => 'desativar'], 
-    'ativarClasse' => ['controller' => 'ClasseController', 'method' => 'ativar'], 
+    // 'listClasse' => ['controller' => 'ClasseController', 'method' => 'listar'],
+    // 'editClasse' => ['controller' => 'ClasseController', 'method' => 'editar'],
+    // 'registerClasse' => ['controller' => 'ClasseController', 'method' => 'registrar'],
+    // 'desativarClasse' => ['controller' => 'ClasseController', 'method' => 'desativar'], 
+    // 'ativarClasse' => ['controller' => 'ClasseController', 'method' => 'ativar'], 
 
     // Dietas Especiais
     'listDieta' => ['controller' => 'DietaEspecialController', 'method' => 'listar'],
