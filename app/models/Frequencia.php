@@ -25,6 +25,7 @@ class Frequencia {
     }
 
     public function salvar($dados) {
+        // esse insert com on duplicate key update evita duplicidade de registros
         $sql = "INSERT INTO frequencia (data_falta, id_matricula, id_funcionario, hora, status_presenca)
         VALUES (:data_falta, :id_matricula, :id_funcionario, CURTIME(), :status_presenca)
         ON DUPLICATE KEY UPDATE

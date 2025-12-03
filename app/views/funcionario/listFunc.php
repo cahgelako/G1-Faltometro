@@ -61,10 +61,10 @@
                                         <td class="text-center">
                                             <div class="d-flex justify-content-center gap-2">
                                                 <?php switch ($func['ativo']) {
-                                                    case 1: ?>
+                                                    case 'ativo': ?>
                                                         <a href="./desativarFunc&id=<?= $func['id_funcionario'] ?>" title="Excluir" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar esse funcionario?')"><i class="fa fa-ban"></i></a>
                                                     <?php break;
-                                                    case 0: ?>
+                                                    case 'inativo': ?>
                                                         <a href="./ativarFunc&id=<?= $func['id_funcionario'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar esse funcionario?')"><i class="fa fa-check"></i></a>
                                                 <?php break;
                                                 } ?>
