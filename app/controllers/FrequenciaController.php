@@ -63,4 +63,19 @@
             $this->view('relatorio/listRelFrenCo', ['frequencia' => $frequencia]);
         }
     }
+
+    public function relatorio_nutri() {
+        require_once 'app/core/auth.php';
+        $model = $this->model('Frequencia');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = $_POST['data_falta'];
+            $relatorio = $model->list_relatorio_nutri_dia($data);
+            $relatorio_dietas = $model->list_relatorio_nutri_dietas($data);
+            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'data_falta' => $data, 'relatorio_dietas' => $relatorio_dietas]);
+        } else {
+            $relatorio = $model->list_relatorio_nutri_dia();
+            $relatorio_dietas = $model->list_relatorio_nutri_dietas();
+            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'relatorio_dietas' => $relatorio_dietas]);
+        }
+    }
  }

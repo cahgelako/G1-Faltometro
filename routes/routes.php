@@ -58,7 +58,7 @@ $routes = [
     'registerDieta' => ['controller' => 'DietaEspecialController', 'method' => 'registrar'],
     'deletedieta' => ['controller' => 'DietaEspecialController', 'method' => 'deletar'],
 
-    // Faltas
+    // Frequencia
     'listFrenqTu' => ['controller' => 'FrequenciaController', 'method' => 'listar_turmas'],
     'editFrenq' => ['controller' => 'FrequenciaController', 'method' => 'editar'],
     'registerFrenqAluno' => ['controller' => 'FrequenciaController', 'method' => 'registrar'],
@@ -66,6 +66,7 @@ $routes = [
     'relFalta' => ['controller' => 'FrequenciaController', 'method' => 'relatorio'],
     'relPDFFalta' => ['controller' => 'FrequenciaController', 'method' => 'gerarPDF'],
     'confirmFrenq' => ['controller' => 'FrequenciaController', 'method' => 'registrar'],
+    'relFrenqNutri' => ['controller' => 'FrequenciaController', 'method' => 'relatorio_nutri'],
     
     // Projetos Especiais
     'listProjeto' => ['controller' => 'ProjetoController', 'method' => 'listar'],

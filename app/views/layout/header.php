@@ -66,6 +66,19 @@
                                 </li>
                                 <?php break;
                             case '2': // Nutricionista
+                                ?>
+                                <li class="nav-item"><a class="nav-link text-dark fw-medium" href="./relFrenqNutri"><i class="fas fa-home me-1"></i>Contagem de alunos</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-dark fw-medium" href="#" id="adminUserDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fas fa-user-shield me-1"></i> Nutricionista
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminUserDropdown">
+                                        <li><a class="dropdown-item" href="./conta"><i class="fas fa-cog me-2"></i> Minha Conta</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-danger" href="./logout"><i class="fas fa-sign-out-alt me-2"></i> Sair</a></li>
+                                    </ul>
+                                </li>
+                            <?php break;
                             case '3': // Coordenação
                                 ?>
                                 <li class="nav-item"><a class="nav-link text-dark fw-medium" href="./inicio"><i class="fas fa-home me-1"></i> Início</a></li>

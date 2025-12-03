@@ -29,13 +29,11 @@ class MatriculaController extends Controller
                 $matestudantes = $model->dietas_do_estudante($_POST['id_estudante']);
                 $mats_form = $_POST['arr_mat_id'] ?? [];
 
-                // verificando quais dietas foram atribuídas (não existem em dietas estudante e existe no formulário)
                 $atribuidas = array_diff($mats_form, $matestudantes); // 1º - array principal | 2º - array de comparação
                 foreach ($atribuidas as $id) {
                     $model->salvar([$_POST['id_clsse'], $id, $_POST['data_matricula'], $_POST['ativo']]);
                 }
 
-                // verificando quais dietas foram excluídas (não existem no formulário e existe no dieta estudante)
                 $excluidas = array_diff($matestudantes, $mats_form); // 1º - array principal | 2º - array de comparação
                 foreach ($excluidas as $id) {
                     $model->desativar($id);
@@ -71,11 +69,8 @@ class MatriculaController extends Controller
             $matestudantes = $model->matricula_por_id_turma($_POST['id_turma']);
             $mats_form = $_POST['arr_mat_id'] ?? [];
 
-            // verificando quais dietas foram atribuídas (não existem em dietas estudante e existe no formulário)
             $atribuidas = array_diff($mats_form, $matestudantes); // 1º - array principal | 2º - array de comparação
             foreach ($atribuidas as $cod_estudante) {
-                //var_dump($cod_estudante); exit;
-                // echo $_POST['id_turma'];
                 $resultado = $model->salvar(['id_turma' => $_POST['id_turma'], 'id_estudante' => $cod_estudante]);
                 
                 // Se a Model retornar FALSE, significa duplicidade (pois desativamos o INSERT no if)
@@ -83,8 +78,6 @@ class MatriculaController extends Controller
                     $erros_duplicidade[] = htmlspecialchars($cod_estudante);
                 }
             }
-
-
 
             if (!empty($erros_duplicidade)) {
                 $lista_erros = implode(', ', $erros_duplicidade); //junta os elementos de um array em uma única string.
@@ -94,7 +87,6 @@ class MatriculaController extends Controller
             }
 
             $id_turma = $_POST['id_turma'];
-            // verificando quais dietas foram excluídas (não existem no formulário e existe no dieta estudante)
             $excluidas = array_diff($matestudantes, $mats_form); // 1º - array principal | 2º - array de comparação
             foreach ($excluidas as $idEstudante) {
                 $model->desativar($id_turma, $idEstudante);

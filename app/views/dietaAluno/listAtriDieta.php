@@ -35,10 +35,9 @@
                         <table id="idtabela" class="table table-striped table-hover align-middle" style="width:100%">
                             <thead>
                                 <tr class="table-light">
-                                    <th class="text-center small">RM</th>
                                     <th>Estudante</th>
                                     <th>Dieta Atribuída</th>
-                                    <th class="text-center">Classe</th>
+                                    <th class="text-center">Turma</th>
                                     <th class="text-center">Data da Atribuição</th>
                                     <th class="text-center">Ações</th>
                                 </tr>
@@ -51,11 +50,10 @@
                                             $data_formatada = date('d/m/Y', strtotime($dieta['data_adicao_dieta']));
                                 ?>
                                             <tr>
-                                                <td class="text-center small text-muted"><?= $dieta['registro_matricula_escola'] ?></td>
                                                 <td class="fw-medium"><?= $dieta['nome_estudante'] ?></td>
                                                 <td><?= $dieta['nome_dieta'] ?></td>
                                                 <td>
-                                                    <span class="fw-normal"><?= $dieta['nome_turma']?> <?= $dieta['ano_turma']?></span>
+                                                    <span class="fw-normal"><?= $dieta['nro_turma']?> <?= $dieta['tipo_ensino']?> <?= $dieta['ano_turma']?></span>
                                                     <?= getTurnoBadgeDieta($dieta['turno']) ?>
                                                 </td>
                                                 <td class="small text-muted"><?= $data_formatada ?></td>

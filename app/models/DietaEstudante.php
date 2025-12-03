@@ -13,13 +13,12 @@ class DietaEstudante
 
     public function listar()
     {
-        $sql = "SELECT t.nome_turma, e.nome_estudante, d.nome_dieta, cd.data_adicao_dieta, e.id_estudante, c.ano_turma, c.turno,  e.registro_matricula_escola
+        $sql = "SELECT t.nro_turma, t.tipo_ensino, e.nome_estudante, d.nome_dieta, cd.data_adicao_dieta, e.id_estudante, t.ano_turma, t.turno
         FROM dietas_especiais d
         JOIN cadastros_dietas_por_estudante cd ON cd.id_dieta = d.id_dieta
         JOIN estudantes e ON e.id_estudante = cd.id_estudante
-        JOIN matriculas_classe_estudante m ON m.id_estudante = e.id_estudante
-        JOIN classes c ON c.id_classe = m.id_classe
-        JOIN turmas t ON t.id_turma = c.id_turma
+        JOIN matriculas_turma_estudante m ON m.id_estudante = e.id_estudante
+        JOIN turmas t ON t.id_turma = m.id_turma
         ORDER BY e.nome_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();

@@ -81,4 +81,19 @@ class Estudante
         $stmt->execute();
         return $stmt->fetch();
     }
+
+    // public function estudantes_da_turma_e_nao_matriculados_outra($id_turma)
+    // {
+    //     $sql = "SELECT e.id_estudante, e.nome_estudante
+    //     FROM estudantes e
+    //     WHERE e.id_estudante NOT IN (
+    //         SELECT m.id_estudante
+    //         FROM matriculas_turma_estudante m
+    //         WHERE m.id_turma != :id_turma AND m.ativo = 'ativo'
+    //     )";
+    //     $stmt = $this->conn->prepare($sql);
+    //     $stmt->bindParam(':id_turma', $id_turma);
+    //     $stmt->execute();
+    //     return $stmt->fetchAll();
+    // }
 }
