@@ -1,3 +1,15 @@
+<style>
+/* * ESTILO ESSENCIAL PARA A IMAGEM DE PRÉ-VISUALIZAÇÃO 
+ * Isso garante que a imagem tenha um tamanho definido e não quebre o layout.
+ */
+.form-preview-img-minimalist {
+    width: 60px; /* Tamanho discreto */
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px; /* Cantos suaves */
+}
+</style>
+
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-8 col-xl-7">
@@ -35,7 +47,7 @@
                                     <label for="img" class="form-label fw-semibold">Imagem Atual</label>
                                     <div class="d-flex align-items-center gap-3">
                                         <div class="flex-shrink-0">
-                                            <img src="/img/<?= $turma['img'] ?? 'default.png' ?>" 
+                                            <img src="./img/<?= $turma['img'] ?? 'default.png' ?>" 
                                                  alt="Imagem Atual da Classe" 
                                                  class="form-preview-img-minimalist border shadow-sm">
                                         </div>
@@ -133,16 +145,6 @@
         </div>
     </div>
 </div>
-
-<style>
-    /* Estilo para a imagem de pré-visualização / imagem atual */
-    .form-preview-img-minimalist {
-        width: 60px; /* Tamanho discreto */
-        height: 60px;
-        object-fit: cover;
-        border-radius: 8px; /* Cantos suaves */
-    }
-</style>
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

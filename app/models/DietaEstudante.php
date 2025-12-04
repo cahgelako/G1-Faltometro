@@ -45,9 +45,18 @@ class DietaEstudante
         $stmt->execute();
     }
 
-    public function deletar($id_estudante, $id_dieta)
+    public function desativar($id_estudante, $id_dieta)
     {
-        $sql = "DELETE FROM cadastros_dietas_por_estudante WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
+        $sql = "UPDATE cadastros_dietas_por_estudante SET ativo = 'inativo' WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_estudante', $id_estudante);
+        $stmt->bindParam(':id_dieta', $id_dieta);
+        $stmt->execute();
+    }
+
+    public function ativar($id_estudante, $id_dieta)
+    {
+        $sql = "UPDATE cadastros_dietas_por_estudante SET ativo = 'ativo' WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id_estudante);
         $stmt->bindParam(':id_dieta', $id_dieta);

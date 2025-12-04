@@ -39,6 +39,7 @@ class Projeto
             $stmt->bindParam(':turno', $dados['turno']);
             $stmt->bindParam(':status', $dados['status']);
             $stmt->execute();
+            return true;
         }
     }
 

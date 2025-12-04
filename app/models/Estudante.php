@@ -20,7 +20,7 @@ class Estudante
             // Já existe um estudante com esse nome
             return false;
         } else {
-            $sql = "INSERT INTO estudantes (nome_estudante) VALUES (:nome_estudante)";
+            $sql = "INSERT INTO estudantes (nome_estudante, ativo) VALUES (:nome_estudante, 'ativo')";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
             $stmt->execute();
@@ -38,7 +38,8 @@ class Estudante
 
     public function editar($dados)
     {
-        $verificacao = "SELECT COUNT(*) FROM estudantes WHERE nome_estudante LIKE '%:nome_estudante%'";
+        $verificacao = "SELECT COUNT(*) FROM estudantes WHERE nome_estudante LIKE CONCAT('%', :nome_estudante, '%')";
+        // o concat faz a concatenação das string
         $stmtVerificacao = $this->conn->prepare($verificacao);
         $stmtVerificacao->bindParam(':nome_estudante', $dados['nome_estudante']);
         $stmtVerificacao->execute();
@@ -53,12 +54,20 @@ class Estudante
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
             $stmt->bindParam(':id_estudante', $dados['id_estudante']);
             $stmt->execute();
+            return true;
         }
     }
 
-    public function deletar($id)
+    public function desativar($id)
     {
-        $sql = "DELETE FROM estudantes WHERE id_estudante = :id_estudante";
+        $sql = "UPDATE estudantes SET ativo = 'inativo' WHERE id_estudante = :id_estudante";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_estudante', $id);
+        $stmt->execute();
+    }
+    public function ativar($id)
+    {
+        $sql = "UPDATE estudantes SET ativo = 'ativo' WHERE id_estudante = :id_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id);
         $stmt->execute();
@@ -96,4 +105,15 @@ class Estudante
     //     $stmt->execute();
     //     return $stmt->fetchAll();
     // }
+
+    public function matricula_por_id_estudante($id) {
+        $sql = "SELECT id_matricula 
+        FROM matriculas_turma_estudante m
+        JOIN estudantes e ON e.id_estudante = m.id_estudante
+        WHERE e.id_estudante = :id";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
 }

@@ -36,9 +36,18 @@ class MatriculaProjeto {
     }
 
 
-    public function deletar($id_projeto, $id_matricula)
+    public function desativar($id_projeto, $id_matricula)
     {
-        $sql = "DELETE FROM matriculas_projetos WHERE id_projeto = :id_projeto AND id_matricula = :id_matricula";
+        $sql = "UPDATE matriculas_projetos SET ativo = 'inativo' WHERE id_projeto = :id_projeto AND id_matricula = :id_matricula";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_projeto', $id_projeto);
+        $stmt->bindParam(':id_matricula', $id_matricula);
+        $stmt->execute();
+    }
+
+    public function ativar($id_projeto, $id_matricula)
+    {
+        $sql = "UPDATE matriculas_projetos SET ativo = 'ativo' WHERE id_projeto = :id_projeto AND id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_projeto', $id_projeto);
         $stmt->bindParam(':id_matricula', $id_matricula);

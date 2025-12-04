@@ -28,6 +28,7 @@ class DietaEspecial
             $stmt->bindParam(':nome_dieta', $dados['nome_dieta']);
             $stmt->bindParam(':observacoes', $dados['observacoes']);
             $stmt->execute();
+            return true;
         }
     }
 

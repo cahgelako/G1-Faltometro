@@ -5,7 +5,7 @@
 </style>
 ...
 
-<footer class="py-3 fixed-bottom w-100 bg-primary-custom shadow-lg">
+<footer class="py-3 w-100 bg-primary-custom shadow-lg">
     <div class="container px-5">
         <div class="row align-items-center justify-content-between">
             

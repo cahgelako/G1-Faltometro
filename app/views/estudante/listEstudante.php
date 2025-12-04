@@ -10,8 +10,11 @@
         </a>
     </div>
     
-    <?php if (isset($msg)) { ?>
-        <p class="text-dark"> <?php echo $msg; ?></p>
+     <?php if (isset($msg)) { ?>
+        <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
     <?php } ?>
 
     <div class="row justify-content-center">
@@ -36,8 +39,13 @@
                                     
                                     <td class="text-center">
                                         <div class="d-flex justify-content-center gap-2">
+                                            <?php
+                                                    if ($estudante['ativo'] == 'ativo') { ?>
+                                                        <a href="./desativarEstudante&id=<?= $estudante['id_estudante'] ?>" title="Desativar" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar esse estudante?')"><i class="fa fa-ban"></i></a>
+                                                    <?php } else if ($estudante['ativo'] == 'inativo') { ?>
+                                                        <a href="./ativarEstudante&id=<?= $estudante['id_estudante'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar esse estudante?')"><i class="fa fa-check"></i></a>
+                                                    <?php } ?>
                                             <a href="./editEstudante&id=<?= $estudante['id_estudante'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
-                                            <a href="./deleteEstudante&id=<?= $estudante['id_estudante'] ?>" title="Excluir" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja excluir o estudante <?= $estudante['nome_estudante'] ?>?')"><i class="fa fa-trash"></i></a>
                                         </div>
                                     </td>
                                 </tr>

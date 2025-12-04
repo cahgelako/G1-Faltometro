@@ -77,12 +77,24 @@ class DietaEstudanteController extends Controller
         }
     }
 
-    public function deletar()
+    public function desativar()
     {
         require_once 'app/core/auth.php';
         if (isset($_GET['id_estudante']) && isset($_GET['id_dieta'])) {
             $model = $this->model('DietaEstudante');
-            $model->deletar($_GET['id_estudante'], $_GET['id_dieta']);
+            $model->desativar($_GET['id_estudante'], $_GET['id_dieta']);
+        }
+        $_SESSION['msg'] = 'Atribuições de dieta deletadas com sucesso!';
+        header('Location: ./listAtriDieta');
+        exit;
+    }
+
+    public function ativar()
+    {
+        require_once 'app/core/auth.php';
+        if (isset($_GET['id_estudante']) && isset($_GET['id_dieta'])) {
+            $model = $this->model('DietaEstudante');
+            $model->ativar($_GET['id_estudante'], $_GET['id_dieta']);
         }
         $_SESSION['msg'] = 'Atribuições de dieta deletadas com sucesso!';
         header('Location: ./listAtriDieta');

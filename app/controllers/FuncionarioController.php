@@ -73,7 +73,6 @@ class FuncionarioController extends Controller
         $model = $this->model('Funcionario');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($model->salvar($_POST)) {
-                $model->salvar($_POST);
                 $_SESSION['msg'] = 'Funcionário cadastrado com sucesso!';
                 header('Location: ./listFunc');
                 exit;

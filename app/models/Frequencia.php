@@ -123,15 +123,16 @@ class Frequencia
 
     public function estudantes_por_turma($id_turma)
     {
-        $verificacao = "SELECT COUNT(*) FROM frequencia f, matriculas_turma_estudante m
+        $verificacao = "SELECT f.data_falta FROM frequencia f, matriculas_turma_estudante m
         WHERE f.id_matricula = m.id_matricula
         AND m.id_turma = :id_turma
-        AND data_falta = CURDATE()";
+        AND data_falta = CURDATE()
+        LIMIT 1";
         $stmtVerificacao = $this->conn->prepare($verificacao);
         $stmtVerificacao->bindParam(':id_turma', $id_turma);
         $stmtVerificacao->execute();
-        $count = $stmtVerificacao->fetchColumn();
-        if ($count > 0) {
+        $data = $stmtVerificacao->fetch();
+        if (!empty($data)) {
             // Já existem registros de frequência para esta turma na data atual
             $sql = "SELECT f.id_matricula, e.nome_estudante, status_presenca, data_falta FROM frequencia f, matriculas_turma_estudante m, estudantes e
             WHERE m.id_turma = :id_turma
@@ -163,7 +164,7 @@ class Frequencia
             JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
             JOIN frequencia f ON f.id_matricula = m.id_matricula
             WHERE f.data_falta = :data_falta
-            AND f.status_presenca = 0
+            AND f.status_presenca = 'presente'
             GROUP BY t.id_turma";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':data_falta', $data);
@@ -175,7 +176,7 @@ class Frequencia
             JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
             JOIN frequencia f ON f.id_matricula = m.id_matricula
             WHERE f.data_falta = CURDATE()
-            AND f.status_presenca = 0
+            AND f.status_presenca = 'presente'
             GROUP BY t.id_turma";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
@@ -194,7 +195,7 @@ class Frequencia
             JOIN turmas t ON  t.id_turma = m.id_turma
             JOIN frequencia f ON f.id_matricula = m.id_matricula
             WHERE f.data_falta = :data_falta
-            AND f.status_presenca = 0";
+            AND f.status_presenca = 'presente'";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':data_falta', $data);
             $stmt->execute();
@@ -208,8 +209,67 @@ class Frequencia
             JOIN turmas t ON  t.id_turma = m.id_turma
             JOIN frequencia f ON f.id_matricula = m.id_matricula
             WHERE f.data_falta = CURDATE()
-            AND f.status_presenca = 0";
+            AND f.status_presenca = 'ausente'";
             $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+    }
+
+    public function list_relatorio_coor_dia($data = null)
+    {
+        if ($data){
+            $sql = "SELECT nro_turma, tipo_ensino, count(f.id_matricula) as quantidade_presentes
+            FROM turmas t 
+            JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
+            JOIN frequencia f ON f.id_matricula = m.id_matricula
+            WHERE f.data_falta = :data_falta
+            AND f.status_presenca = 'presente'
+            GROUP BY t.id_turma";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':data_falta', $data);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } else {
+            $sql = "SELECT nro_turma, tipo_ensino, count(f.id_matricula) as quantidade_presentes
+            FROM turmas t 
+            JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
+            JOIN frequencia f ON f.id_matricula = m.id_matricula
+            WHERE f.data_falta = CURDATE()
+            AND f.status_presenca = 'presente'
+            GROUP BY t.id_turma";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        }
+    }
+
+    public function list_relatorio_coor_estudantes_dia($data = null, $id_turma = null) {
+        if ($data && $id_turma) {
+            $sql = "SELECT nro_turma, tipo_ensino, e.nome_estudante
+            FROM turmas t 
+            JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
+            JOIN estudantes e ON e.id_estudante = m.id_estudante
+            JOIN frequencia f ON f.id_matricula = m.id_matricula
+            WHERE f.data_falta = :data_falta
+            AND t.id_turma = :id_turma
+            AND f.status_presenca = 'ausente'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':data_falta', $data);
+            $stmt->bindParam(':id_turma', $id_turma);
+            $stmt->execute();
+            return $stmt->fetchAll();
+        } else {
+            $sql = "SELECT nro_turma, tipo_ensino, e.nome_estudante
+            FROM turmas t 
+            JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
+            JOIN estudantes e ON e.id_estudante = m.id_estudante
+            JOIN frequencia f ON f.id_matricula = m.id_matricula
+            WHERE f.data_falta = CURDATE()
+            AND t.id_turma = :id_turma
+            AND f.status_presenca = 'ausente'";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':id_turma', $id_turma);
             $stmt->execute();
             return $stmt->fetchAll();
         }

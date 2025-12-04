@@ -44,7 +44,7 @@
                                             // A chave 'status_presenca' só existe se a frequência já foi registrada para hoje.
                                             // Sua controller usa 0 para Ausente e 1 para Presente.
                                             $registro_existe = isset($estudante['status_presenca']);
-                                            $esta_ausente = $registro_existe && ($estudante['status_presenca'] == 0);
+                                            $esta_ausente = $registro_existe && ($estudante['status_presenca'] == 'ausente');
 
                                             // Define o ID de matrícula para uso no HTML
                                             $matricula_id = htmlspecialchars($estudante['id_matricula']);

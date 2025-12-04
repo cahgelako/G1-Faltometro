@@ -29,7 +29,7 @@
             foreach ($todos as $t) {
                 // verifica se esse $t['id'] está no array de id dos alunos que faltaram
                 // se estiver, status = 0 (ausente), senão, status = 1 (presnte)  
-                $status = in_array($t['id_matricula'], $faltosos) ? 0 : 1;
+                $status = in_array($t['id_matricula'], $faltosos) ? 'ausente' : 'presente';
 
                 $model->salvar([
                     'data_falta' => $_POST['data_falta'],
@@ -76,6 +76,24 @@
             $relatorio = $model->list_relatorio_nutri_dia();
             $relatorio_dietas = $model->list_relatorio_nutri_dietas();
             $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'relatorio_dietas' => $relatorio_dietas]);
+        }
+    }
+    public function relatorio_coordenacao() {
+        require_once 'app/core/auth.php';
+        $model = $this->model('Frequencia');
+        $modelTu = $this->model('Turma');
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $data = $_POST['data_falta'];
+            $id_turma = $_POST['id_turma'];
+            $relatorio = $model->list_relatorio_coor_dia($data, $id_turma);
+            $relatorio_es = $model->list_relatorio_coor_estudantes_dia($data, $id_turma);
+            $turmas = $modelTu->listar();
+            $this->view('frequencia/relFrenqCo', ['relatorio' => $relatorio, 'relatorio_es' => $relatorio_es, 'data_falta' => $data, 'turmas' => $turmas]);
+        } else {
+            $relatorio = $model->list_relatorio_coor_dia();
+            $relatorio_es = $model->list_relatorio_coor_estudantes_dia();
+            $turmas = $modelTu->listar();
+            $this->view('frequencia/relFrenqCo', ['relatorio' => $relatorio, 'relatorio_es' => $relatorio_es, 'turmas' => $turmas]);
         }
     }
  }

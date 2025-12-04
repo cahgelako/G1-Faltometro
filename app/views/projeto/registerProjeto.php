@@ -42,9 +42,9 @@
                                 <div class="input-group">
                                     <span class="input-group-text"><i class="fas fa-toggle-on"></i></span>
                                     <select name="status" class="form-select" id="status" required>
-                                        <option value="0" <?= !isset($projeto['status']) || $projeto['status'] == 0 ? 'selected' : '' ?>>Escolha um Status</option>
-                                        <option value="1" <?= (isset($projeto['status']) && $projeto['status'] == 1) ? 'selected' : '' ?>>Ativado</option>
-                                        <option value="2" <?= (isset($projeto['status']) && $projeto['status'] == 2) ? 'selected' : '' ?>>Desativado</option>
+                                        <option value="" <?= !isset($projeto['status']) || $projeto['status'] == 0 ? 'selected' : '' ?>>Escolha um Status</option>
+                                        <option value="ativo" <?= (isset($projeto['status']) && $projeto['status'] == 'ativo') ? 'selected' : '' ?>>Ativado</option>
+                                        <option value="inativo" <?= (isset($projeto['status']) && $projeto['status'] == 'inativo') ? 'selected' : '' ?>>Desativado</option>
                                     </select>
                                 </div>
                             </div>

@@ -24,13 +24,6 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-5 mb-3">
-                                <label for="registro_matricula_escola" class="form-label small text-muted">Registro de Matrícula</label>
-                                <div class="input-group">
-                                    <span class="input-group-text"><i class="fas fa-id-card"></i></span>
-                                    <input type="text" class="form-control" id="registro_matricula_escola" name="registro_matricula_escola" placeholder="Matrícula" value="<?= $estudantes['registro_matricula_escola'] ?? '' ?>" required>
-                                </div>
-                            </div>
                         </div>
 
                         <hr class="mt-4 mb-3">

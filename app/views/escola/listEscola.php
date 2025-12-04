@@ -9,9 +9,12 @@
             <i class="fas fa-plus me-1"></i> Cadastrar Escola
         </a>
     </div>
-
-    <?php if (isset($msg)) { ?>
-        <p class="text-dark"> <?php echo $msg; ?></p>
+    
+ <?php if (isset($msg)) { ?>
+        <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
     <?php } ?>
 
     <div class="row justify-content-center">
@@ -39,11 +42,11 @@
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-2">
                                                     <?php switch ($escola['ativo']) {
-                                                        case 1: ?>
+                                                        case 'ativo': ?>
                                                         <a href="./desativarEscola&id=<?= $escola['id_escola'] ?>" title="Desativar" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-ban"></i></a>
                                                         <?php break;
                                                         
-                                                        case 0: ?>
+                                                        case 'inativo': ?>
                                                             <a href="./ativarEscola&id=<?= $escola['id_escola'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-check"></i></a>
                                                            <?php break;
                                                     }?>

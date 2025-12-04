@@ -26,6 +26,7 @@ class Escola
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':nome_escola', $nome_escola);
             $stmt->execute();
+            return true;
         }
     }
 
@@ -57,7 +58,7 @@ class Escola
 
     public function desativar($id)
     {
-        $sql = "UPDATE escolas SET ativo = 0 WHERE id_escola = :id_escola";
+        $sql = "UPDATE escolas SET ativo = 'inativo' WHERE id_escola = :id_escola";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_escola', $id);
         $stmt->execute();
@@ -65,7 +66,7 @@ class Escola
 
     public function ativar($id)
     {
-        $sql = "UPDATE escolas SET ativo = 1 WHERE id_escola = :id_escola";
+        $sql = "UPDATE escolas SET ativo = 'ativo' WHERE id_escola = :id_escola";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_escola', $id);
         $stmt->execute();

@@ -11,7 +11,10 @@
     </div>
 
     <?php if (isset($msg)) { ?>
-        <p class="text-dark"> <?php echo $msg; ?></p>
+        <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
     <?php } ?>
     
     <div class="row justify-content-center">

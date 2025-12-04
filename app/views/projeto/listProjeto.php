@@ -10,8 +10,11 @@
         </a>
     </div>
 
-    <?php if (isset($msg)) { ?>
-        <p class="text-dark"> <?php echo $msg; ?></p>
+     <?php if (isset($msg)) { ?>
+        <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+            <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+        </div>
     <?php } ?>
 
     <div class="row justify-content-center">
@@ -37,7 +40,7 @@
 
                     function getStatusBadge($status)
                     {
-                        return $status == 1
+                        return $status == 'ativo'
                             ? '<span class="badge bg-danger text-white">Ativo</span>'     // Vermelho
                             : '<span class="badge bg-secondary text-white">Desativado</span>'; // Cinza
                     }
@@ -68,7 +71,7 @@
                                             <td class="text-center">
                                                 <div class="d-flex justify-content-center gap-2">
                                                     <?php
-                                                    if ($proj['status'] == 1) { ?>
+                                                    if ($proj['status'] == 'ativo') { ?>
                                                         <a href="./desativarProjeto&id=<?= $proj['id_projeto'] ?>" title="Desativar" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar esta turma?')"><i class="fa fa-ban"></i></a>
                                                     <?php } else if ($proj['status'] == 0) { ?>
                                                         <a href="./ativarProjeto&id=<?= $proj['id_projeto'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar esta turma?')"><i class="fa fa-check"></i></a>

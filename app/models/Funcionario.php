@@ -43,6 +43,7 @@ class Funcionario
             $stmt->bindParam(':senha', $senha);
             $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
             $stmt->execute();
+            return true;
         }
     }
 
@@ -72,36 +73,25 @@ class Funcionario
 
     public function editar($dados)
     {
-        $verificacao = "SELECT COUNT(*) FROM funcionarios WHERE email = :email";
-        $stmtVerificacao = $this->conn->prepare($verificacao);
-        $stmtVerificacao->bindParam(':email', $dados['email']);
-        $stmtVerificacao->execute();
-        $count = $stmtVerificacao->fetchColumn();
-
-        if ($count > 0) {
-            // Já existe um funcionário com esse email
-            return false;
-        } else {
-            if (!empty($dados['senha'])) {
-                $sql = "UPDATE funcionarios SET nome = :nome, email = :email, 
+        if (!empty($dados['senha'])) {
+            $sql = "UPDATE funcionarios SET nome = :nome, email = :email, 
             senha = :senha, tipo_acesso = :tipo_acesso WHERE id_funcionario = :id_funcionario";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindParam(':nome', $dados['nome']);
-                $stmt->bindParam(':email', $dados['email']);
-                $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
-                $stmt->bindParam(':senha', $senha);
-                $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
-                $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
-                $stmt->execute();
-            } else {
-                $sql = "UPDATE funcionarios SET nome = :nome, email = :email, tipo_acesso = :tipo_acesso WHERE id_funcionario = :id_funcionario";
-                $stmt = $this->conn->prepare($sql);
-                $stmt->bindParam(':nome', $dados['nome']);
-                $stmt->bindParam(':email', $dados['email']);
-                $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
-                $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
-                $stmt->execute();
-            }
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':nome', $dados['nome']);
+            $stmt->bindParam(':email', $dados['email']);
+            $senha = password_hash($dados['senha'], PASSWORD_DEFAULT);
+            $stmt->bindParam(':senha', $senha);
+            $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
+            $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
+            $stmt->execute();
+        } else {
+            $sql = "UPDATE funcionarios SET nome = :nome, email = :email, tipo_acesso = :tipo_acesso WHERE id_funcionario = :id_funcionario";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->bindParam(':nome', $dados['nome']);
+            $stmt->bindParam(':email', $dados['email']);
+            $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
+            $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
+            $stmt->execute();
         }
     }
 

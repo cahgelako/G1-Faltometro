@@ -173,7 +173,8 @@ class Matricula
         $sql = "SELECT m.* FROM matriculas_turma_estudante m, turmas t, estudantes e
         WHERE m.id_matricula = :id_matricula
         AND m.id_turma = t.id_turma
-        AND m.id_estudante = e.id_estudante";
+        AND m.id_estudante = e.id_estudante 
+        AND m.ativo = 'ativo'";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_matricula', $id);
         $stmt->execute();
