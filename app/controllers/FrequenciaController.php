@@ -96,4 +96,16 @@
             $this->view('frequencia/relFrenqCo', ['relatorio' => $relatorio, 'relatorio_es' => $relatorio_es, 'turmas' => $turmas]);
         }
     }
+
+    public function gerar_pdf_dia_coordenacao() {
+        require_once 'app/core/auth.php';
+        $model = $this->model('Frequencia');
+        if (isset($_GET['data_falta']) && isset($_GET['id_turma'])) {
+            $data_falta = $_GET['data_falta'];
+            $id_turma = $_GET['id_turma'];
+            $relatorio = $model->list_relatorio_coor_dia($data_falta, $id_turma);
+            $relatorio_es = $model->list_relatorio_coor_estudantes_dia($data_falta, $id_turma);
+            $this->view('frequencia/pdfRelFrenqCo', ['relatorio' => $relatorio, 'relatorio_es' => $relatorio_es, 'data_falta' => $data_falta]);
+        }
+    }
  }
