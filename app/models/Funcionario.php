@@ -52,7 +52,7 @@ class Funcionario
         $sql = "SELECT * FROM funcionarios ORDER BY nome";
         $stmt =  $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function desativar($id)

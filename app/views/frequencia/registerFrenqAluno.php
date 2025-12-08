@@ -57,14 +57,14 @@
                                                 <input class="form-check-input me-3 mt-0" type="checkbox"
                                                     value="<?= $matricula_id ?>"
                                                     name="id_matricula[]"
-                                                    id="matricula_<?= $matricula_id ?>"
+                                                    id="<?= $matricula_id ?>"
 
                                                     <?php if ($esta_ausente): ?>
                                                     checked
                                                     <?php endif; ?>>
 
                                                 <label class="form-check-label w-100 fw-medium"
-                                                    for="matricula_<?= $matricula_id ?>">
+                                                    for="<?= $matricula_id ?>">
 
                                                     <?= htmlspecialchars($estudante['nome_estudante']) ?>
                                                 </label>

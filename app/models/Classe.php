@@ -22,7 +22,7 @@ class Classe
         ORDER BY t.nome_turma";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function salvar($dados)

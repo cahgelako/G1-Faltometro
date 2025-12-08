@@ -22,7 +22,7 @@ class DietaEstudante
         ORDER BY e.nome_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function salvar($id_estudante, $id_dieta)
@@ -70,7 +70,7 @@ class DietaEstudante
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id_estudante);
         $stmt->execute();
-        $resultado = $stmt->fetchAll();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // retorna um array com os ids das dietas atribuidas
         $dietas = [];

@@ -17,7 +17,7 @@ class Projeto
         $sql = "SELECT * FROM projetos_extra ORDER BY nome_projeto";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function salvar($dados)

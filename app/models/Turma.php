@@ -20,7 +20,7 @@ class turma
         ORDER BY t.nro_turma, t.tipo_ensino";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function salvar($dados)

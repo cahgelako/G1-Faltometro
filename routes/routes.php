@@ -65,7 +65,7 @@ $routes = [
     'registerFrenqAluno' => ['controller' => 'FrequenciaController', 'method' => 'registrar'],
     'deleteFalta' => ['controller' => 'FrequenciaController', 'method' => 'delete'],
     'relFalta' => ['controller' => 'FrequenciaController', 'method' => 'relatorio'],
-    'relPDFFalta' => ['controller' => 'FrequenciaController', 'method' => 'gerarPDF'],
+    'pdfRelFrenqCo' => ['controller' => 'FrequenciaController', 'method' => 'gerar_pdf_dia_coordenacao'],
     'confirmFrenq' => ['controller' => 'FrequenciaController', 'method' => 'registrar'],
     'relFrenqNutri' => ['controller' => 'FrequenciaController', 'method' => 'relatorio_nutri'],
     'relFrenqCo' => ['controller' => 'FrequenciaController', 'method' => 'relatorio_coordenacao'],

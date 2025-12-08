@@ -19,12 +19,12 @@ class Frequencia
         RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
         WHERE t.id_turma = :id_turma
         AND t.ativo = 'ativo'
-        AND f.status_presenca = 0
+        AND f.status_presenca = 'ausente'
         AND f.data_falta = CURDATE()";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_turma', $id_turma);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function salvar($dados)
@@ -64,7 +64,7 @@ class Frequencia
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
             WHERE t.id_turma = :id_turma
             AND t.ativo = 'ativo'
-            AND f.status_presenca = 0
+            AND f.status_presenca = 'ausente'
             AND f.data_falta BETWEEN :dta_inicial AND :dta_final
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
@@ -73,7 +73,7 @@ class Frequencia
             $stmt->bindParam(':dta_final', $dados['dta_final']);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else if ($dados['dta_inicial'] && $dados['nome_estudante']) {
             $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, t.ano_turma, e.nome_estudante
             FROM turmas t
@@ -83,7 +83,7 @@ class Frequencia
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
             WHERE t.id_turma = :id_turma
             AND t.ativo = 'ativo'
-            AND f.status_presenca = 0
+            AND f.status_presenca = 'ausente'
             AND f.data_falta = :dta_inicial 
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
@@ -91,7 +91,7 @@ class Frequencia
             $stmt->bindParam(':dta_inicial', $dados['dta_inicial']);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else if ($dados['nome_estudante']) {
             $sql = "SELECT SELECT f.data_falta, fu.nome, t.nome_turma, t.ano_turma, e.nome_estudante
             FROM turmas t
@@ -101,13 +101,13 @@ class Frequencia
             RIGHT JOIN funcionarios fu ON fu.id_funcionario = f.id_funcionario
             WHERE t.id_turma = :id_turma
             AND t.ativo = 'ativo'
-            AND f.status_presenca = 0
+            AND f.status_presenca = 'ausente'
             AND e.nome_estudante LIKE '%:nome_estudante%'";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id_turma', $dados['id_turma']);
             $stmt->bindParam(':nome_estudante', $dados['nome_estudante']);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
@@ -142,7 +142,7 @@ class Frequencia
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id_turma', $id_turma);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         $sql = "SELECT m.id_matricula, e.nome_estudante
@@ -153,7 +153,7 @@ class Frequencia
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_turma', $id_turma);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function list_relatorio_nutri_dia($data = null)
@@ -169,7 +169,7 @@ class Frequencia
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':data_falta', $data);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
             $sql = "SELECT nro_turma, tipo_ensino, count(f.id_matricula) as quantidade_presentes
             FROM turmas t 
@@ -180,7 +180,7 @@ class Frequencia
             GROUP BY t.id_turma";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
@@ -199,7 +199,7 @@ class Frequencia
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':data_falta', $data);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
             $sql = "SELECT nro_turma, tipo_ensino, d.nome_dieta, e.nome_estudante
             FROM dietas_especiais d
@@ -212,7 +212,7 @@ class Frequencia
             AND f.status_presenca = 'ausente'";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
@@ -229,7 +229,7 @@ class Frequencia
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':data_falta', $data);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         } else {
             $sql = "SELECT nro_turma, tipo_ensino, count(f.id_matricula) as quantidade_presentes
             FROM turmas t 
@@ -240,13 +240,18 @@ class Frequencia
             GROUP BY t.id_turma";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute();
-            return $stmt->fetchAll();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 
     public function list_relatorio_coor_estudantes_dia($data = null, $id_turma = null) {
+        $sql_turma = "SELECT id_turma FROM turmas WHERE ativo = 'ativo'";
+        $stmt_turma = $this->conn->prepare($sql_turma);
+        $stmt_turma->execute();
+        $ids_tu = $stmt_turma->fetchAll();
         if ($data && $id_turma) {
-            $sql = "SELECT nro_turma, tipo_ensino, e.nome_estudante
+            $estudantes = [];
+            $sql = "SELECT e.nome_estudante
             FROM turmas t 
             JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
             JOIN estudantes e ON e.id_estudante = m.id_estudante
@@ -258,20 +263,45 @@ class Frequencia
             $stmt->bindParam(':data_falta', $data);
             $stmt->bindParam(':id_turma', $id_turma);
             $stmt->execute();
-            return $stmt->fetchAll();
+            $estudantes[$id_turma] = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            return $estudantes;
+        } else if ($data) {
+            $estudantes = [];
+            foreach ($ids_tu as $tu) {
+                $id_turma = $tu['id_turma'];
+                $sql = "SELECT e.nome_estudante
+                FROM turmas t 
+                JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
+                JOIN estudantes e ON e.id_estudante = m.id_estudante
+                JOIN frequencia f ON f.id_matricula = m.id_matricula
+                WHERE f.data_falta = :data_falta
+                AND t.id_turma = :id_turma
+                AND f.status_presenca = 'ausente'";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':data_falta', $data);
+                $stmt->bindParam(':id_turma', $tu['id_turma']);
+                $stmt->execute();
+                $estudantes[$tu['id_turma']] = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            }
+            return $estudantes;
         } else {
-            $sql = "SELECT nro_turma, tipo_ensino, e.nome_estudante
-            FROM turmas t 
-            JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
-            JOIN estudantes e ON e.id_estudante = m.id_estudante
-            JOIN frequencia f ON f.id_matricula = m.id_matricula
-            WHERE f.data_falta = CURDATE()
-            AND t.id_turma = :id_turma
-            AND f.status_presenca = 'ausente'";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id_turma', $id_turma);
-            $stmt->execute();
-            return $stmt->fetchAll();
+            $estudantes = [];
+            foreach ($ids_tu as $tu) {
+                $id_turma = $tu['id_turma'];
+                $sql = "SELECT e.nome_estudante
+                FROM turmas t 
+                JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
+                JOIN estudantes e ON e.id_estudante = m.id_estudante
+                JOIN frequencia f ON f.id_matricula = m.id_matricula
+                WHERE f.data_falta = CURDATE()
+                AND t.id_turma = :id_turma
+                AND f.status_presenca = 'ausente'";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id_turma', $tu['id_turma']);
+                $stmt->execute();
+                $estudantes[$tu['id_turma']] = $stmt->fetchAll(PDO::FETCH_COLUMN);
+            }
+            return $estudantes;
         }
     }
 }

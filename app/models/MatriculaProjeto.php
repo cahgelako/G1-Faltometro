@@ -23,7 +23,7 @@ class MatriculaProjeto {
         ORDER BY c.id_classe";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function salvar($id_projeto, $id_matricula)
@@ -62,7 +62,7 @@ class MatriculaProjeto {
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_matricula', $id_matricula);
         $stmt->execute();
-        $resultado = $stmt->fetchAll();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // retorna um array com os ids dos projetos atribuidas
         $mat = [];
@@ -81,7 +81,7 @@ class MatriculaProjeto {
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_projeto', $id_projeto);
         $stmt->execute();
-        $resultado = $stmt->fetchAll();
+        $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // retorna um array com os ids dos alunos matriculados
         $mat = [];
@@ -102,7 +102,7 @@ class MatriculaProjeto {
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_projeto', $id_projeto);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function projetos_por_estudante($id_matricula) {
@@ -115,6 +115,6 @@ class MatriculaProjeto {
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_matricula', $id_matricula);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

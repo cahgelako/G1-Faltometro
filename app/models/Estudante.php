@@ -33,7 +33,7 @@ class Estudante
         $sql = "SELECT * FROM estudantes ORDER BY nome_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function editar($dados)

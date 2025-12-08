@@ -37,7 +37,7 @@ class DietaEspecial
         $sql = "SELECT * FROM dietas_especiais ORDER BY nome_dieta";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function editar($dados)

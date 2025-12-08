@@ -35,7 +35,7 @@ class Escola
         $sql = "SELECT * FROM escolas ORDER BY nome_escola";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->fetchAll();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function filtrar($id_escola)

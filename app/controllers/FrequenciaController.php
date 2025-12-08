@@ -1,7 +1,9 @@
 <?php
- class FrequenciaController extends Controller {
+class FrequenciaController extends Controller
+{
 
-    public function listar_turmas() {
+    public function listar_turmas()
+    {
         require_once 'app/core/auth.php';
         $modelTurma = $this->model('Turma');
         $turmas = $modelTurma->listar();
@@ -13,7 +15,8 @@
         $this->view('frequencia/listFrenqTu', $data);
     }
 
-    public function registrar() {
+    public function registrar()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Frequencia');
         $modelTurma = $this->model('Turma');
@@ -47,7 +50,8 @@
         }
     }
 
-    public function filtro() {
+    public function filtro()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Frequencia');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -64,7 +68,8 @@
         }
     }
 
-    public function relatorio_nutri() {
+    public function relatorio_nutri()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Frequencia');
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -78,7 +83,8 @@
             $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'relatorio_dietas' => $relatorio_dietas]);
         }
     }
-    public function relatorio_coordenacao() {
+    public function relatorio_coordenacao()
+    {
         require_once 'app/core/auth.php';
         $model = $this->model('Frequencia');
         $modelTu = $this->model('Turma');
@@ -97,15 +103,47 @@
         }
     }
 
-    public function gerar_pdf_dia_coordenacao() {
+    public function gerar_pdf_dia_coordenacao()
+    {
         require_once 'app/core/auth.php';
-        $model = $this->model('Frequencia');
-        if (isset($_GET['data_falta']) && isset($_GET['id_turma'])) {
-            $data_falta = $_GET['data_falta'];
-            $id_turma = $_GET['id_turma'];
-            $relatorio = $model->list_relatorio_coor_dia($data_falta, $id_turma);
-            $relatorio_es = $model->list_relatorio_coor_estudantes_dia($data_falta, $id_turma);
-            $this->view('frequencia/pdfRelFrenqCo', ['relatorio' => $relatorio, 'relatorio_es' => $relatorio_es, 'data_falta' => $data_falta]);
+
+        $modelFrequencia = $this->model('Frequencia');
+        $modelTurma = $this->model('Turma');
+
+        $dataFiltro = $_GET['data_falta'] ?? null;
+        $id_turma = $_GET['id_turma'] ?? null;
+
+        if (empty($dataFiltro)) {
+            die('Parâmetro de data é obrigatório.');
         }
+
+        $dataHoje = date('Y-m-d');
+
+        $turmas = $modelTurma->listar();
+        $relatorio = $modelFrequencia->list_relatorio_coor_dia($dataFiltro, $id_turma);
+        $relatorio_es = $modelFrequencia->list_relatorio_coor_estudantes_dia($dataFiltro, $id_turma);
+
+        // CAPTURA DA VIEW
+        ob_start();
+        require 'app/views/relatorio/pdfRelFrenqCo.php';
+        $html = ob_get_clean();
+
+        // DOMPDF CONFIGURADO PARA NÃO QUEBRAR PÁGINA
+        require_once __DIR__ . '/../dompdf/autoload.inc.php';
+        $dompdf = new \Dompdf\Dompdf();
+
+        $dompdf->set_option('isHtml5ParserEnabled', true);
+        $dompdf->set_option('isRemoteEnabled', true);
+        $dompdf->set_option('enable_css_float', true);
+        $dompdf->set_option('defaultPaperSize', 'A4');
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $nomeArq = "Relatorio_" . $dataHoje;
+
+        $dompdf->stream($nomeArq . ".pdf", ["Attachment" => false]);
+        exit();
     }
- }
+}
