@@ -1,3 +1,18 @@
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        margin-top: auto;
+    }
+</style>
 <div class="container my-5">
     <div class="row justify-content-center">
         <div class="col-lg-7 col-xl-6">
@@ -43,5 +58,5 @@
         </div>
     </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

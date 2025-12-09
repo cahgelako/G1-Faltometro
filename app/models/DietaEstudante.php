@@ -34,29 +34,23 @@ class DietaEstudante
         $stmt->execute();
     }
 
-    public function editar($dados)
-    {
-        $sql = "UPDATE cadastros_dietas_por_estudante SET :data_adicao_dieta, :ativo WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':data_adicao_dieta', $dados['data_adicao_dieta']);
-        $stmt->bindParam(':ativo', $dados['ativo']);
-        $stmt->bindParam(':id_estudante', $dados['id_estudante']);
-        $stmt->bindParam(':id_dieta', $dados['id_dieta']);
-        $stmt->execute();
-    }
+    // revisar
+    // public function editar($dados)
+    // {
+    //     $sql = "UPDATE cadastros_dietas_por_estudante SET data_adicao_dieta = :data_adicao_dieta, ativo = :ativo WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
+    //     $stmt = $this->conn->prepare($sql);
+    //     $stmt->bindParam(':data_adicao_dieta', $dados['data_adicao_dieta']);
+    //     $stmt->bindParam(':ativo', $dados['ativo']);
+    //     $stmt->bindParam(':id_estudante', $dados['id_estudante']);
+    //     $stmt->bindParam(':id_dieta', $dados['id_dieta']);
+    //     $stmt->execute();
+    // }
 
-    public function desativar($id_estudante, $id_dieta)
-    {
-        $sql = "UPDATE cadastros_dietas_por_estudante SET ativo = 'inativo' WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_estudante', $id_estudante);
-        $stmt->bindParam(':id_dieta', $id_dieta);
-        $stmt->execute();
-    }
 
-    public function ativar($id_estudante, $id_dieta)
+
+    public function deletar($id_estudante, $id_dieta)
     {
-        $sql = "UPDATE cadastros_dietas_por_estudante SET ativo = 'ativo' WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
+        $sql = "DELETE FROM cadastros_dietas_por_estudante WHERE id_estudante = :id_estudante AND id_dieta = :id_dieta";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id_estudante);
         $stmt->bindParam(':id_dieta', $id_dieta);

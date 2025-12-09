@@ -1,3 +1,19 @@
+<style>
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+</style>
+
 <div class="container py-5">
     <div class="row justify-content-center">
         <div class="col-12 col-md-8 col-lg-6">
@@ -39,7 +55,7 @@
                         </div>
                         
                         <div class="col-12 mt-5 d-flex justify-content-end pt-3">
-                            <a href="./listFunc" class="btn btn-outline-secondary me-2 px-4 btn-minimalista-hover">
+                            <a href="./inicio" class="btn btn-outline-secondary me-2 px-4 btn-minimalista-hover">
                                 <i class="bi bi-x-lg me-1"></i> Cancelar
                             </a>
                             <button type="submit" class="btn btn-primary px-4 btn-minimalista-submit">

@@ -46,13 +46,6 @@ $routes = [
     'ativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
     // 'editAlunoClasse' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
 
-    // Classe
-    // 'listClasse' => ['controller' => 'ClasseController', 'method' => 'listar'],
-    // 'editClasse' => ['controller' => 'ClasseController', 'method' => 'editar'],
-    // 'registerClasse' => ['controller' => 'ClasseController', 'method' => 'registrar'],
-    // 'desativarClasse' => ['controller' => 'ClasseController', 'method' => 'desativar'], 
-    // 'ativarClasse' => ['controller' => 'ClasseController', 'method' => 'ativar'], 
-
     // Dietas Especiais
     'listDieta' => ['controller' => 'DietaEspecialController', 'method' => 'listar'],
     'editDieta' => ['controller' => 'DietaEspecialController', 'method' => 'editar'],
@@ -89,11 +82,11 @@ $routes = [
     'listAtriDieta' => ['controller' => 'DietaEstudanteController', 'method' => 'listar'],
     'editAtriDieta' => ['controller' => 'DietaEstudanteController', 'method' => 'editar'],
     'registerAtriDieta' => ['controller' => 'DietaEstudanteController', 'method' => 'registrar'],
-    'desativarDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'desativar'],
-    'ativarDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'ativar'],
+    'deletarDietaEstudante' => ['controller' => 'DietaEstudanteController', 'method' => 'deletar'],
     
     // Relatórios
     'listRelTu' => ['controller' => 'FrequenciaController', 'method' => 'listar_turmas'],
     'listRelFrenCo' => ['controller' => 'FrequenciaController', 'method' => 'filtro'],
+    'escolhaRel' => ['controller' => 'FrequenciaController', 'method' => 'relatorio'],
 
 ];

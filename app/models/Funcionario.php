@@ -57,7 +57,7 @@ class Funcionario
 
     public function desativar($id)
     {
-        $sql = "UPDATE funcionarios SET ativo = 0 WHERE id_funcionario = :id_funcionario";
+        $sql = "UPDATE funcionarios SET ativo = 'inativo' WHERE id_funcionario = :id_funcionario";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_funcionario', $id);
         $stmt->execute();
@@ -65,7 +65,7 @@ class Funcionario
 
     public function ativar($id)
     {
-        $sql = "UPDATE funcionarios SET ativo = 1 WHERE id_funcionario = :id_funcionario";
+        $sql = "UPDATE funcionarios SET ativo = 'ativo' WHERE id_funcionario = :id_funcionario";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_funcionario', $id);
         $stmt->execute();
@@ -135,5 +135,44 @@ class Funcionario
             $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
             $stmt->execute();
         }
+    }
+
+    public function salvar_token_recuperacao($email, $token)
+    {
+        $sql = "INSERT INTO password_reset (email, token, created_at) VALUES (:email, :token, NOW())";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+    }
+
+    public function validar_token_recuperacao($token)
+    {
+        $sql = "SELECT * FROM password_reset 
+            WHERE token = :token 
+              AND created_at >= (NOW() - INTERVAL 1 HOUR)
+            LIMIT 1";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':token', $token);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function atualizar_senha($email, $senha)
+    {
+        $sql = "UPDATE usuarios SET senha = :senha WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':senha', $senha);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
+    }
+
+    public function remover_tokens($email)
+    {
+        $sql = "DELETE FROM password_reset WHERE email = :email";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':email', $email);
+        $stmt->execute();
     }
 }

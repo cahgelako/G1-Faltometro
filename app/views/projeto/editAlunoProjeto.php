@@ -1,3 +1,19 @@
+<style>
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+</style>
+
 <head>
     <link href="assets/select2/select2.min.css" rel="stylesheet" />
     <link href="assets/select2-bootstrap.min.css" rel="stylesheet" />

@@ -44,6 +44,15 @@ class turma
             // Já existe uma turma para essa combinação de id_turma e id_escola
             return false;
         } else {
+            $nomeImg = null;
+
+            if (!empty($dados['img']['name'])) {
+                $ext = pathinfo($dados['img']['name'], PATHINFO_EXTENSION);
+                $nomeImg = uniqid() . "." . $ext;
+                $destino = "img/" . $nomeImg;
+
+                move_uploaded_file($dados['img']['tmp_name'], $destino);
+            }
             $sql = "INSERT INTO turmas (id_turma, id_escola, nro_turma, tipo_ensino, ano_turma, turno, ativo, img) VALUES (:id_turma, :id_escola, :nro_turma, :tipo_ensino, :ano_turma, :turno, :ativo, :img)";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':id_turma', $dados['id_turma']);
@@ -53,7 +62,7 @@ class turma
             $stmt->bindParam(':ano_turma', $dados['ano_turma']);
             $stmt->bindParam(':turno', $dados['turno']);
             $stmt->bindParam(':ativo', $dados['ativo']);
-            $stmt->bindParam(':img', $dados['img']);
+            $stmt->bindParam(':img', $nomeImg);
             $stmt->execute();
             return true;
         }
@@ -61,33 +70,51 @@ class turma
 
     public function editar($dados)
     {
-        $verificacao = "SELECT COUNT(*) FROM turmas WHERE id_turma = :id_turma AND id_escola = :id_escola";
-        $stmtVerificacao = $this->conn->prepare($verificacao);
-        $stmtVerificacao->bindParam(':id_turma', $dados['id_turma']);
-        $stmtVerificacao->bindParam(':id_escola', $dados['id_escola']);
-        $stmtVerificacao->execute();
-        $count = $stmtVerificacao->fetchColumn();
+        // 1) Obter a imagem atual do banco
+        $sqlAtual = "SELECT img FROM turmas WHERE id_turma = :id_turma";
+        $stmtAtual = $this->conn->prepare($sqlAtual);
+        $stmtAtual->bindParam(':id_turma', $dados['id_turma']);
+        $stmtAtual->execute();
+        $imgAtual = $stmtAtual->fetchColumn();
 
-        if ($count > 0) {
-            // Já existe uma turma para essa combinação de id_turma e id_escola
-            return false;
-        } else {
-            $sql = "UPDATE turmas SET id_turma = :id_turma, id_escola = :id_escola, ano_turma = :ano_turma, turno = :turno, ativo = :ativo, img = :img WHERE id_turma = :id_turma";
-            $stmt = $this->conn->prepare($sql);
-            $stmt->bindParam(':id_turma', $dados['id_turma']);
-            $stmt->bindParam(':id_escola', $dados['id_escola']);
-            $stmt->bindParam(':ano_turma', $dados['ano_turma']);
-            $stmt->bindParam(':turno', $dados['turno']);
-            $stmt->bindParam(':ativo', $dados['ativo']);
-            $stmt->bindParam(':img', $dados['img']);
-            $stmt->bindParam(':id_turma', $dados['id_turma']);
-            $stmt->execute();
+        // 2) Tratar nova imagem (se enviada)
+        $nomeImg = $imgAtual;
+
+        if (!empty($dados['img']['name'])) {
+            $ext = pathinfo($dados['img']['name'], PATHINFO_EXTENSION);
+            $nomeImg = uniqid() . "." . $ext;
+            $destino = "img/" . $nomeImg;
+
+            move_uploaded_file($dados['img']['tmp_name'], $destino);
         }
+
+        // 3) Atualizar registro
+        $sql = "UPDATE turmas
+            SET id_escola = :id_escola,
+                ano_turma = :ano_turma,
+                turno = :turno,
+                ativo = :ativo,
+                img = :img
+            WHERE id_turma = :id_turma";
+
+        $stmt = $this->conn->prepare($sql);
+
+        $stmt->bindParam(':id_turma', $dados['id_turma']);
+        $stmt->bindParam(':id_escola', $dados['id_escola']);
+        $stmt->bindParam(':ano_turma', $dados['ano_turma']);
+        $stmt->bindParam(':turno', $dados['turno']);
+        $stmt->bindParam(':ativo', $dados['ativo']);
+        $stmt->bindParam(':img', $nomeImg);
+
+        $stmt->execute();
+
+        return true;
     }
+
 
     public function desativar($id)
     {
-        $sql = "UPDATE turmas SET ativo = 'inativo WHERE id_turma = :id_turma";
+        $sql = "UPDATE turmas SET ativo = 'inativo' WHERE id_turma = :id_turma";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_turma', $id);
         $stmt->execute();

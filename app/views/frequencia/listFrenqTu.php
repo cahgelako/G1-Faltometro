@@ -20,11 +20,11 @@
                 $badge_class = "bg-dark"; // Padrão para Integral
                 $card_color_code = "#212529"; // Cor de Destaque
 
-                if ($turma['turno'] == 1) {
+                if ($turma['turno'] == 'manha') {
                     $perfil = "Manhã";
                     $badge_class = "bg-success"; // Verde para Manhã
                     $card_color_code = "#198754";
-                } elseif ($turma['turno'] == 2) {
+                } elseif ($turma['turno'] == 'tarde') {
                     $perfil = "Tarde";
                     $badge_class = "bg-warning text-dark"; // Amarelo para Tarde
                     $card_color_code = "#ffc107";

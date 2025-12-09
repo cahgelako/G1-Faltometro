@@ -67,14 +67,14 @@ class Projeto
 
     public function desativar($id)
     {
-        $sql = "UPDATE projetos_extra SET status = 0  WHERE id_projeto = :id_projeto";
+        $sql = "UPDATE projetos_extra SET status = 'inativo'  WHERE id_projeto = :id_projeto";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_projeto', $id);
         $stmt->execute();
     }
     public function ativar($id)
     {
-        $sql = "UPDATE projetos_extra SET status = 1  WHERE id_projeto = :id_projeto";
+        $sql = "UPDATE projetos_extra SET status = 'ativo'  WHERE id_projeto = :id_projeto";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_projeto', $id);
         $stmt->execute();

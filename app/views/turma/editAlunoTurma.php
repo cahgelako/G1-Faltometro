@@ -41,8 +41,23 @@
                 <div class="card-body p-4 p-md-5">
                     <h2 class="card-title text-center text-dark mb-4 pb-2 border-bottom">
                         <i class="fas fa-utensils me-2"></i> 
-                        Editar estudantes da Turma <?php if (isset($turma['nro_turma']) && isset($turma['tipo_ensino'])) { ?>
-                        <p class="text-center lead mb-4"> <strong><?= htmlspecialchars(isset($turma['nro_turma']) . 'º do ' . isset($turma['tipo_ensino'])) ?></strong></p>
+                        Editar estudantes da Turma <?php if (isset($turma['nro_turma']) && isset($turma['tipo_ensino'])) { 
+                            $tipo_ensino = '';
+                            switch ($turma['tipo_ensino']) {
+                                case 'ef1':
+                                    $tipo_ensino = 'Ensino Fundamental I';
+                                    break;
+                                
+                                case 'ef2':
+                                    $tipo_ensino = 'Ensino Fundamental II';
+                                    break;
+                                
+                                case 'em':
+                                    $tipo_ensino = 'Ensino Médio';
+                                    break;
+                                
+                            }?>
+                        <p class="text-center lead mb-4"> <strong><?= $turma['nro_turma'] . 'º do ' . $tipo_ensino ?></strong></p>
                     <?php } ?>
                     </h2>
                     

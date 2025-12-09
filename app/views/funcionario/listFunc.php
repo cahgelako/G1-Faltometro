@@ -3,7 +3,7 @@
 
     <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
         <h2 class="fw-bold text-dark mb-0">
-            <i class="fas fa-funcs-cog me-2 text-secondary"></i> Painel de Funcionários
+             Painel de Funcionários
         </h2>
         <a href="./registrarFunc" class="btn btn-primary fw-bold shadow-sm">
             <i class="fas fa-plus me-1"></i> Novo Funcionário
@@ -86,6 +86,5 @@
 </div>
 
 <script src="index.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.2/dist/sweetalert2.all.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.26.2/dist/sweetalert2.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

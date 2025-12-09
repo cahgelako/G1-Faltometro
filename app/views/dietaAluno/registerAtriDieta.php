@@ -1,3 +1,19 @@
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        margin-top: auto;
+    }
+</style>
+
 <head>
     <link href="assets/select2/select2.min.css" rel="stylesheet" />
     <link href="assets/select2-bootstrap.min.css" rel="stylesheet" />
@@ -7,22 +23,24 @@
             /* Força a largura para que o select fique legível com busca */
             min-width: 300px;
         }
-         .select2-results__option {
-            color: #000000 !important; /* Cor do texto das opções na lista */
+
+        .select2-results__option {
+            color: #000000 !important;
+            /* Cor do texto das opções na lista */
         }
     </style>
 </head>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8"> 
+        <div class="col-lg-6 col-md-8">
             <div class="card shadow-lg border-0 rounded-3">
                 <div class="card-body p-4 p-md-5">
                     <h2 class="card-title text-center text-dark mb-4 pb-2 border-bottom">
-                        <i class="fas fa-user-tag me-2"></i> 
+                        <i class="fas fa-user-tag me-2"></i>
                         Atribuição de Dieta
                     </h2>
-                    
+
                     <p class="text-center text-muted mb-4">
                         Selecione o estudante para gerenciar suas dietas.
                     </p>
@@ -42,7 +60,7 @@
                                 </select>
                             </div>
                         </div>
-                        
+
                         <div class="text-center mt-4 pt-3 border-top">
                             <a href="#" id="linkDietas" class="btn btn-primary btn-lg disabled shadow">
                                 <i class="fas fa-forward me-1"></i> Avançar para Dietas
@@ -63,8 +81,8 @@
 
             // 1. Inicializa o Select2 para permitir a busca
             if (typeof jQuery !== 'undefined' && typeof jQuery.fn.select2 !== 'undefined') {
-                 $selectEstudante.select2({
-                    theme: "bootstrap", 
+                $selectEstudante.select2({
+                    theme: "bootstrap",
                     placeholder: $selectEstudante.attr('data-placeholder'),
                     allowClear: true // Permite desmarcar
                 });
@@ -76,7 +94,7 @@
             // Usando o evento 'change' padrão (funciona mesmo sem Select2)
             $selectEstudante.on('change', function() {
                 const id = $(this).val(); // Obter o valor via jQuery
-                
+
                 if (id) {
                     // Monta o link para o módulo de edição/atribuição
                     linkDietas.href = './editAtriDieta&id_estudante=' + encodeURIComponent(id);
@@ -93,5 +111,5 @@
         });
 </script>
 
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

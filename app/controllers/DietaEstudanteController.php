@@ -6,7 +6,33 @@ class DietaEstudanteController extends Controller
         require_once 'app/core/auth.php';
         $model = $this->model('DietaEstudante');
         $dietas = $model->listar();
-        $data = ['dietas' => $dietas];
+        $agrupado = [];
+        foreach ($dietas as $item) {
+            $id = $item['id_estudante'];
+
+            if (!isset($agrupado[$id])) {
+                $agrupado[$id] = [
+                    "nome" => $item["nome_estudante"],
+                    "id" => $id,
+                    "nro_turma" => $item["nro_turma"],
+                    "tipo_ensino" => $item["tipo_ensino"], 
+                    "ano_turma" => $item['ano_turma'],
+                    "turno" => $item['turno'],
+                    "data_dieta" => $item["data_adicao_dieta"],
+                    "dietas" => []
+                ];
+            }
+
+            // adiciona o array de dietas no array de agrupados
+            $agrupado[$id]["dietas"][] = $item["nome_dieta"];
+        }
+
+        // organiza o array por ordem alfabética dos nomes dos estudantes, sem mudar o agrupamento
+        usort($agrupado, function ($a, $b) {
+            return strcasecmp($a['nome'], $b['nome']);
+        });
+
+        $data = ['agrupado' => $agrupado];
         if (isset($_SESSION['msg'])) {
             $data['msg'] = $_SESSION['msg'];
             unset($_SESSION['msg']);
@@ -68,6 +94,7 @@ class DietaEstudanteController extends Controller
         } else if (isset($_GET['id_estudante'])) {
             $estudante = $modelEstudante->estudante_por_id($_GET['id_estudante']);
             $dietaestudante = $model->dietas_do_estudante($_GET['id_estudante']);
+
 
             $this->view('dietaAluno/editAtriDieta', [
                 'estudante' => $estudante,

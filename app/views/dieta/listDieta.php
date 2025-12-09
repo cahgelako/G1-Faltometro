@@ -3,7 +3,7 @@
     
     <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
         <h2 class="fw-bold text-dark mb-0">
-            <i class="fas fa-utensils me-2 text-secondary"></i> Painel das Dietas
+           Painel das Dietas
         </h2>
         <a href="./registerDieta" class="btn btn-primary fw-bold shadow-sm">
             <i class="fas fa-plus me-1"></i> Nova Dieta

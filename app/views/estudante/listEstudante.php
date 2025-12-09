@@ -1,9 +1,9 @@
-<div class="container my-5">
+<div class="container my-5 mt-5">
     <?php require 'app/core/auth.php'; ?>
     
     <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
         <h2 class="fw-bold text-dark mb-0">
-            <i class="fas fa-user-graduate me-2 text-secondary"></i> Painel do Estudante
+             Painel do Estudante
         </h2>
         <a href="./registerEstudantes" class="btn btn-primary fw-bold shadow-sm">
             <i class="fas fa-plus me-1"></i> Novo Estudante

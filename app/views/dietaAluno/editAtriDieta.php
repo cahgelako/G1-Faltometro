@@ -1,3 +1,19 @@
+<style>
+    html,
+    body {
+        height: 100%;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        margin-top: auto;
+    }
+</style>
+
 <head>
     <link href="assets/select2/select2.min.css" rel="stylesheet" />
     <link href="assets/select2-bootstrap.min.css" rel="stylesheet" />
@@ -5,45 +21,53 @@
     <style>
         /* Regras para o texto das opções na lista suspensa (Dropdown) */
         .select2-results__option {
-            color: #000000 !important; /* Cor do texto das opções na lista */
+            color: #000000 !important;
+            /* Cor do texto das opções na lista */
         }
-        
+
         /* NOVO ESTILO: Dietas Selecionadas (Tags/Pílulas) */
         .select2-container .select2-selection--multiple .select2-selection__choice {
             /* Fundo Verde Claro (pode usar #d1e7dd ou uma cor personalizada) */
-            background-color: #5cb85c !important; 
-            color: #ffffff !important; /* Texto Branco para contraste */
-            border: 1px solid #4cae4c !important; /* Borda Verde Escuro */
-            border-radius: 0.5rem !important; /* Mais arredondado */
-            padding: 3px 10px 3px 10px !important; /* Aumenta o padding interno */
-            margin-top: 5px !important; /* Pequeno ajuste de margem para melhor visualização */
+            background-color: #5cb85c !important;
+            color: #ffffff !important;
+            /* Texto Branco para contraste */
+            border: 1px solid #4cae4c !important;
+            /* Borda Verde Escuro */
+            border-radius: 0.5rem !important;
+            /* Mais arredondado */
+            padding: 3px 10px 3px 10px !important;
+            /* Aumenta o padding interno */
+            margin-top: 5px !important;
+            /* Pequeno ajuste de margem para melhor visualização */
         }
 
         /* NOVO ESTILO: Botão de remoção (o 'x') */
         .select2-container .select2-selection--multiple .select2-selection__choice__remove {
-            color: #F5F5F4 !important; /* Cor do 'x' branco */
+            color: #F5F5F4 !important;
+            /* Cor do 'x' branco */
             background-color: #5cb85c;
-            border:1px solid #5cb85c  ;
+            border: 1px solid #5cb85c;
             margin-right: 5px !important;
         }
 
         /* Estilo ao passar o mouse sobre o botão de remoção */
         .select2-container .select2-selection--multiple .select2-selection__choice__remove:hover {
-            color: #f8d7da !important; /* Cor mais clara ao passar o mouse */
+            color: #f8d7da !important;
+            /* Cor mais clara ao passar o mouse */
         }
     </style>
 </head>
 
 <div class="container mt-5">
     <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-8"> 
-            <div class="card shadow-lg border-0 rounded-3"> 
+        <div class="col-lg-6 col-md-8">
+            <div class="card shadow-lg border-0 rounded-3">
                 <div class="card-body p-4 p-md-5">
                     <h2 class="card-title text-center text-dark mb-4 pb-2 border-bottom">
-                        <i class="fas fa-utensils me-2"></i> 
+                        <i class="fas fa-utensils me-2"></i>
                         Atribuir Dieta ao Estudante
                     </h2>
-                    
+
                     <?php if (isset($nome_estudante)) { ?>
                         <p class="text-center lead mb-4">Estudante: <strong><?= htmlspecialchars($nome_estudante) ?></strong></p>
                     <?php } ?>
@@ -60,23 +84,23 @@
                                     <select class="form-select select2-custom" name="arr_dieta_id[]" id="dietas" multiple data-placeholder="Digite para buscar e selecionar dietas...">
                                         <?php foreach ($dietas as $dieta) {
                                             // Usar htmlspecialchars para evitar XSS no valor do atributo
-                                            $dieta_id = htmlspecialchars($dieta['id_dieta']); 
+                                            $dieta_id = htmlspecialchars($dieta['id_dieta']);
                                             $dieta_nome = htmlspecialchars($dieta['nome_dieta']);
                                             $op_selected = in_array($dieta['id_dieta'], $dietaestudante) ? 'selected' : '';
                                         ?>
-                                            <option   value="<?= $dieta_id ?>" <?= $op_selected ?>><?= $dieta_nome ?></option>
+                                            <option value="<?= $dieta_id ?>" <?= $op_selected ?>><?= $dieta_nome ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="d-flex justify-content-end mt-4 pt-3 border-top">
                             <a href="./listAtriDieta" class="btn btn-outline-secondary me-2">
                                 <i class="fas fa-arrow-left me-1"></i> Voltar
                             </a>
                             <button type="submit" class="btn btn-primary btn-lg shadow-sm">
-                                <i class="fas fa-save me-1"></i> 
+                                <i class="fas fa-save me-1"></i>
                                 <?= isset($edit) ? 'Atualizar Atribuição' : 'Atribuir Dietas' ?>
                             </button>
                         </div>
@@ -97,7 +121,7 @@
                 // Inicializa o Select2, usando o atributo data-placeholder
                 $dietas.select2({
                     // Adiciona o tema Bootstrap
-                    theme: "bootstrap", 
+                    theme: "bootstrap",
                     // Tenta usar o placeholder do data-attribute
                     placeholder: $dietas.attr('data-placeholder') || 'Digite para buscar dietas...',
                     allowClear: true // Permite limpar a seleção se não for 'multiple' (boa prática)
@@ -107,7 +131,7 @@
                 $dietas.on('select2:unselecting', function(e) {
                     const dietaLabel = $(e.params.args.data.element).text();
                     // Alerta mais moderno (embora o confirm nativo seja funcional)
-                    if (!confirm(`Confirma a remoção? A dieta "${dietaLabel}" será desvinculada.`)) { 
+                    if (!confirm(`Confirma a remoção? A dieta "${dietaLabel}" será desvinculada.`)) {
                         e.preventDefault(); // Cancela a remoção
                     }
                 });
@@ -116,5 +140,5 @@
             }
         });
 </script>
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

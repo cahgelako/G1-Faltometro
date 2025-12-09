@@ -1,16 +1,32 @@
+<style>
+html, body {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+}
+
+</style>
+
 <div class="container my-5">
     <?php require 'app/core/auth.php'; ?>
 
     <div class="d-flex justify-content-between align-items-center mb-4 border-bottom pb-2">
         <h2 class="fw-bold text-dark mb-0">
-            <i class="fas fa-school me-2 text-secondary"></i> Painel das Escolas
+            Painel das Escolas
         </h2>
         <a href="./registerEs" class="btn btn-primary fw-bold shadow-sm">
             <i class="fas fa-plus me-1"></i> Cadastrar Escola
         </a>
     </div>
-    
- <?php if (isset($msg)) { ?>
+
+    <?php if (isset($msg)) { ?>
         <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
             <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
@@ -43,13 +59,13 @@
                                                 <div class="d-flex justify-content-center gap-2">
                                                     <?php switch ($escola['ativo']) {
                                                         case 'ativo': ?>
-                                                        <a href="./desativarEscola&id=<?= $escola['id_escola'] ?>" title="Desativar" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-ban"></i></a>
+                                                            <a href="./desativarEscola&id=<?= $escola['id_escola'] ?>" title="Desativar" class="btn btn-sm btn-outline-danger" onclick="return confirm('Tem certeza que deseja desativar a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-ban"></i></a>
                                                         <?php break;
-                                                        
+
                                                         case 'inativo': ?>
                                                             <a href="./ativarEscola&id=<?= $escola['id_escola'] ?>" title="Ativar" class="btn btn-sm btn-outline-success" onclick="return confirm('Tem certeza que deseja ativar a escola <?= $escola['nome_escola'] ?>?')"><i class="fa fa-check"></i></a>
-                                                           <?php break;
-                                                    }?>
+                                                    <?php break;
+                                                    } ?>
                                                     <a href="./editEscola&id=<?= $escola['id_escola'] ?>" title="Editar" class="btn btn-sm btn-outline-secondary"><i class="fa fa-edit"></i></a>
                                                 </div>
                                             </td>
@@ -70,5 +86,5 @@
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.7.1.js"></script> 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>

@@ -50,37 +50,70 @@ class FrequenciaController extends Controller
         }
     }
 
-    public function filtro()
-    {
-        require_once 'app/core/auth.php';
-        $model = $this->model('Frequencia');
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $relatorio = $model->filtro_intervalo($_POST);
-            if ($relatorio) {
-                $this->view('relatorio/listRelFrenCo', ['relatorio' => $relatorio]);
-            } else {
-                $frequencia = $model->listar_por_turma_dia($_GET['id_turma']);
-                $this->view('relatorio/listRelFrenCo', ['frequencia' => $frequencia]);
-            }
-        } else if (isset($_GET['id_turma'])) {
-            $frequencia = $model->listar_por_turma_dia($_GET['id_turma']);
-            $this->view('relatorio/listRelFrenCo', ['frequencia' => $frequencia]);
-        }
-    }
 
+    // reajustar para não ignorar o filtro de turno
     public function relatorio_nutri()
     {
         require_once 'app/core/auth.php';
         $model = $this->model('Frequencia');
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST['data_falta'];
-            $relatorio = $model->list_relatorio_nutri_dia($data);
-            $relatorio_dietas = $model->list_relatorio_nutri_dietas($data);
-            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'data_falta' => $data, 'relatorio_dietas' => $relatorio_dietas]);
+            $turno = $_POST['turno'] ?? '';
+            $relatorio = $model->list_relatorio_nutri_dia($data, $turno);
+            $relatorio_dietas = $model->list_relatorio_nutri_dietas($data, $turno);
+            $agrupado = [];
+
+            // ordena por id do estudante
+            foreach ($relatorio_dietas as $item) {
+                $id = $item['id_estudante'];
+
+                if (!isset($agrupado[$id])) {
+                    $agrupado[$id] = [
+                        "nome" => $item["nome_estudante"],
+                        "turma" => $item["nro_turma"] . "º do " . $item["tipo_ensino"],
+                        "dietas" => []
+                    ];
+                }
+
+                // adiciona o array de dietas no array de agrupados
+                $agrupado[$id]["dietas"][] = $item["nome_dieta"];
+            }
+
+            // organiza o array por ordem alfabética dos nomes dos estudantes, sem mudar o agrupamento
+            usort($agrupado, function ($a, $b) {
+                return strcasecmp($a['nome'], $b['nome']);
+            });
+
+            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'data_falta' => $data, 'relatorio_dietas' => $relatorio_dietas, 'agrupado' => $agrupado]);
+
         } else {
             $relatorio = $model->list_relatorio_nutri_dia();
             $relatorio_dietas = $model->list_relatorio_nutri_dietas();
-            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'relatorio_dietas' => $relatorio_dietas]);
+            $agrupado = [];
+
+            // ordena por id do estudante
+            foreach ($relatorio_dietas as $item) {
+                $id = $item['id_estudante'];
+
+                if (!isset($agrupado[$id])) {
+                    $agrupado[$id] = [
+                        "nome" => $item["nome_estudante"],
+                        "turma" => $item["nro_turma"] . "º do " . $item["tipo_ensino"],
+                        "dietas" => []
+                    ];
+                }
+
+                // adiciona o array de dietas no array de agrupados
+                $agrupado[$id]["dietas"][] = $item["nome_dieta"];
+            }
+
+            // organiza o array por ordem alfabética dos nomes dos estudantes, sem mudar o agrupamento
+            usort($agrupado, function ($a, $b) {
+                return strcasecmp($a['nome'], $b['nome']);
+            });
+
+            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'relatorio_dietas' => $relatorio_dietas, 'agrupado' => $agrupado]);
         }
     }
     public function relatorio_coordenacao()

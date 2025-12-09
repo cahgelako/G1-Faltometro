@@ -28,8 +28,11 @@ class TurmaController extends Controller
             unset($_SESSION['msg']);
         }
 
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($modelTurma->salvar($_POST)) {
+            $dados = $_POST;
+            $dados['img'] = $_FILES['img'] ?? null;
+            if ($modelTurma->salvar($dados)) {
                 $_SESSION['msg'] = 'Turma cadastrada com sucesso!';
                 header(header: 'Location: ./listTurma');
                 exit;
@@ -51,7 +54,9 @@ class TurmaController extends Controller
 
         $escolas = $modelEscola->listar();
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($modelTurma->editar($_POST)) {
+            $dados = $_POST;
+            $dados['img'] = $_FILES['img'] ?? null;
+            if ($modelTurma->editar($dados)) {
                 $_SESSION['msg'] = 'Turma editada com sucesso!';
                 header('Location: ./listTurma');
             } else {
