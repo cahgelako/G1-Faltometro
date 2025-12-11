@@ -30,7 +30,7 @@ $routes = [
     'registrarFunc' => ['controller' => 'FuncionarioController', 'method' => 'registrar'],
     'conta' => ['controller' => 'FuncionarioController', 'method' => 'perfil'],
     'recuperarSenha' => ['controller' => 'FuncionarioController', 'method' => 'solicitar_recuperacao'],
-    'redefinirSenha' => ['controller' => 'FuncionarioController', 'method' => 'recuperar_senha'],
+    'redefinirSenha' => ['controller' => 'FuncionarioController', 'method' => 'redefinir_senha'],
     'validarToken' => ['controller' => 'FuncionarioController', 'method' => 'validarToken'],
 
     // Estudantes

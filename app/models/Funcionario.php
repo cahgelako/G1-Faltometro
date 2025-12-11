@@ -139,7 +139,7 @@ class Funcionario
 
     public function salvar_token_recuperacao($email, $token)
     {
-        $sql = "INSERT INTO password_reset (email, token, created_at) VALUES (:email, :token, NOW())";
+        $sql = "INSERT INTO restaurar_senhas (email, token, data_restauracao) VALUES (:email, :token, NOW())";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->bindParam(':token', $token);
@@ -148,9 +148,9 @@ class Funcionario
 
     public function validar_token_recuperacao($token)
     {
-        $sql = "SELECT * FROM password_reset 
+        $sql = "SELECT * FROM restaurar_senhas 
             WHERE token = :token 
-              AND created_at >= (NOW() - INTERVAL 1 HOUR)
+              AND data_restauracao >= (NOW() - INTERVAL 1 HOUR)
             LIMIT 1";
 
         $stmt = $this->conn->prepare($sql);
@@ -161,7 +161,7 @@ class Funcionario
 
     public function atualizar_senha($email, $senha)
     {
-        $sql = "UPDATE usuarios SET senha = :senha WHERE email = :email";
+        $sql = "UPDATE funcionarios SET senha = :senha WHERE email = :email";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':senha', $senha);
         $stmt->bindParam(':email', $email);
@@ -170,7 +170,7 @@ class Funcionario
 
     public function remover_tokens($email)
     {
-        $sql = "DELETE FROM password_reset WHERE email = :email";
+        $sql = "DELETE FROM restaurar_senhas WHERE email = :email";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':email', $email);
         $stmt->execute();

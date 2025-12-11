@@ -123,7 +123,7 @@
                     </div>
 
                     <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                        <img class="img-fluid rounded-3 hero-img" src="img/icon_faltometro.ico" alt="Logo" style="width: 60%; height: 60%"/>
+                        <img class="img-fluid rounded-3 hero-img" src="img/icon_faltometro.png" alt="Logo" style="width: 60%; height: 60%"/>
                     </div>
 
                 </div>

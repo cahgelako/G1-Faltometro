@@ -1,13 +1,17 @@
 <h2>Redefinir Senha</h2>
 
-<?php if (isset($msg)) { ?>
-    <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-        <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
-    </div>
-<?php } ?>
+<?php if (!empty($sucesso)): ?>
+    <div class="alert alert-success"><?= htmlspecialchars($sucesso) ?></div>
+    <button>
 
-<form action="/redefinir-senha" method="POST">
+        <a href="./login">Login</a>
+    </button>
+<?php endif; ?>
+
+
+<form action="" method="POST">
+    <input type="hidden" name="token" value="<?= htmlspecialchars($token ?? '') ?>">
+
     <label>Nova Senha</label>
     <input type="password" name="senha" required>
 

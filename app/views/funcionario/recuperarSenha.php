@@ -1,8 +1,8 @@
 <h2>Recuperação de Senha</h2>
 
-<?php if (isset($msg)) { ?>
+<?php if (!empty($msg)) { ?>
     <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-        <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
+        <i class="fas fa-info-circle me-2"></i><?php echo $msg; ?>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
     </div>
 <?php } ?>

@@ -151,6 +151,10 @@ class FuncionarioController extends Controller
             $this->view('funcionario/conta', ['funcionario' => $funcionario]);
         }
     }
+    // public function solicitar_recuperacao()
+    // {
+    //     $this->view('funcionario/recuperarSenha', [], false);
+    // }
 
     public function solicitar_recuperacao()
     {
@@ -173,7 +177,7 @@ class FuncionarioController extends Controller
             $model->salvar_token_recuperacao($email, $token);
 
             // 4. Envia o email
-            $link = "10.132.224.26/faltometro/redefinirSenha?token=" . $token;
+            $link = "http://localhost/Faltometro/redefinirSenha?token=" . $token;
 
             $mail = new PHPMailer(true);
 
@@ -198,65 +202,69 @@ class FuncionarioController extends Controller
 
                 $mail->send();
             } catch (Exception $e) {
-                echo "Erro ao enviar e-mail";
+                echo "Erro ao enviar e-mail: " . $e->getMessage();
             }
 
-            echo 'Um e-mail foi enviado com instruções para recuperar sua senha.';
+            $this->view('funcionario/recuperarSenha', ['msg' => 'Um e-mail foi enviado com instruções para recuperar sua senha.'], false);
         } else {
             // $ola = 'funcionario/recuperarSenha';
             // var_dump($ola); exit;
-            $this->view('funcionario/recuperarSenha');
+            $this->view('funcionario/recuperarSenha', [], false);
         }
     }
 
-    public function enviar_email_recuperacao($email, $link) {}
-
-    public function recuperar_senha()
+    public function redefinir_senha()
     {
+        $model = $this->model('Funcionario');
+
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            $token = $_GET['token'];
+            // Recebe o token via GET
+            $token = $_GET['token'] ?? null;
 
-            $reset = $this->model('Funcionario')->validar_token_recuperacao($token);
+            if (!$token) {
+                echo "Token ausente!";
+                return;
+            }
 
+            // Valida o token
+            $reset = $model->validar_token_recuperacao($token);
             if (!$reset) {
                 echo "Token inválido ou expirado!";
                 return;
             }
 
-            // Mostra a página de alterar senha
+            // Mostra a página de redefinir senha, envia token para o input hidden
             $this->view('funcionario/redefinirSenha', ['token' => $token], false);
-        } else {
-            $this->view('funcionario/redefinirSenha');
-        }
-    }
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            // Recebe o token e a nova senha via POST
+            $token = $_POST['token'] ?? null;
+            $senha = $_POST['senha'] ?? null;
 
-    public function salvar_nova_senha()
-    {
-        $model = $this->model('Funcionario');
+            if (!$token || !$senha) {
+                echo "Token ou senha ausente!";
+                return;
+            }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $token = $_POST['token'];
-            $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
-
+            // Valida o token novamente
             $reset = $model->validar_token_recuperacao($token);
-
             if (!$reset) {
                 echo "Token inválido ou expirado!";
                 return;
             }
 
             $email = $reset['email'];
+            $senha_hash = password_hash($senha, PASSWORD_BCRYPT);
 
-            // Atualiza a senha do usuário
-            $model->atualizar_senha($email, $senha);
+            // Atualiza a senha
+            $model->atualizar_senha($email, $senha_hash);
 
-            // Opcional: remover tokens antigos
+            // Remove tokens antigos
             $model->remover_tokens($email);
 
-            echo "Senha alterada com sucesso! Tente o login novamente.";
-            $this->view('funcionario/login');
-        } else {
-            $this->view('funcionario/redefinirSenha');
+            // Redireciona para login com mensagem
+            $this->view('funcionario/redefinirSenha', [
+                'sucesso' => "Senha alterada com sucesso! Faça login."
+            ], false);
         }
     }
 
