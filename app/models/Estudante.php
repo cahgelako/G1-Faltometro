@@ -30,7 +30,11 @@ class Estudante
 
     public function listar()
     {
-        $sql = "SELECT * FROM estudantes ORDER BY nome_estudante";
+        $sql = "SELECT e.*, t.* FROM estudantes e
+        JOIN matriculas_turma_estudante m ON m.id_estudante = e.id_estudante
+        JOIN turmas t ON t.id_turma = m.id_turma
+        WHERE m.ativo = 'ativo'
+        ORDER BY nome_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -91,21 +95,6 @@ class Estudante
         return $stmt->fetch();
     }
 
-    // public function estudantes_da_turma_e_nao_matriculados_outra($id_turma)
-    // {
-    //     $sql = "SELECT e.id_estudante, e.nome_estudante
-    //     FROM estudantes e
-    //     WHERE e.id_estudante NOT IN (
-    //         SELECT m.id_estudante
-    //         FROM matriculas_turma_estudante m
-    //         WHERE m.id_turma != :id_turma AND m.ativo = 'ativo'
-    //     )";
-    //     $stmt = $this->conn->prepare($sql);
-    //     $stmt->bindParam(':id_turma', $id_turma);
-    //     $stmt->execute();
-    //     return $stmt->fetchAll();
-    // }
-
     public function matricula_por_id_estudante($id) {
         $sql = "SELECT id_matricula 
         FROM matriculas_turma_estudante m
@@ -115,5 +104,9 @@ class Estudante
         $stmt->bindParam(':id', $id);
         $stmt->execute();
         return $stmt->fetch();
+    }
+
+    public function visualizar($id_estudante) {
+
     }
 }

@@ -60,8 +60,10 @@ class FrequenciaController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $data = $_POST['data_falta'];
             $turno = $_POST['turno'] ?? '';
+            $projeto = $_POST['projeto'] ?? '';
             $relatorio = $model->list_relatorio_nutri_dia($data, $turno);
             $relatorio_dietas = $model->list_relatorio_nutri_dietas($data, $turno);
+            $relatorio_proj = $model->list_relatorio_nutri_projeto($data, $projeto);
             $agrupado = [];
 
             // ordena por id do estudante
@@ -71,7 +73,8 @@ class FrequenciaController extends Controller
                 if (!isset($agrupado[$id])) {
                     $agrupado[$id] = [
                         "nome" => $item["nome_estudante"],
-                        "turma" => $item["nro_turma"] . "º do " . $item["tipo_ensino"],
+                        "nro_turma" => $item["nro_turma"],
+                        "tipo_ensino" => $item["tipo_ensino"],
                         "dietas" => []
                     ];
                 }
@@ -85,11 +88,15 @@ class FrequenciaController extends Controller
                 return strcasecmp($a['nome'], $b['nome']);
             });
 
-            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'data_falta' => $data, 'relatorio_dietas' => $relatorio_dietas, 'agrupado' => $agrupado]);
+            $model_proj = $this->model('Projeto');
+            $projetos = $model_proj->listar();
 
+
+            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'data_falta' => $data, 'relatorio_proj' => $relatorio_proj, 'agrupado' => $agrupado, 'lista_projetos' => $projetos, 'turno' => $turno, 'projeto' => $projeto]);
         } else {
             $relatorio = $model->list_relatorio_nutri_dia();
             $relatorio_dietas = $model->list_relatorio_nutri_dietas();
+            $relatorio_proj = $model->list_relatorio_nutri_projeto();
             $agrupado = [];
 
             // ordena por id do estudante
@@ -99,7 +106,8 @@ class FrequenciaController extends Controller
                 if (!isset($agrupado[$id])) {
                     $agrupado[$id] = [
                         "nome" => $item["nome_estudante"],
-                        "turma" => $item["nro_turma"] . "º do " . $item["tipo_ensino"],
+                        "nro_turma" => $item["nro_turma"],
+                        "tipo_ensino" =>  $item["tipo_ensino"],
                         "dietas" => []
                     ];
                 }
@@ -113,7 +121,15 @@ class FrequenciaController extends Controller
                 return strcasecmp($a['nome'], $b['nome']);
             });
 
-            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'relatorio_dietas' => $relatorio_dietas, 'agrupado' => $agrupado]);
+            $model_proj = $this->model('Projeto');
+            $projetos = $model_proj->listar();
+
+            // echo '<pre>';
+            // var_dump($relatorio_proj); 
+            // echo '</pre>';
+            // exit;
+
+            $this->view('frequencia/relFrenqNutri', ['relatorio' => $relatorio, 'relatorio_proj' => $relatorio_proj, 'agrupado' => $agrupado, 'lista_projetos' => $projetos]);
         }
     }
     public function relatorio_coordenacao()
@@ -159,6 +175,79 @@ class FrequenciaController extends Controller
         // CAPTURA DA VIEW
         ob_start();
         require 'app/views/relatorio/pdfRelFrenqCo.php';
+        $html = ob_get_clean();
+
+        // DOMPDF CONFIGURADO PARA NÃO QUEBRAR PÁGINA
+        require_once __DIR__ . '/../dompdf/autoload.inc.php';
+        $dompdf = new \Dompdf\Dompdf();
+
+        $dompdf->set_option('isHtml5ParserEnabled', true);
+        $dompdf->set_option('isRemoteEnabled', true);
+        $dompdf->set_option('enable_css_float', true);
+        $dompdf->set_option('defaultPaperSize', 'A4');
+
+        $dompdf->loadHtml($html);
+        $dompdf->setPaper('A4', 'portrait');
+        $dompdf->render();
+
+        $nomeArq = "Relatorio_" . $dataHoje;
+
+        $dompdf->stream($nomeArq . ".pdf", ["Attachment" => false]);
+        exit();
+    }
+
+    public function gerar_pdf_dia_nutricionista()
+    {
+        require_once 'app/core/auth.php';
+
+        $modelFrequencia = $this->model('Frequencia');
+        $modelTurma = $this->model('Turma');
+
+        $dataFiltro = $_GET['data_falta'] ?? null;
+        $projeto = $_GET['projeto'] ?? null;
+        $turno = $_GET['turno'] ?? null;
+
+        if (empty($dataFiltro)) {
+            die('Parâmetro de data é obrigatório.');
+        }
+
+        $dataHoje = date('Y-m-d');
+
+        $turmas = $modelTurma->listar();
+        $relatorio = $modelFrequencia->list_relatorio_nutri_dia($dataFiltro, $turno);
+        $relatorio_dietas = $modelFrequencia->list_relatorio_nutri_dietas($dataFiltro, $turno);
+        $relatorio_proj = $modelFrequencia->list_relatorio_nutri_projeto($dataFiltro, $projeto);
+
+        $agrupado = [];
+
+        // ordena por id do estudante
+        foreach ($relatorio_dietas as $item) {
+            $id = $item['id_estudante'];
+
+            if (!isset($agrupado[$id])) {
+                $agrupado[$id] = [
+                    "nome" => $item["nome_estudante"],
+                    "nro_turma" => $item["nro_turma"],
+                    "tipo_ensino" => $item["tipo_ensino"],
+                    "dietas" => []
+                ];
+            }
+
+            // adiciona o array de dietas no array de agrupados
+            $agrupado[$id]["dietas"][] = $item["nome_dieta"];
+        }
+
+        // organiza o array por ordem alfabética dos nomes dos estudantes, sem mudar o agrupamento
+        usort($agrupado, function ($a, $b) {
+            return strcasecmp($a['nome'], $b['nome']);
+        });
+
+        $model_proj = $this->model('Projeto');
+        $lista_projetos = $model_proj->listar();
+
+        // CAPTURA DA VIEW
+        ob_start();
+        require 'app/views/relatorio/pdfRelFrenqNutri.php';
         $html = ob_get_clean();
 
         // DOMPDF CONFIGURADO PARA NÃO QUEBRAR PÁGINA

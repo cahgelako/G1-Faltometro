@@ -92,6 +92,31 @@
     }
 </style>
 
+<?php 
+
+        function formatarEnsino($tipo)
+                    {
+                        $tipo = strtolower(trim($tipo));
+
+                        return match ($tipo) {
+                            'ef1' => 'Ensino Fundamental I',
+                            'ef2' => 'Ensino Fundamental II',
+                            'em'  => 'Ensino Médio',
+                            default => ucfirst($tipo)
+                        };
+                    }
+
+
+                    function formatarTurno($t)
+                    {
+                        return match (strtolower(trim($t))) {
+                            'manha', 'manhã', 'm' => 'Manhã',
+                            'tarde', 't' => 'Tarde',
+                            'integral', 'i' => 'Integral',
+                            default => mb_convert_case($t, MB_CASE_TITLE, "UTF-8")
+                        };
+                    }
+?>
 
 <div class="container mt-4 pt-4">
 
@@ -119,7 +144,7 @@
                             <option value="">Selecione uma turma</option>
                             <?php foreach ($turmas as $turma) { ?>
                                 <option value="<?= $turma['id_turma'] ?>">
-                                    <?= $turma['nro_turma'] ?>º ano do <?= $turma['tipo_ensino'] ?>
+                                    <?= $turma['nro_turma'] . 'º do ' . formatarEnsino($turma['tipo_ensino'])?>
                                 </option>
                             <?php } ?>
                         </select>
@@ -159,7 +184,8 @@
                         <?php if (!empty($relatorio)) : ?>
                             <?php foreach ($relatorio as $item) : ?>
                                 <tr>
-                                    <td><?= htmlspecialchars($item['nro_turma'] . 'º do ' . $item['tipo_ensino']); ?></td>
+                                   <td><?= htmlspecialchars($item['nro_turma'] . 'º do ' . formatarEnsino($item['tipo_ensino'])); ?></td>
+
                                     <td class="text-center fw-bold"><?= htmlspecialchars($item['quantidade_presentes']); ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -205,6 +231,7 @@
             'em'  => ['titulo' => 'Ensino Médio',         'cor' => '#ffda6a']
         ];
 
+
         $ultimo = null;
     ?>
 
@@ -245,6 +272,7 @@
             </div>
         </div>
 
+        
     <?php endforeach; ?>
     <?php endif; ?>
 

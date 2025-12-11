@@ -13,14 +13,13 @@ class MatriculaProjeto {
     // rever lógica
     public function listar()
     {
-        $sql = "SELECT e.registro_matricula_escola, e.nome_estudante, t.nome_turma, c.ano_turma, c.turno, e.id_estudante, p.nome_projeto, mp.id_matricula
+        $sql = "SELECT e.registro_matricula_escola, e.nome_estudante, t.nome_turma, t.ano_turma, t.turno, e.id_estudante, p.nome_projeto, mp.id_matricula
         FROM turmas t
-        JOIN classes c ON c.id_turma = t.id_turma
-        JOIN matriculas_classe_estudante me ON me.id_classe = c.id_classe
+        JOIN matriculas_turma_estudante me ON me.id_turma = t.id_turma
         JOIN estudantes e ON e.id_estudante = me.id_estudante
         JOIN matriculas_projetos mp ON mp.id_matricula = me.id_matricula
         JOIN projetos_extra p ON p.id_projeto = mp.id_projeto
-        ORDER BY c.id_classe";
+        ORDER BY t.id_turma";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -96,7 +95,7 @@ class MatriculaProjeto {
         $sql = "SELECT DISTINCT e.nome_estudante, mp.id_matricula
         FROM projetos_extra p 
         RIGHT JOIN matriculas_projetos mp ON mp.id_projeto = p.id_projeto
-        RIGHT JOIN matriculas_classe_estudante me ON me.id_matricula = mp.id_matricula
+        RIGHT JOIN matriculas_turma_estudante me ON me.id_matricula = mp.id_matricula
         RIGHT JOIN estudantes e ON e.id_estudante = me.id_estudante
         WHERE p.id_projeto = :id_projeto";
         $stmt = $this->conn->prepare($sql);
@@ -109,7 +108,7 @@ class MatriculaProjeto {
         $sql = "SELECT p.nome_projeto, e.nome_estudante, p.id_projeto 
         FROM projetos_extra p 
         LEFT JOIN matriculas_projetos mp ON mp.id_projeto = p.id_projeto
-        LEFT JOIN matriculas_classe_estudante me ON me.id_matricula = mp.id_matricula
+        LEFT JOIN matriculas_turma_estudante me ON me.id_matricula = mp.id_matricula
         LEFT JOIN estudantes e ON e.id_estudante = me.id_estudante
         WHERE me.id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);

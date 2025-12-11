@@ -88,6 +88,7 @@
                             case '3': // Coordenação
                             ?>
                                 <li class="nav-item"><a class="nav-link text-dark fw-medium" href="./inicio"><i class="fas fa-home me-1"></i> Início</a></li>
+                                <li class="nav-item"><a class="nav-link text-dark fw-medium" href="./listEstudante"><i class="fas fa-user me-2"></i> Alunos</a></li>
                                 <li class="nav-item"><a class="nav-link text-dark fw-medium" href="./relFrenqCo"><i class="fas fa-chart-bar me-2"></i> Relatórios</a></li>
 
                                 <li class="nav-item dropdown">
