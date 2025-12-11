@@ -6,7 +6,7 @@ class Database extends PDO
         $host = 'localhost';
         $dbname = 'faltometro';
         $username = 'root';
-        $password = '';
+        $password = 'Bia@06_10_2007';
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
         parent::__construct($dsn, $username, $password);
 

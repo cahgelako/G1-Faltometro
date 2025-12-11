@@ -29,6 +29,9 @@ $routes = [
     'ativarFunc' => ['controller' => 'FuncionarioController', 'method' => 'ativar'],
     'registrarFunc' => ['controller' => 'FuncionarioController', 'method' => 'registrar'],
     'conta' => ['controller' => 'FuncionarioController', 'method' => 'perfil'],
+    'recuperarSenha' => ['controller' => 'FuncionarioController', 'method' => 'solicitar_recuperacao'],
+    'redefinirSenha' => ['controller' => 'FuncionarioController', 'method' => 'recuperar_senha'],
+    'validarToken' => ['controller' => 'FuncionarioController', 'method' => 'validarToken'],
 
     // Estudantes
     'listEstudante' => ['controller' => 'EstudanteController', 'method' => 'listar'],
@@ -44,7 +47,6 @@ $routes = [
     'registerMatricula' => ['controller' => 'MatriculaController', 'method' => 'registrar'], 
     'desativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'desativar'], 
     'ativarMatricula' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
-    // 'editAlunoClasse' => ['controller' => 'MatriculaController', 'method' => 'ativar'], 
 
     // Dietas Especiais
     'listDieta' => ['controller' => 'DietaEspecialController', 'method' => 'listar'],

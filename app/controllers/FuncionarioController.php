@@ -154,26 +154,32 @@ class FuncionarioController extends Controller
 
     public function solicitar_recuperacao()
     {
-        $email = $_POST['email'];
+        $model = $this->model('Funcionario');
 
-        // 1. Verifica se email existe
-        $usuario = $this->model('Funcionario')->funcionario_por_email($email);
-        if (!$usuario) {
-            echo "E-mail não encontrado";
-            return;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $email = $_POST['email'];
+
+            // 1. Verifica se email existe
+            $funcionario = $model->funcionario_por_email($email);
+            if (!$funcionario) {
+                echo "E-mail não encontrado";
+                return;
+            }
+
+            // 2. Gera token
+            $token = bin2hex(random_bytes(32));
+
+            // 3. Salva token
+            $model->salvar_token_recuperacao($email, $token);
+
+            // 4. Envia o email
+            $link = "localhost/faltometro/redefinirSenha?token=" . $token;
+            $this->enviar_email_recuperacao($email, $link);
+
+            echo 'Um e-mail foi enviado com instruções para recuperar sua senha.';
+        } else {
+            $this->view('funcionario/recuperarSenha');
         }
-
-        // 2. Gera token
-        $token = bin2hex(random_bytes(32));
-
-        // 3. Salva token
-        $this->model('Funcionario')->salvar_token_recuperacao($email, $token);
-
-        // 4. Envia o email
-        $link = "https://seusite.com/recuperar_senha?token=" . $token;
-        $this->enviar_email_recuperacao($email, $link);
-
-        echo "Um e-mail foi enviado com instruções para recuperar sua senha.";
     }
 
     public function enviar_email_recuperacao($email, $link)
@@ -184,12 +190,12 @@ class FuncionarioController extends Controller
             $mail->isSMTP();
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'seuemail@gmail.com';
-            $mail->Password = 'SUA_SENHA_DE_APP';
+            $mail->Username = 'bijudabia6@gmail.com';
+            $mail->Password = 'osax vzzg bhsk jnyf';
             $mail->SMTPSecure = 'tls';
             $mail->Port = 587;
 
-            $mail->setFrom('seuemail@gmail.com', 'Sistema');
+            $mail->setFrom('bijudabia6@gmail.com', 'Sistema');
             $mail->addAddress($email);
 
             $mail->isHTML(true);
@@ -207,41 +213,77 @@ class FuncionarioController extends Controller
 
     public function recuperar_senha()
     {
-        $token = $_GET['token'];
-
-        $reset = $this->model('Usuario')->validar_token_recuperacao($token);
-
-        if (!$reset) {
-            echo "Token inválido ou expirado!";
-            return;
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            $token = $_GET['token'];
+    
+            $reset = $this->model('Funcionario')->validar_token_recuperacao($token);
+    
+            if (!$reset) {
+                echo "Token inválido ou expirado!";
+                return;
+            }
+    
+            // Mostra a página de alterar senha
+            $this->view('funcionario/redefinirSenha', ['token' => $token], false);
+        } else {
+            $this->view('funcionario/redefinirSenha');
         }
-
-        // Mostra a página de alterar senha
-        require 'app/views/usuario/nova_senha.php';
+        
     }
 
     public function salvar_nova_senha()
     {
-        $token = $_POST['token'];
-        $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
+        $model = $this->model('Funcionario');
 
-        $reset = $this->model('Usuario')->validar_token_recuperacao($token);
-
-        if (!$reset) {
-            echo "Token inválido ou expirado!";
-            return;
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $token = $_POST['token'];
+            $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
+    
+            $reset = $model->validar_token_recuperacao($token);
+    
+            if (!$reset) {
+                echo "Token inválido ou expirado!";
+                return;
+            }
+    
+            $email = $reset['email'];
+    
+            // Atualiza a senha do usuário
+            $model->atualizar_senha($email, $senha);
+    
+            // Opcional: remover tokens antigos
+            $model->remover_tokens($email);
+    
+            echo "Senha alterada com sucesso! Tente o login novamente.";
+            $this->view('funcionario/login');
+        } else {
+            $this->view('funcionario/redefinirSenha');
         }
+        
 
-        $email = $reset['email'];
-
-        // Atualiza a senha do usuário
-        $this->model('Usuario')->atualizar_senha($email, $senha);
-
-        // Opcional: remover tokens antigos
-        $this->model('Usuario')->remover_tokens($email);
-
-        echo "Senha alterada com sucesso!";
     }
+
+    public function validarToken()
+{
+    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+        return $this->view('funcionario/validarToken');
+    }
+
+    // POST → valida token
+    $token = $_POST['token'];
+    $model = $this->model('Funcionario');
+
+    $validacao = $model->validar_token_recuperacao($token);
+
+    if (!$validacao) {
+        $_SESSION['erro'] = "Código inválido ou expirado.";
+        return $this->view('funcionario/validarToken');
+    }
+
+    $_SESSION['email_recuperacao'] = $validacao['email'];
+    header("Location: /redefinirSenha");
+    exit;
+}
 
 
 

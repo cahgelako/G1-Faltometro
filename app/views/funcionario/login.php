@@ -125,7 +125,7 @@
                                     <input type="password" class="form-control" id="senha" name="senha" placeholder="••••••••" required>
                                 </div>
                                 <small class="form-text d-flex justify-content-end mt-2">
-                                    <a href="./listFunc.php" class="text-decoration-none text-muted small fw-medium">Esqueceu a senha?</a>
+                                    <a href="?url=recuperarSenha" class="text-decoration-none text-muted small fw-medium">Esqueceu a senha?</a>
                                 </small>
                             </div>
                             

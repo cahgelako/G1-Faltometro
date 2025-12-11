@@ -234,7 +234,7 @@
     <!-- DIETA ESPECIAL -->
     <div class="card shadow-sm mb-4">
         <div class="card-header" style="border-bottom: 2px solid #a0c4ff;">
-            Estudantes com Dieta Especial
+            Estudantes com Dieta Especial Presentes
         </div>
 
         <div class="card-body">

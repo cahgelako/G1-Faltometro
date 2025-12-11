@@ -127,10 +127,6 @@
                                         </li>
                                         <li><a class="dropdown-item" href="./listDieta">Dietas Especiais</a></li>
                                         <li><a class="dropdown-item" href="./listProjeto">Turmas Extracurriculares</a></li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                       
                                     </ul>
                                 </li>
                                 <li class="nav-item dropdown">

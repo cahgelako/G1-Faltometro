@@ -115,7 +115,7 @@
 
                     <div class="col-md-4">
                         <label class="fw-semibold text-muted">Turma:</label>
-                        <select id="id_turma" name="id_turma" class="form-select" required>
+                        <select id="id_turma" name="id_turma" class="form-select">
                             <option value="">Selecione uma turma</option>
                             <?php foreach ($turmas as $turma) { ?>
                                 <option value="<?= $turma['id_turma'] ?>">

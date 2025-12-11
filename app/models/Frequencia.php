@@ -293,6 +293,7 @@ class Frequencia
             JOIN frequencia f ON f.id_matricula = m.id_matricula
             WHERE f.data_falta = :data_falta
             AND t.id_turma = :id_turma
+            AND f.status_presenca = 'ausente'
             ORDER BY t.nro_turma, t.tipo_ensino";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':data_falta', $data);
@@ -310,9 +311,12 @@ class Frequencia
                 JOIN estudantes e ON e.id_estudante = m.id_estudante
                 JOIN frequencia f ON f.id_matricula = m.id_matricula
                 WHERE f.data_falta = :data_falta
-                AND f.status_presenca = 'ausente'";
+                AND f.status_presenca = 'ausente'
+                AND t.id_turma = :id_turma
+                ORDER BY t.nro_turma, t.tipo_ensino";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindParam(':data_falta', $data);
+                $stmt->bindParam(':id_turma', $id_turma);
                 $stmt->execute();
                 $estudantes[$tu['id_turma']] = $stmt->fetchAll(PDO::FETCH_COLUMN);
             }
@@ -328,8 +332,10 @@ class Frequencia
                 JOIN frequencia f ON f.id_matricula = m.id_matricula
                 WHERE f.data_falta = CURDATE()
                 AND f.status_presenca = 'ausente'
+                AND t.id_turma = :id_turma
                 ORDER BY t.nro_turma, t.tipo_ensino";
                 $stmt = $this->conn->prepare($sql);
+                $stmt->bindParam(':id_turma', $id_turma);
                 $stmt->execute();
                 $estudantes[$tu['id_turma']] = $stmt->fetchAll(PDO::FETCH_COLUMN);
             }
