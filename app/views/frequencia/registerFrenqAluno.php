@@ -1,3 +1,4 @@
+<?php date_default_timezone_set('America/Sao_Paulo'); ?>
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-lg-7 col-md-9">
@@ -24,7 +25,7 @@
                                 <label for="data_falta" class="form-label fw-bold text-danger">
                                     <i class="fas fa-calendar-alt me-1"></i> Data do Registro
                                 </label>
-                                <input type="date" name="data_falta" id="data_falta" class="form-control form-control-lg" required>
+                                <input type="date" name="data_falta" id="data_falta" class="form-control form-control-lg" value="<?php echo date('Y-m-d'); ?>" required>
                             </div>
                         </div>
 

@@ -83,7 +83,7 @@
                                             </div>
                                         </td>
                                          <?php } else{ ?>
-                                                <a href="./contaEstudante&id=<?= $estudante['id_estudante'] ?>" title="Visualizar" class="btn btn-sm btn-outline-warning"><i class="fa fa-eye"></i></a>
+                                                <a href="./perfilEstudante&id=<?= $estudante['id_estudante'] ?>" title="Visualizar" class="btn btn-sm btn-outline-warning"><i class="fa fa-eye"></i></a>
                                       <?php   } ?>
                                     </tr>
                                 <?php endforeach; ?>

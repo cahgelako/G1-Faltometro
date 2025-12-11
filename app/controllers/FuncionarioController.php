@@ -173,62 +173,61 @@ class FuncionarioController extends Controller
             $model->salvar_token_recuperacao($email, $token);
 
             // 4. Envia o email
-            $link = "localhost/faltometro/redefinirSenha?token=" . $token;
-            $this->enviar_email_recuperacao($email, $link);
+            $link = "10.132.224.26/faltometro/redefinirSenha?token=" . $token;
 
-            echo 'Um e-mail foi enviado com instruções para recuperar sua senha.';
-        } else {
-            $this->view('funcionario/recuperarSenha');
-        }
-    }
+            $mail = new PHPMailer(true);
 
-    public function enviar_email_recuperacao($email, $link)
-    {
-        $mail = new PHPMailer(true);
+            try {
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'bijudabia6@gmail.com';
+                $mail->Password = 'osax vzzg bhsk jnyf';
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
 
-        try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'bijudabia6@gmail.com';
-            $mail->Password = 'osax vzzg bhsk jnyf';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
+                $mail->setFrom('bijudabia6@gmail.com', 'Sistema');
+                $mail->addAddress($email);
 
-            $mail->setFrom('bijudabia6@gmail.com', 'Sistema');
-            $mail->addAddress($email);
-
-            $mail->isHTML(true);
-            $mail->Subject = "Recuperação de senha";
-            $mail->Body = "
+                $mail->isHTML(true);
+                $mail->Subject = "Recuperação de senha";
+                $mail->Body = "
                 <p>Para recuperar sua senha clique no link abaixo:</p>
                 <a href='$link'>$link</a>
             ";
 
-            $mail->send();
-        } catch (Exception $e) {
-            echo "Erro ao enviar e-mail: {$mail->ErrorInfo}";
+                $mail->send();
+            } catch (Exception $e) {
+                echo "Erro ao enviar e-mail";
+            }
+
+            echo 'Um e-mail foi enviado com instruções para recuperar sua senha.';
+        } else {
+            // $ola = 'funcionario/recuperarSenha';
+            // var_dump($ola); exit;
+            $this->view('funcionario/recuperarSenha');
         }
     }
+
+    public function enviar_email_recuperacao($email, $link) {}
 
     public function recuperar_senha()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'GET') {
             $token = $_GET['token'];
-    
+
             $reset = $this->model('Funcionario')->validar_token_recuperacao($token);
-    
+
             if (!$reset) {
                 echo "Token inválido ou expirado!";
                 return;
             }
-    
+
             // Mostra a página de alterar senha
             $this->view('funcionario/redefinirSenha', ['token' => $token], false);
         } else {
             $this->view('funcionario/redefinirSenha');
         }
-        
     }
 
     public function salvar_nova_senha()
@@ -238,54 +237,50 @@ class FuncionarioController extends Controller
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $token = $_POST['token'];
             $senha = password_hash($_POST['senha'], PASSWORD_BCRYPT);
-    
+
             $reset = $model->validar_token_recuperacao($token);
-    
+
             if (!$reset) {
                 echo "Token inválido ou expirado!";
                 return;
             }
-    
+
             $email = $reset['email'];
-    
+
             // Atualiza a senha do usuário
             $model->atualizar_senha($email, $senha);
-    
+
             // Opcional: remover tokens antigos
             $model->remover_tokens($email);
-    
+
             echo "Senha alterada com sucesso! Tente o login novamente.";
             $this->view('funcionario/login');
         } else {
             $this->view('funcionario/redefinirSenha');
         }
-        
-
     }
 
     public function validarToken()
-{
-    if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-        return $this->view('funcionario/validarToken');
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            return $this->view('funcionario/validarToken');
+        }
+
+        // POST → valida token
+        $token = $_POST['token'];
+        $model = $this->model('Funcionario');
+
+        $validacao = $model->validar_token_recuperacao($token);
+
+        if (!$validacao) {
+            $_SESSION['erro'] = "Código inválido ou expirado.";
+            return $this->view('funcionario/validarToken');
+        }
+
+        $_SESSION['email_recuperacao'] = $validacao['email'];
+        header("Location: /redefinirSenha");
+        exit;
     }
-
-    // POST → valida token
-    $token = $_POST['token'];
-    $model = $this->model('Funcionario');
-
-    $validacao = $model->validar_token_recuperacao($token);
-
-    if (!$validacao) {
-        $_SESSION['erro'] = "Código inválido ou expirado.";
-        return $this->view('funcionario/validarToken');
-    }
-
-    $_SESSION['email_recuperacao'] = $validacao['email'];
-    header("Location: /redefinirSenha");
-    exit;
-}
-
-
 
     // Para testar o PHPMailer falta criar um gmail fictício, permitir a senha do app e mudar as validações do código
 }

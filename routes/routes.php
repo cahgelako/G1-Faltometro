@@ -40,7 +40,7 @@ $routes = [
     'desativarEstudante' => ['controller' => 'EstudanteController', 'method' => 'desativar'],
     'ativarEstudante' => ['controller' => 'EstudanteController', 'method' => 'ativar'],
     'viewEstudante' => ['controller' => 'EstudanteController', 'method' => 'visualizar_estudante'],
-    'contaEstudante' => ['controller' => 'EstudanteController', 'method' => ''],
+    'perfilEstudante' => ['controller' => 'EstudanteController', 'method' => 'visualizar_estudante'],
 
     // Matricula
     'listMatricula' => ['controller' => 'MatriculaController', 'method' => 'listar'], 

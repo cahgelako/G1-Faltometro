@@ -30,10 +30,7 @@ class Estudante
 
     public function listar()
     {
-        $sql = "SELECT e.*, t.* FROM estudantes e
-        JOIN matriculas_turma_estudante m ON m.id_estudante = e.id_estudante
-        JOIN turmas t ON t.id_turma = m.id_turma
-        WHERE m.ativo = 'ativo'
+        $sql = "SELECT * FROM estudantes e
         ORDER BY nome_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -79,7 +76,13 @@ class Estudante
 
     public function estudante_por_id($id)
     {
-        $sql = "SELECT * FROM estudantes WHERE id_estudante = :id_estudante";
+        $sql = "SELECT e.nome_estudante, t.*
+        FROM estudantes e 
+        JOIN matriculas_turma_estudante m ON m.id_estudante = e.id_estudante
+        JOIN turmas t ON t.id_turma = m.id_turma
+        JOIN frequencia f ON f.id_matricula = m.id_matricula
+        WHERE e.id_estudante = :id_estudante
+        AND m.ativo = 'ativo'";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id);
         $stmt->execute();
@@ -95,7 +98,8 @@ class Estudante
         return $stmt->fetch();
     }
 
-    public function matricula_por_id_estudante($id) {
+    public function matricula_por_id_estudante($id)
+    {
         $sql = "SELECT id_matricula 
         FROM matriculas_turma_estudante m
         JOIN estudantes e ON e.id_estudante = m.id_estudante
@@ -106,7 +110,32 @@ class Estudante
         return $stmt->fetch();
     }
 
-    public function visualizar($id_estudante) {
+    public function faltas_mes($id_estudante)
+    {
+        $sql = "SELECT MONTH(f.data_falta) AS mes, COUNT(*) AS total_faltas
+        FROM frequencia f
+        JOIN matriculas_turma_estudante m ON m.id_matricula = f.id_matricula
+        JOIN estudantes e ON e.id_estudante = m.id_estudante
+        WHERE e.id_estudante = :id_estudante
+        AND m.ativo = 'ativo'
+        GROUP BY MONTH(f.data_falta)
+        ORDER BY mes;";
+        $stmt = $this->conn->prepare($sql); 
+        $stmt->bindParam(':id_estudante', $id_estudante);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 
+    public function faltas_ano($id_estudante)
+    {
+        $sql = "SELECT COUNT(*) AS total_ano
+        FROM frequencia f
+        JOIN matriculas_turma_estudante m ON m.id_matricula = f.id_matricula
+        WHERE m.id_estudante = :id_estudante
+        AND m.ativo = 'ativo';";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_estudante', $id_estudante);
+        $stmt->execute();
+        return $stmt->fetch();
     }
 }

@@ -133,10 +133,20 @@ class EstudanteController extends Controller
         $modelDietasEs = $this->model('DietaEstudante');
 
         if (isset($_GET['id'])) {
-            $estudantes = $model->estudante_por_id(isset($_GET['id']));
+            $estudante = $model->estudante_por_id(isset($_GET['id']));
             $participando = $modelMatProjeto->projetos_por_estudante(isset($_GET['id']));
             $dietas = $modelDietasEs->dietas_do_estudante(isset($_GET['id']));
-            $this->view('estudante/viewEstudante', ['estudantes' => $estudantes, 'participando' => $participando, 'dietas' => $dietas]);
+            $faltas_por_mes = $model->faltas_mes($_GET['id']);
+            $faltas_ano = $model->faltas_ano($_GET['id']);
+
+            $faltas_mes = [];
+            foreach ($faltas_por_mes as $linha) {
+                $faltas_mes[$linha['mes']] = $linha['total_faltas'];
+            }
+
+             //var_dump($faltas_ano); exit;
+
+            $this->view('estudante/perfilEstudante', ['estudante' => $estudante, 'participando' => $participando, 'dietas' => $dietas, 'faltas_mes' => $faltas_mes, 'faltas_ano' => $faltas_ano]);
         } else {
             $this->view('estudante/listEstudante');
         }
