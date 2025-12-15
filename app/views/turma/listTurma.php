@@ -24,7 +24,7 @@
          Painel de Turmas
         </h2>
         <a href="./registerTurma" class="btn btn-primary fw-bold shadow-sm">
-            <i class="fas fa-plus me-1"></i> Nova classe
+            <i class="fas fa-plus me-1"></i> Nova turma
         </a>
     </div>
 

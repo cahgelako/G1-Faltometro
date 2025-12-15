@@ -151,10 +151,6 @@ class FuncionarioController extends Controller
             $this->view('funcionario/conta', ['funcionario' => $funcionario]);
         }
     }
-    // public function solicitar_recuperacao()
-    // {
-    //     $this->view('funcionario/recuperarSenha', [], false);
-    // }
 
     public function solicitar_recuperacao()
     {
@@ -177,7 +173,8 @@ class FuncionarioController extends Controller
             $model->salvar_token_recuperacao($email, $token);
 
             // 4. Envia o email
-            $link = "http://localhost/Faltometro/redefinirSenha?token=" . $token;
+            // O ip deste link se refere a máquina onde o site está hospedado na rede local. Ajustar conforme necessário.
+            $link = "http://10.132.224.51/faltometro/redefinirSenha?token=" . $token;
 
             $mail = new PHPMailer(true);
 

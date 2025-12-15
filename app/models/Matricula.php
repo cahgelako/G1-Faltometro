@@ -119,6 +119,7 @@ class Matricula
         JOIN escolas es ON es.id_escola = t.id_escola
         JOIN matriculas_turma_estudante m ON m.id_turma = t.id_turma
         JOIN estudantes e ON e.id_estudante = m.id_estudante
+        
         ORDER BY es.nome_escola";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -137,20 +138,21 @@ class Matricula
         $stmt->execute();
     }
 
-    public function desativar($id_turma, $id_estudante)
+    public function desativar($id_matricula)
     {
-        $sql = "UPDATE matriculas_turma_estudante SET ativo = 'inativo' WHERE id_turma = :id_turma AND id_estudante = :id_estudante";
+        $id_mat = $id_matricula['id_matricula'];
+        $sql = "UPDATE matriculas_turma_estudante SET ativo = 'inativo' WHERE id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_turma', $id_turma);
-        $stmt->bindParam(':id_estudante', $id_estudante);
+        $stmt->bindParam(':id_matricula', $id_mat);
         $stmt->execute();
     }
-
+    
     public function ativar($id)
     {
+        $id_mat = $id['id_matricula'];
         $sql = "UPDATE matriculas_turma_estudante SET ativo = 'ativo' WHERE id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_matricula', $id);
+        $stmt->bindParam(':id_matricula', $id_mat);
         $stmt->execute();
     }
 

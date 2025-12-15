@@ -221,7 +221,7 @@
                     <!-- Integrante 1 -->
                     <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle mb-3" src="img/logo_faltometro" style="width:120px;height:120px;">
+                            <img class="mx-auto rounded-circle mb-3" src="img/ftcarol.jpeg" style="width:120px;height:120px;">
                             <h6 class="fw-bold mb-0">Ana Carolina</h6>
                             <p class="text-secondary small">Desenvolvedora FrontEnd</p>
                         </div>
@@ -230,7 +230,7 @@
                     <!-- 2 -->
                     <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle mb-3" src="img/logo_novo.php" style="width:120px;height:120px;">
+                            <img class="mx-auto rounded-circle mb-3" src="img/ftbia.jpeg" style="width:120px;height:120px;">
                             <h6 class="fw-bold mb-0">Beatriz Purissimo</h6>
                             <p class="text-secondary small">Desenvolvedora BackEnd</p>
                         </div>
@@ -239,7 +239,7 @@
                     <!-- 3 -->
                     <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle mb-3" src="assets/img/team/3.jpg" style="width:120px;height:120px;">
+                            <img class="mx-auto rounded-circle mb-3" src="img/ftgiordana.jpeg" style="width:120px;height:120px;">
                             <h6 class="fw-bold mb-0">Giordana Martins</h6>
                             <p class="text-secondary small">Documentação</p>
                         </div>
@@ -248,7 +248,7 @@
                     <!-- 4 -->
                     <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle mb-3" src="assets/img/team/3.jpg" style="width:120px;height:120px;">
+                            <img class="mx-auto rounded-circle mb-3" src="img/ftmatheus.jpg" style="width:120px;height:120px;">
                             <h6 class="fw-bold mb-0">Matheus Silva</h6>
                             <p class="text-secondary small">Documentação</p>
                         </div>
@@ -257,7 +257,7 @@
                     <!-- 5 -->
                     <div class="col-sm-6 col-md-4 col-lg-2 mb-5 text-center">
                         <div class="team-member">
-                            <img class="mx-auto rounded-circle mb-3" src="assets/img/team/3.jpg" style="width:120px;height:120px;">
+                            <img class="mx-auto rounded-circle mb-3" src="img/ftjose.jpg" style="width:120px;height:120px;">
                             <h6 class="fw-bold mb-0">José Piedade</h6>
                             <p class="text-secondary small">Documentação</p>
                         </div>

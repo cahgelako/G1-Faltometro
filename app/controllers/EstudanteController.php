@@ -85,13 +85,14 @@ class EstudanteController extends Controller
         $modelDieta = $this->model('DietaEstudante');
         if (isset($_GET['id'])) {
             $id_estudante = $_GET['id'];
-
+            
             // buscando o id_matricula através do id_estudante
             $id_mat = $model->matricula_por_id_estudante($id_estudante);
-
+            
             // buscando quais os projetos em que o id_matricula faz parte e desativando as matrículas nos projetos
             $proj_estudante = $modelMatProj->matricula_proj_estudante_por_id($id_mat);
             foreach ($proj_estudante as $p) {
+                
                 $modelMatProj->desativar($p, $id_estudante);
             }
 
@@ -102,7 +103,7 @@ class EstudanteController extends Controller
             $dietas_estudante = $modelDieta->dietas_do_estudante($id_estudante);
             if ($dietas_estudante !== []) {
                 foreach ($dietas_estudante as $id) {
-                    $modelDieta->desativar($id_estudante, $id);
+                    $modelDieta->deletar($id_estudante, $id);
                 }
             }
 

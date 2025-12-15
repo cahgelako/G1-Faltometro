@@ -3,7 +3,6 @@
         background-color: #ADD8E6 ; /* Cor do Header (Azul Claro) */
     }
 </style>
-...
 
 <footer class="py-3 w-100 bg-primary-custom shadow-lg">
     <div class="container px-5">

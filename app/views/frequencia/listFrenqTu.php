@@ -6,12 +6,12 @@
         </h2>
 
         <?php if (isset($msg)) { ?>
-        <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
-            <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
-        </div>
-    <?php } ?>
-        
+            <div class="alert alert-info alert-dismissible fade show shadow-sm" role="alert">
+                <i class="fas fa-info-circle me-2"></i> <b>Aviso:</b> <?php echo $msg; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Fechar"></button>
+            </div>
+        <?php } ?>
+
         <div class="row justify-content-center g-4">
             <?php
             foreach ($turmas as $turma) {
@@ -19,6 +19,7 @@
                 $perfil = "Integral";
                 $badge_class = "bg-dark"; // Padrão para Integral
                 $card_color_code = "#212529"; // Cor de Destaque
+                $tipo_ensino; // Variável para Tipo de Ensino
 
                 if ($turma['turno'] == 'manha') {
                     $perfil = "Manhã";
@@ -28,6 +29,18 @@
                     $perfil = "Tarde";
                     $badge_class = "bg-warning text-dark"; // Amarelo para Tarde
                     $card_color_code = "#ffc107";
+                }
+
+                switch ($turma['tipo_ensino']) {
+                    case 'ef1':
+                        $tipo_ensino = 'EFI';
+                        break;
+                    case 'ef2':
+                        $tipo_ensino = 'EFII';
+                        break;
+                    case 'em':
+                        $tipo_ensino = 'EM';
+                        break;
                 }
             ?>
                 <div class="col-12 col-sm-6 col-md-6 col-lg-4 col-xl-3">
@@ -42,7 +55,7 @@
 
                         <div class="card-body d-flex flex-column p-4">
                             <h5 class="card-title text-truncate mb-2 text-dark fw-bolder">
-                                <?= $turma["nro_turma"] ?>º do <?= $turma["tipo_ensino"] ?>
+                                <?= $turma["nro_turma"] ?>º do <?= $tipo_ensino ?>
                             </h5>
 
                             <p class="card-subtitle mb-3">

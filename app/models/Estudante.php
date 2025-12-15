@@ -31,6 +31,7 @@ class Estudante
     public function listar()
     {
         $sql = "SELECT * FROM estudantes e
+        WHERE e.ativo = 'ativo'
         ORDER BY nome_estudante";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
@@ -107,7 +108,7 @@ class Estudante
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function faltas_mes($id_estudante)

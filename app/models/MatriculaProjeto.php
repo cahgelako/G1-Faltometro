@@ -56,10 +56,12 @@ class MatriculaProjeto {
     //rever
     public function matricula_proj_estudante_por_id($id_matricula)
     {
+        $id_mat = $id_matricula['id_matricula'];
+        // var_dump($id_matricula); exit;
         $sql = "SELECT id_projeto FROM matriculas_projetos mp
         WHERE id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_matricula', $id_matricula);
+        $stmt->bindParam(':id_matricula', $id_mat);
         $stmt->execute();
         $resultado = $stmt->fetchAll(PDO::FETCH_ASSOC);
 

@@ -84,6 +84,7 @@ class Funcionario
             $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
             $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
             $stmt->execute();
+            return true;
         } else {
             $sql = "UPDATE funcionarios SET nome = :nome, email = :email, tipo_acesso = :tipo_acesso WHERE id_funcionario = :id_funcionario";
             $stmt = $this->conn->prepare($sql);
@@ -92,6 +93,7 @@ class Funcionario
             $stmt->bindParam(':tipo_acesso', $dados['tipo_acesso']);
             $stmt->bindParam(':id_funcionario', $dados['id_funcionario']);
             $stmt->execute();
+            return true;
         }
     }
 

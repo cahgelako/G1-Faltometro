@@ -172,16 +172,18 @@ function formatarEnsino($tipo)
                         </select>
                     </div>
 
-                    <div class="col-auto">
-                        <button type="submit" class="btn btn-filtrar">
-                            <i class="bi bi-filter"></i> Filtrar
-                        </button>
-                    </div>
-
-                    <div class="col-12 col-md-2 mt-2">
-                        <a id="btnImprimir" href="#" target="_blank" class="btn btn-success w-100">
-                            Imprimir
-                        </a>
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-filtrar">
+                                <i class="bi bi-filter"></i> Filtrar
+                            </button>
+                        </div>
+    
+                        <div class="col-12 col-md-2 mt-2">
+                            <a id="btnImprimir" href="#" target="_blank" class="btn btn-success w-100">
+                                Imprimir
+                            </a>
+                        </div>
                     </div>
 
                 </div>

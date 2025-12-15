@@ -15,43 +15,6 @@ class MatriculaController extends Controller
         $this->view('matricula/listMatricula', $data);
     }
 
-    public function registrar()
-    {
-        require_once 'app/core/auth.php';
-        $model = $this->model('Matricula');
-        $modelTurma = $this->model('Turma');
-        $modelEstudante = $this->model('Estudante');
-
-        $estudantes = $modelEstudante->listar();
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if ($model->salvar($_POST)) {
-                $matestudantes = $model->dietas_do_estudante($_POST['id_estudante']);
-                $mats_form = $_POST['arr_mat_id'] ?? [];
-
-                $atribuidas = array_diff($mats_form, $matestudantes); // 1º - array principal | 2º - array de comparação
-                foreach ($atribuidas as $id) {
-                    $model->salvar([$_POST['id_clsse'], $id, $_POST['data_matricula'], $_POST['ativo']]);
-                }
-
-                $excluidas = array_diff($matestudantes, $mats_form); // 1º - array principal | 2º - array de comparação
-                foreach ($excluidas as $id) {
-                    $model->desativar($id);
-                }
-                $_SESSION['msg'] = 'Matrículas cadastradas com sucesso!';
-                header('Location: ./listMatricula');
-                exit;
-            } else {
-                $_SESSION['msg'] = 'Erro: Já existe uma matrícula para essa combinação de turma e estudante.';
-                header('Location: ./listMatricula');
-                exit;
-            }
-        } else if (isset($_GET['id'])) {
-            $turma = $modelturma->turma_por_id($_GET['id']);
-            $matriculas = $model->matricula_por_id_turma($_GET['id']);
-            $this->view('turma/editAlunoturma', ['turma' => $turma, 'estudantes' => $estudantes, 'matriculas' => $matriculas]);
-        }
-    }
 
     public function editar()
     {

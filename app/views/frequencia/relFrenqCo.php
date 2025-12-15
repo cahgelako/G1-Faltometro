@@ -129,7 +129,7 @@
     <div class="card shadow-sm mb-5">
         <div class="card-body">
             <form method="POST">
-                <div class="row g-3 justify-content-center text-center">
+                <div class="row g-3 justify-content-center text-center align-items-center">
 
                     <div class="col-md-3">
                         <label class="form-label fw-semibold text-muted">Data do Relatório:</label>
@@ -150,7 +150,7 @@
                         </select>
                     </div>
 
-                    <div class="col-md-3 d-flex align-items-end gap-2">
+                    <div class="col-md-3 d-flex align-items-center gap-2">
                         <button type="submit" class="btn btn-primary w-100">
                             Consultar
                         </button>

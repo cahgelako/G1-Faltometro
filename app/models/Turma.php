@@ -17,7 +17,7 @@ class turma
         $sql = "SELECT e.nome_escola, t.*
         FROM escolas e, turmas t
         WHERE t.id_escola = e.id_escola
-        ORDER BY t.nro_turma, t.tipo_ensino";
+        ORDER BY t.tipo_ensino, t.nro_turma";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
