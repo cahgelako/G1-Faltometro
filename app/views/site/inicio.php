@@ -8,7 +8,7 @@
     <title>Faltômetro</title>
 
     <!-- Favicon-->
-    <link rel="icon" href="./img/icon_faltometro.ico" />
+    <link rel="icon" href="img/icon_faltometro.ico" />
 
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
