@@ -186,12 +186,19 @@ class Matricula
     public function matricula_por_id_turma($id)
     {
         $sql = "SELECT m.id_estudante 
-            FROM matriculas_turma_estudante m
+            FROM matriculas_turma_estudante m, estudantes e
             WHERE m.id_turma = :id_turma
+            AND m.id_estudante = e.id_estudante
             AND m.ativo = 'ativo'";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_turma', $id);
         $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+        $resultado =  $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $matriculas = [];
+        foreach ($resultado as $d) {
+            $matriculas[] = $d['id_dieta'];
+        }
+
+        return $matriculas;
     }
 }

@@ -80,12 +80,12 @@ class TurmaController extends Controller
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
             $model = $this->model('Turma');
-            $modelMat = $this->model('Matriculas');
+            $modelMat = $this->model('Matricula');
             $model->desativar($_GET['id']);
 
             $matriculas_turma = $modelMat->matricula_por_id_turma($_GET['id']);
 
-            foreach ($matriculas_turma as $id_mat) {
+            foreach ($matriculas_turma as $id_mat => $valor) {
                 $modelMat->desativar($id_mat);
             }
         }
