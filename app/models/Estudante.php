@@ -30,9 +30,11 @@ class Estudante
 
     public function listar()
     {
-        $sql = "SELECT * FROM estudantes e
+        $sql = "SELECT e.*, t.* FROM estudantes e
+        JOIN matriculas_turma_estudante m ON m.id_estudante = e.id_estudante
+        JOIN turmas t ON t.id_turma = m.id_turma 
         WHERE e.ativo = 'ativo'
-        ORDER BY nome_estudante";
+        ORDER BY nome_estudante ASC";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -121,7 +123,7 @@ class Estudante
         AND m.ativo = 'ativo'
         GROUP BY MONTH(f.data_falta)
         ORDER BY mes;";
-        $stmt = $this->conn->prepare($sql); 
+        $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_estudante', $id_estudante);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
