@@ -79,8 +79,15 @@ class TurmaController extends Controller
     {
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
-            $model = $this->model('turma');
+            $model = $this->model('Turma');
+            $modelMat = $this->model('Matriculas');
             $model->desativar($_GET['id']);
+
+            $matriculas_turma = $modelMat->matricula_por_id_turma($_GET['id']);
+
+            foreach ($matriculas_turma as $id_mat) {
+                $modelMat->desativar($id_mat);
+            }
         }
         $_SESSION['msg'] = 'Turma desativada com sucesso!';
         header('Location: ./listTurma');
@@ -91,7 +98,7 @@ class TurmaController extends Controller
     {
         require_once 'app/core/auth.php';
         if (isset($_GET['id'])) {
-            $model = $this->model('turma');
+            $model = $this->model('Turma');
             $model->ativar($_GET['id']);
         }
         $_SESSION['msg'] = 'Turma ativada com sucesso!';

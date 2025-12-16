@@ -116,10 +116,6 @@
                         <p class="lead text-secondary mb-4">
                             Da frequência à gestão: informação para cuidar do futuro.
                         </p>
-
-                        <a class="btn btn-outline-info px-4 py-2 fw-medium shadow-sm" href="#">
-                            <i class="fa-solid fa-book me-2"></i> Manual de Uso
-                        </a>
                     </div>
 
                     <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">

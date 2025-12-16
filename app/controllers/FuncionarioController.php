@@ -174,7 +174,7 @@ class FuncionarioController extends Controller
 
             // 4. Envia o email
             // O ip deste link se refere a máquina onde o site está hospedado na rede local. Ajustar conforme necessário.
-            $link = "http://10.132.224.51/faltometro/redefinirSenha?token=" . $token;
+            $link = "http://10.132.224.26/faltometro/redefinirSenha?token=" . $token;
 
             $mail = new PHPMailer(true);
 
