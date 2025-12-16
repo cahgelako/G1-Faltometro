@@ -213,9 +213,15 @@ if (!function_exists('formatarEnsino')) {
                     <?php foreach ($lista_projetos as $projeto) {
                         if ($projeto['id_projeto'] == $id_projeto) {
                             switch ($projeto['turno']) {
-                                case '1': $turno = 'Manhã'; break;
-                                case '2': $turno = 'Tarde'; break;
-                                case '3': $turno = 'Integral'; break;
+                                case '1':
+                                    $turno = 'Manhã';
+                                    break;
+                                case '2':
+                                    $turno = 'Tarde';
+                                    break;
+                                case '3':
+                                    $turno = 'Integral';
+                                    break;
                             }
                             echo $projeto['nome_projeto'] . ' - ' . $turno;
                         }
@@ -223,27 +229,24 @@ if (!function_exists('formatarEnsino')) {
                 </div>
 
                 <div class="card-body p-0">
-                    <table class="table mb-0">
+                    <table class="table table-striped table-hover mb-0">
                         <thead>
                             <tr>
-                                <th>Estudantes Ausentes</th>
+                                <th>Quantidade estudantes presentes</th>
                             </tr>
                         </thead>
 
                         <tbody>
                             <?php if (!empty($lista)) : ?>
-                                <?php foreach ($lista as $estudante) : ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($estudante['nome_estudante']) ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
+                                <tr>
+                                    <td><?= $lista['qtd_estudantes']; ?></td>
+                                </tr>
                             <?php else : ?>
                                 <tr>
-                                    <td class="text-center py-3">Nenhum estudante ausente.</td>
+                                    <td class="text-center py-3 text-muted">Nenhum estudante ausente.</td>
                                 </tr>
                             <?php endif; ?>
                         </tbody>
-
                     </table>
                 </div>
             </div>

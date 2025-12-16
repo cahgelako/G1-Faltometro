@@ -83,11 +83,7 @@ class TurmaController extends Controller
             $modelMat = $this->model('Matricula');
             $model->desativar($_GET['id']);
 
-            $matriculas_turma = $modelMat->matricula_por_id_turma($_GET['id']);
-
-            foreach ($matriculas_turma as $id_mat => $valor) {
-                $modelMat->desativar($id_mat);
-            }
+            $modelMat->desativar_por_turma($_GET['id']);
         }
         $_SESSION['msg'] = 'Turma desativada com sucesso!';
         header('Location: ./listTurma');

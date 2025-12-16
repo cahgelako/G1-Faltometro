@@ -42,14 +42,14 @@ class MatriculaProjetoController extends Controller
     public function editar()
     {
         require_once 'app/core/auth.php';
-        
+
         $model = $this->model('MatriculaProjeto');
         $modelMatriculas = $this->model('Matricula');
         $modelProjetos = $this->model('Projeto');
 
         $matriculas = $modelMatriculas->listar();
-        
-        
+
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // verificar as mudanças do array e passar as funções de cada situação
             // ainda está no array: nada acontece
@@ -57,24 +57,25 @@ class MatriculaProjetoController extends Controller
             // não estava antes e está agora: adicionar (salvar)
 
             $matprojetos = $model->matriculas_por_id_projeto($_POST['id_projeto']);
+
             $mat_form = $_POST['arr_mat_id'] ?? [];
+
 
             // verificando quais projetos foram atribuídas (não existem em projeto estudante e existe no formulário)
             $matriculados = array_diff($mat_form, $matprojetos); // 1º - array principal | 2º - array de comparação
             foreach ($matriculados as $id) {
                 $model->salvar($_POST['id_projeto'], $id);
             }
-            
+
             // verificando quais projetos foram excluídas (não existem no formulário e existe no projeto estudante)
             $excluidos = array_diff($matprojetos, $mat_form); // 1º - array principal | 2º - array de comparação
             foreach ($excluidos as $id) {
                 $model->deletar($_POST['id_projeto'], $id);
             }
-            
+
             $_SESSION['msg'] = 'Participantes editados com sucesso!';
             header('Location: ./listProjeto');
             exit;
-
         } else if (isset($_GET['id_projeto'])) {
             $estudantes = $model->matriculas_por_id_projeto($_GET['id_projeto']);
             $projeto = $modelProjetos->projeto_por_id($_GET['id_projeto']);

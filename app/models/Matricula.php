@@ -146,13 +146,12 @@ class Matricula
         $stmt->bindParam(':id_matricula', $id_mat);
         $stmt->execute();
     }
-    
+
     public function ativar($id)
     {
-        $id_mat = $id['id_matricula'];
         $sql = "UPDATE matriculas_turma_estudante SET ativo = 'ativo' WHERE id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_matricula', $id_mat);
+        $stmt->bindParam(':id_matricula', $id);
         $stmt->execute();
     }
 
@@ -185,7 +184,7 @@ class Matricula
 
     public function matricula_por_id_turma($id)
     {
-        $sql = "SELECT m.id_estudante 
+        $sql = "SELECT m.id_matricula
             FROM matriculas_turma_estudante m, estudantes e
             WHERE m.id_turma = :id_turma
             AND m.id_estudante = e.id_estudante
@@ -196,9 +195,20 @@ class Matricula
         $resultado =  $stmt->fetchAll(PDO::FETCH_ASSOC);
         $matriculas = [];
         foreach ($resultado as $d) {
-            $matriculas[] = $d['id_dieta'];
+            $matriculas[] = $d['id_matricula'];
         }
 
         return $matriculas;
+    }
+
+    public function desativar_por_turma($id_turma)
+    {
+        $sql = "UPDATE matriculas_turma_estudante 
+            SET ativo = 'inativo' 
+            WHERE id_turma = :id_turma";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(':id_turma', $id_turma);
+        $stmt->execute();
     }
 }

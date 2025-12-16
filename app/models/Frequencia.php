@@ -256,7 +256,7 @@ class Frequencia
         $ids_proj = $stmt_proj->fetchAll();
         if ($data && $projeto) {
             $projetos = [];
-            $sql = "SELECT e.nome_estudante
+            $sql = "SELECT COUNT(m.id_matricula) AS qtd_estudantes
             FROM projetos_extra p
             JOIN matriculas_projetos m ON m.id_projeto = p.id_projeto 
             JOIN matriculas_turma_estudante me ON me.id_matricula = m.id_matricula
@@ -265,20 +265,20 @@ class Frequencia
             JOIN frequencia f ON f.id_matricula = m.id_matricula
             WHERE f.data_falta = :data_falta
             AND p.id_projeto = :id_projeto
-            AND f.status_presenca = 'ausente'
-            ORDER BY p.nome_projeto;";
+            AND f.status_presenca = 'presente'
+            GROUP BY p.id_projeto;";
             $stmt = $this->conn->prepare($sql);
             $stmt->bindParam(':data_falta', $data);
             $stmt->bindParam(':id_projeto', $projeto);
             $stmt->execute();
-            $projetos[$projeto] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $projetos[$projeto] = $stmt->fetch(PDO::FETCH_ASSOC);
             
             return $projetos;
         } else if ($data) {
             $projetos = [];
             foreach ($ids_proj as $projeto) {
                 $id_projeto = $projeto['id_projeto'];
-                $sql = "SELECT e.nome_estudante
+                $sql = "SELECT COUNT(m.id_matricula) AS qtd_estudantes
                 FROM projetos_extra p
                 JOIN matriculas_projetos m ON m.id_projeto = p.id_projeto 
                 JOIN matriculas_turma_estudante me ON me.id_matricula = m.id_matricula
@@ -287,20 +287,20 @@ class Frequencia
                 JOIN frequencia f ON f.id_matricula = m.id_matricula
                 WHERE f.data_falta = :data_falta
                 AND p.id_projeto = :id_projeto
-                AND f.status_presenca = 'ausente'
-                ORDER BY  p.nome_projeto;";
+                AND f.status_presenca = 'presente'
+                GROUP BY p.id_projeto;";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindParam(':data_falta', $data);
                 $stmt->bindParam(':id_projeto', $id_projeto);
                 $stmt->execute();
-                $projetos[$id_projeto] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $projetos[$id_projeto] = $stmt->fetch(PDO::FETCH_ASSOC);
             }
             return $projetos;
         } else {
             $projetos = [];
             foreach ($ids_proj as $projeto) {
                 $id_projeto = $projeto['id_projeto'];
-                $sql = "SELECT e.nome_estudante
+                $sql = "SELECT COUNT(m.id_matricula) AS qtd_estudantes
                 FROM projetos_extra p
                 JOIN matriculas_projetos m ON m.id_projeto = p.id_projeto 
                 JOIN matriculas_turma_estudante me ON me.id_matricula = m.id_matricula
@@ -309,12 +309,12 @@ class Frequencia
                 JOIN frequencia f ON f.id_matricula = m.id_matricula
                 WHERE f.data_falta = CURDATE()
                 AND p.id_projeto = :id_projeto
-                AND f.status_presenca = 'ausente'
-                ORDER BY  p.nome_projeto;";
+                AND f.status_presenca = 'presente'
+                GROUP BY p.id_projeto;";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->bindParam(':id_projeto', $id_projeto);
                 $stmt->execute();
-                $projetos[$id_projeto] = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                $projetos[$id_projeto] = $stmt->fetch(PDO::FETCH_ASSOC);
             }
             return $projetos;
         }

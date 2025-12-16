@@ -6,7 +6,12 @@ class EstudanteController extends Controller
     {
         require_once 'app/core/auth.php';
         $model = $this->model('Estudante');
-        $estudantes = $model->listar();
+        $estudantes;
+        if ($_SESSION['func_tipo_acesso'] === 4) {
+            $estudantes = $model->listar();
+        } else {
+            $estudantes = $model->listar_coordenacao();
+        }
         $data = ['estudantes' => $estudantes];
         if (isset($_SESSION['msg'])) {
             $data['msg'] = $_SESSION['msg'];

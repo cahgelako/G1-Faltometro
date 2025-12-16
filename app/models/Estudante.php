@@ -30,6 +30,15 @@ class Estudante
 
     public function listar()
     {
+        $sql = "SELECT e.* FROM estudantes e
+        WHERE e.ativo = 'ativo'
+        ORDER BY nome_estudante ASC";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function listar_coordenacao()
+    {
         $sql = "SELECT e.*, t.* FROM estudantes e
         JOIN matriculas_turma_estudante m ON m.id_estudante = e.id_estudante
         JOIN turmas t ON t.id_turma = m.id_turma 

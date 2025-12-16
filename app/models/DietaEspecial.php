@@ -58,6 +58,7 @@ class DietaEspecial
             $stmt->bindParam(':observacoes', $dados['observacoes']);
             $stmt->bindParam(':id_dieta', $dados['id_dieta']);
             $stmt->execute();
+            return true;
         }
     }
 

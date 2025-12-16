@@ -1,6 +1,7 @@
 <?php
-class MatriculaProjeto {
-    
+class MatriculaProjeto
+{
+
     // Atributos
     private $conn;
 
@@ -27,31 +28,27 @@ class MatriculaProjeto {
 
     public function salvar($id_projeto, $id_matricula)
     {
-        $sql = "INSERT INTO matriculas_projetos (id_projeto, id_matricula) VALUES (:id_projeto, :id_matricula)";
+        $sql = "INSERT INTO matriculas_projetos (id_projeto, id_matricula)
+        VALUES (:id_projeto, :id_matricula)";
+
         $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_projeto', $id_projeto);
-        $stmt->bindParam(':id_matricula', $id_matricula);
+        $stmt->bindParam(':id_projeto', $id_projeto, PDO::PARAM_INT);
+        $stmt->bindParam(':id_matricula', $id_matricula, PDO::PARAM_INT);
         $stmt->execute();
     }
 
 
-    public function desativar($id_projeto, $id_matricula)
+
+    public function deletar($id_projeto, $id_matricula)
     {
-        $sql = "UPDATE matriculas_projetos SET ativo = 'inativo' WHERE id_projeto = :id_projeto AND id_matricula = :id_matricula";
+        
+        $sql = "DELETE FROM matriculas_projetos WHERE id_projeto = :id_projeto AND id_matricula = :id_matricula";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':id_projeto', $id_projeto);
         $stmt->bindParam(':id_matricula', $id_matricula);
         $stmt->execute();
     }
 
-    public function ativar($id_projeto, $id_matricula)
-    {
-        $sql = "UPDATE matriculas_projetos SET ativo = 'ativo' WHERE id_projeto = :id_projeto AND id_matricula = :id_matricula";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->bindParam(':id_projeto', $id_projeto);
-        $stmt->bindParam(':id_matricula', $id_matricula);
-        $stmt->execute();
-    }
 
     //rever
     public function matricula_proj_estudante_por_id($id_matricula)
@@ -93,7 +90,8 @@ class MatriculaProjeto {
         return $mat;
     }
 
-    public function estudantes_por_projeto($id_projeto) {
+    public function estudantes_por_projeto($id_projeto)
+    {
         $sql = "SELECT DISTINCT e.nome_estudante, mp.id_matricula
         FROM projetos_extra p 
         RIGHT JOIN matriculas_projetos mp ON mp.id_projeto = p.id_projeto
@@ -106,7 +104,8 @@ class MatriculaProjeto {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function projetos_por_estudante($id_matricula) {
+    public function projetos_por_estudante($id_matricula)
+    {
         $sql = "SELECT p.nome_projeto, e.nome_estudante, p.id_projeto 
         FROM projetos_extra p 
         LEFT JOIN matriculas_projetos mp ON mp.id_projeto = p.id_projeto

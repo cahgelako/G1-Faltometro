@@ -178,7 +178,7 @@ function formatarEnsino($tipo)
                                 <i class="bi bi-filter"></i> Filtrar
                             </button>
                         </div>
-    
+
                         <div class="col-12 col-md-2 mt-2">
                             <a id="btnImprimir" href="#" target="_blank" class="btn btn-success w-100">
                                 Imprimir
@@ -294,17 +294,15 @@ function formatarEnsino($tipo)
                     <table class="table table-striped table-hover mb-0">
                         <thead>
                             <tr>
-                                <th>Estudantes Ausentes</th>
+                                <th>Quantidade estudantes presentes</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            <?php if (!empty($lista)) :
-                                foreach ($lista as $estudante) : ?>
-                                    <tr>
-                                        <td><?= htmlspecialchars($estudante['nome_estudante']) ?></td>
-                                    </tr>
-                                <?php endforeach; ?>
+                            <?php if (!empty($lista)) : ?>
+                                <tr>
+                                    <td><?= $lista['qtd_estudantes']; ?></td>
+                                </tr>
                             <?php else : ?>
                                 <tr>
                                     <td class="text-center py-3 text-muted">Nenhum estudante ausente.</td>
